@@ -1,6 +1,9 @@
 package modele;
 
-public class LabyrintheGame {
+import engine.Commande;
+import engine.Game;
+
+public class LabyrintheGame implements Game {
 
     private Niveau level;
 
@@ -8,15 +11,21 @@ public class LabyrintheGame {
         this.level = new Niveau();
     }
 
-    public void deplacerHeros(String s){
-        if (s.equalsIgnoreCase("Z")) this.level.deplacerHero(-1,0);
-        if (s.equalsIgnoreCase("S")) this.level.deplacerHero(1,0);
-        if (s.equalsIgnoreCase("Q")) this.level.deplacerHero(0,-1);
-        if (s.equalsIgnoreCase("D")) this.level.deplacerHero(0,1);
-    }
-
     @Override
     public String toString(){
         return this.level.toString();
+    }
+
+    @Override
+    public void evolve(Commande cmd) {
+        if (cmd == Commande.UP) this.level.deplacerHero(-1,0);
+        if (cmd == Commande.DOWN) this.level.deplacerHero(1,0);
+        if (cmd == Commande.LEFT) this.level.deplacerHero(0,-1);
+        if (cmd == Commande.RIGHT) this.level.deplacerHero(0,1);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 }
