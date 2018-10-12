@@ -23,6 +23,8 @@ public class Hero {
      * Constructeur du hero
      */
     public Hero(){
+        this.x = 2;
+        this.y = 2;
     }
 
     /**

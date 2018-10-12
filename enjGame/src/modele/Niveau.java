@@ -25,7 +25,8 @@ public class Niveau {
      * Constructeur de Niveau
      */
     public Niveau(){
-
+        this.labyrinthe = new Labyrinthe();
+        this.hero = new Hero();
     }
 
     /**
@@ -56,6 +57,8 @@ public class Niveau {
         if (this.labyrinthe.deplacementPossible(this.getPlayerX(),this.getPlayerY(),x,y)){
             this.hero.setX(this.getPlayerX()+x);
             this.hero.setY(this.getPlayerY()+y);
+        }else{
+            System.out.println("Deplacement Impossible!");
         }
     }
 
@@ -67,6 +70,7 @@ public class Niveau {
         int[][] labyrinthe = this.labyrinthe.getLabyrinthe();
         int playerX = this.getPlayerX();
         int playerY = this.getPlayerY();
+        System.out.println("Hero("+playerX+","+playerY+")");
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
         for (int i = 0; i<labyrinthe.length;i++){
