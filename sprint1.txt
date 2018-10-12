@@ -1,0 +1,6 @@
+Liste des fonctionnalités (Sprint 1) : 
+
+- Structure globale du projet 
+- Lecture d'un fichier pour récupérer le labyrinthe 
+- Affichage du joueur et du labyrinthe dans la console
+- Déplacement du joueur dans la console
