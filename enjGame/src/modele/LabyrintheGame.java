@@ -3,12 +3,20 @@ package modele;
 import engine.Commande;
 import engine.Game;
 
+import java.io.File;
+
 public class LabyrintheGame implements Game {
 
     private Niveau level;
 
     public LabyrintheGame(){
         this.level = new Niveau();
+        genLabyrinth();
+    }
+
+    public void genLabyrinth(){
+        File file = new File("enjGame\\src\\modele\\Labyrinthe1");
+        this.level.chargerNiveau(file);
     }
 
     @Override
