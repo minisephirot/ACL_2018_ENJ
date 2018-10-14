@@ -1,5 +1,7 @@
 package modele;
 
+import Exception.ExceptionTailleLaby;
+
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -57,28 +59,28 @@ public class Niveau {
             String dimensions[] = br.readLine().split(",");
             int labyrinthe[][] = new int[Integer.parseInt(dimensions[0])][Integer.parseInt(dimensions[1])];
             Scanner scanner = new Scanner(file);
-            while (true){
-                try{
-                    line = scanner.nextLine();
-                    strArray = line.split(",");
-                    if (hauteur > 0) {
-                        for (int i = 0; i < strArray.length; i++) {
-                            labyrinthe[hauteur-1][i] = Integer.parseInt(strArray[i]);
-                        }
+            while (hauteur < labyrinthe.length+1) {
+                line = scanner.nextLine();
+                strArray = line.split(",");
+                if (hauteur > 0) {
+                    if (strArray.length != labyrinthe[0].length){
+                       ExceptionTailleLaby exceptionTailleLaby = new ExceptionTailleLaby();
+                       throw exceptionTailleLaby;
                     }
-                    hauteur++;
-                }catch(NoSuchElementException exception){
-                    break;
+                    for (int i = 0; i < strArray.length; i++) {
+                        labyrinthe[hauteur - 1][i] = Integer.parseInt(strArray[i]);
+                    }
                 }
+                hauteur++;
             }
         }
         catch (FileNotFoundException exception){
             System.out.println("Le fichier n'existe pas");
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ExceptionTailleLaby exceptionTailleLaby) {
+            System.out.println(exceptionTailleLaby.getMessage());
         }
-
-
     }
 
     /**
