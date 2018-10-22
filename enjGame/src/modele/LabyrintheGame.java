@@ -4,6 +4,7 @@ import engine.Commande;
 import engine.Game;
 
 import java.io.File;
+import java.io.InputStream;
 
 public class LabyrintheGame implements Game {
 
@@ -15,8 +16,7 @@ public class LabyrintheGame implements Game {
     }
 
     public void genLabyrinth(){
-        File file = new File("enjGame\\src\\modele\\Labyrinthe1");
-        this.level.chargerNiveau(file);
+        this.level.chargerNiveau("Labyrinthe1");
     }
 
     @Override

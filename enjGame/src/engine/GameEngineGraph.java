@@ -69,7 +69,6 @@ public class GameEngineGraph {
 
     public static void main(String[] args) {
         LabyrintheGame lg = new LabyrintheGame();
-
         GameController gc = new LabyrintheController();
         GameEngineGraph g = new GameEngineGraph(lg, null, gc);
         try {

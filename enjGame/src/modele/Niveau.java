@@ -49,16 +49,15 @@ public class Niveau {
      * Permet de charger le niveau souhaité
      * @param file informations nécessaire au niveau
      */
-    public void chargerNiveau(File file){
+    public void chargerNiveau(String file){
         int hauteur = 0;
         String line;
         String strArray[];
         try {
-            FileReader fr = new FileReader (file);
-            BufferedReader br = new BufferedReader (fr);
+            BufferedReader br = new BufferedReader (new InputStreamReader(getClass().getResourceAsStream("/res/" + file)));
             String dimensions[] = br.readLine().split(",");
             int labyrinthe[][] = new int[Integer.parseInt(dimensions[0])][Integer.parseInt(dimensions[1])];
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(new InputStreamReader(getClass().getResourceAsStream("/res/" + file)));
             while (hauteur < labyrinthe.length+1) {
                 line = scanner.nextLine();
                 strArray = line.split(",");
@@ -73,6 +72,7 @@ public class Niveau {
                 }
                 hauteur++;
             }
+            this.labyrinthe.setLabyrinthe(labyrinthe);
         }
         catch (FileNotFoundException exception){
             System.out.println("Le fichier n'existe pas");
