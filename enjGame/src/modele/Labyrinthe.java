@@ -10,7 +10,7 @@ public class Labyrinthe {
     /**
      * Représentation du labyrinthe
      */
-    private int[][] labyrinthe = {{1,1,1,1,1},{1,0,0,0,1},{1,0,0,0,1},{1,0,0,0,1},{1,1,1,1,1}};
+    private int[][] labyrinthe;
 
     /**
      * Constructeur de Labyrinthe
