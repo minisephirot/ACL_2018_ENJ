@@ -80,6 +80,8 @@ public class Niveau {
             e.printStackTrace();
         } catch (ExceptionTailleLaby exceptionTailleLaby) {
             System.out.println(exceptionTailleLaby.getMessage());
+        } catch (NumberFormatException numberException){
+            System.out.println("Fichier corrompu");
         }
     }
 
