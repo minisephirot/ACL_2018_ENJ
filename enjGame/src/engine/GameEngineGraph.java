@@ -52,7 +52,10 @@ public class GameEngineGraph {
         while (true){
             System.out.println(this.game.toString());
             //System.out.println(this.gameController.getCommande());
-            char ch = in.nextLine().charAt(0);
+            String line = in.nextLine();
+            char ch = '0';
+            if (line.length() > 0)
+                ch = line.charAt(0);
             if (ch == 'z'){
                 c = Commande.UP;
             } else if (ch == 'q'){
