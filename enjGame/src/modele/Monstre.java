@@ -1,4 +1,8 @@
 package modele;
 
-public class Monstre {
+public class Monstre extends Entite {
+
+    public void seRapprocher(){
+
+    }
 }
