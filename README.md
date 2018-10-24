@@ -132,10 +132,11 @@ Niveau "1..n"-- LabyrinthGame
 Hero "1"-- Niveau
 Game "1"--up GameEngineGraph
 GameController "1"-- GameEngineGraph
-GamePainter "1"--up GameEngineGraph
+GamePainter "1"--up  GameEngineGraph
 LabyrinthGame "1"-- LabyrinthPainter
 GraphInterface --"1" DrawingPanel
 DrawingPanel --"1" GamePainter
 GameEngineGraph -- "1" GraphInterface 
+
 
 @enduml
