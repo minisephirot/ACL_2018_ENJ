@@ -1,7 +1,18 @@
 # Projet-Labyrinthe
 Projet M1 - Conception
 
-Ici on fait la conception d'un jeu et son dévelopement en scrub, voilà.
+Compiler et exécuter le programme :
+
+Pour compiler et lancer le programme, il faut run la méthode main présente dans la class GameEngineGraph
+Le labyrinthe va s'afficher dans la console :
+        - Les 1 représentent les murs
+        - Les 0 représentent les cases vides dans lesquelles le héro peut se déplacer
+        - H concerne la position du héro dans le labyrinthe
+
+Pour déplacer le héro, il faut rentrer "z", "q", "s" ou "d" dans la console.
+
+
+Diagramme UML du projet :
 
 http://www.plantuml.com/plantuml/img/RPBFJW8n4CRlVOevWhBHrPinXCY1O1Or8HgDyJ2xEragtHRRBeY41_8vV37RNVuKDEcX_NxjVFDbsZCMjQrAmPXKbW0DtCKCu3hj3YrfYA_W-YpjZbHEWaxxIXebAE0N3U_hds-qN4aO3W9wsT24amTHKuMHpC6RCPO9D0OIh6Gs8RroB-UAvr0YbwtszbHtk74-KWSQPnF-KNbzpTWCioaM1BNFQbj-W2MDK3gWWJwjSpTmdnhISqm5WNVbqhxADxT0OBhKxZY1rZceQGTYA2lTWIY6TrLHfTlDTIZ8FWXSadvk_P5UWZR99jkIO_v5BNzHxd11SeVhHsFhzWLOrMp2GZ9_dELeDrc3k4-S5WTflN0KrMNtGU7MsP48mlRHaAd9Y6HrWzfvAv6YzbhjNFtlwYPYjHA2j5bjlFTIOpQbPSADQuDq7GGmytyaqDQ-ugxbaoWAftK8ziLPE567ShMG8MOz5znzwLy0
 
