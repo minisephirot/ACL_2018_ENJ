@@ -32,6 +32,18 @@ public class LabyrintheGame implements Game {
         if (cmd == Commande.RIGHT) this.level.deplacerHero(0,1);
     }
 
+    public int[][] getLabyrinthe(){
+        return level.getLabyrinthe();
+    }
+
+    public int getHeroX(){
+        return level.getPlayerX();
+    }
+
+    public int getHeroY(){
+        return level.getPlayerY();
+    }
+
     @Override
     public boolean isFinished() {
         return false;

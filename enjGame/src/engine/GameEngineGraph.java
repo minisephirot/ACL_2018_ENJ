@@ -2,6 +2,7 @@ package engine;
 
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
+import modele.LabyrinthePainter;
 
 import java.util.Scanner;
 
@@ -46,26 +47,15 @@ public class GameEngineGraph {
      * @throws InterruptedException
      */
     public void run() throws InterruptedException{
-
-        Scanner in = new Scanner(System.in);
-        Commande c = Commande.IDLE;
+        this.graphicalInterface = new GraphicalInterface(this.gamePainter, this.gameController);
         while (true){
-            System.out.println(this.game.toString());
-            //System.out.println(this.gameController.getCommande());
-            String line = in.nextLine();
-            char ch = '0';
-            if (line.length() > 0)
-                ch = line.charAt(0);
-            if (ch == 'z' || ch == 'Z'){
-                c = Commande.UP;
-            } else if (ch == 'q' | ch == 'Q'){
-                c = Commande.LEFT;
-            } else if (ch == 's' | ch == 'S'){
-                c = Commande.DOWN;
-            } else if (ch == 'd' | ch == 'D'){
-                c = Commande.RIGHT;
-            }
+            // demande controle utilisateur
+            Commande c = this.gameController.getCommande();
+            // fait evoluer le game
             this.game.evolve(c);
+            // affiche le game
+            this.graphicalInterface.paint();
+            // met en attente
             Thread.sleep(100);
         }
     }
@@ -73,7 +63,8 @@ public class GameEngineGraph {
     public static void main(String[] args) {
         LabyrintheGame lg = new LabyrintheGame();
         GameController gc = new LabyrintheController();
-        GameEngineGraph g = new GameEngineGraph(lg, null, gc);
+        GamePainter gp = new LabyrinthePainter(lg);
+        GameEngineGraph g = new GameEngineGraph(lg, gp, gc);
         try {
             g.run();
         } catch (InterruptedException e) {

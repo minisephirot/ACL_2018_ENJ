@@ -1,5 +1,7 @@
 package engine;
 
+import java.awt.image.BufferedImage;
+
 public interface GamePainter {
 
     /**
@@ -15,6 +17,6 @@ public interface GamePainter {
     /**
      * dessine l'image
      */
-    public void draw();
+    public void draw(BufferedImage img);
 
 }

@@ -33,6 +33,10 @@ public class Niveau {
         this.hero = new Hero();
     }
 
+    public int[][] getLabyrinthe(){
+        return labyrinthe.getLabyrinthe();
+    }
+
     /**
      * Retourne la coordonnée X du hero
      * @return coordonnée x
