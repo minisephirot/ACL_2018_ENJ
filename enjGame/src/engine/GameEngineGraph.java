@@ -52,14 +52,17 @@ public class GameEngineGraph {
         while (true){
             System.out.println(this.game.toString());
             //System.out.println(this.gameController.getCommande());
-            char ch = in.nextLine().charAt(0);
-            if (ch == 'z'){
+            String line = in.nextLine();
+            char ch = '0';
+            if (line.length() > 0)
+                ch = line.charAt(0);
+            if (ch == 'z' || ch == 'Z'){
                 c = Commande.UP;
-            } else if (ch == 'q'){
+            } else if (ch == 'q' | ch == 'Q'){
                 c = Commande.LEFT;
-            } else if (ch == 's'){
+            } else if (ch == 's' | ch == 'S'){
                 c = Commande.DOWN;
-            } else if (ch == 'd'){
+            } else if (ch == 'd' | ch == 'D'){
                 c = Commande.RIGHT;
             }
             this.game.evolve(c);
