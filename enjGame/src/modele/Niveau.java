@@ -1,9 +1,8 @@
 package modele;
 
-import Exception.ExceptionTailleLaby;
+import exception.ExceptionTailleLaby;
 
 import java.io.*;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
