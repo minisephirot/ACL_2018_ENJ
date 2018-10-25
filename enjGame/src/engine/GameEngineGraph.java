@@ -11,33 +11,22 @@ public class GameEngineGraph {
      */
     private Game game;
 
-    /**
-     * Afficheur rendu
-     */
-    private GamePainter gamePainter;
 
     /**
      * controlleur pour recuperer les commandes
      */
     private GameController gameController;
 
-    /**
-     * Inteface Graphique
-     */
-    private GraphicalInterface graphicalInterface;
 
     /**
      * Construit le moteur du jeu
      * @param game
      *              Jeu a Lancer
-     * @param gamePainter
-     *              afficheur a utiliser
      * @param gameController
      *              controlleur a utiliser
      */
-    public GameEngineGraph(Game game, GamePainter gamePainter, GameController gameController) {
+    public GameEngineGraph(Game game, GameController gameController) {
         this.game = game;
-        this.gamePainter = gamePainter;
         this.gameController = gameController;
     }
 
@@ -73,7 +62,7 @@ public class GameEngineGraph {
     public static void main(String[] args) {
         LabyrintheGame lg = new LabyrintheGame();
         GameController gc = new LabyrintheController();
-        GameEngineGraph g = new GameEngineGraph(lg, null, gc);
+        GameEngineGraph g = new GameEngineGraph(lg, gc);
         try {
             g.run();
         } catch (InterruptedException e) {
