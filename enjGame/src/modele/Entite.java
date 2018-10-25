@@ -23,8 +23,9 @@ public abstract class Entite {
      * Constructeur de l'entité
      */
     public Entite(){
-        this.x = 2;
-        this.y = 2;
+        this.x = 1;
+        this.y = 1;
+        this.pv = 1;
     }
 
     /**
@@ -68,4 +69,10 @@ public abstract class Entite {
     public void setPv(int pv) {
         this.pv = pv;
     }
+
+    /**
+     * est-ce que l'entitée est morte
+     */
+    public boolean isDead() { return this.pv <= 0; }
+
 }
