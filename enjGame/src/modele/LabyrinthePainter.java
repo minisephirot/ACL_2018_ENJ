@@ -45,7 +45,7 @@ public class LabyrinthePainter implements GamePainter {
                 } else {
                     crayon.setColor(Color.green);
                 }
-                crayon.fillRect(casey, casex, 64, 64);
+                crayon.fillRect(casex, casey, 64, 64);
                 casex += 64;
             }
             casey+=64;

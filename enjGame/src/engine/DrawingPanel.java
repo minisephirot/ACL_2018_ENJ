@@ -35,9 +35,9 @@ public class DrawingPanel extends JPanel {
      * Panel associe. Les images stockent le painter et on demande au panel la
      * mise a jour quand le painter est fini
      *
-     * @param width
+   //  * @param width
      *            largeur de l'image
-     * @param height
+     //* @param height
      *            hauteur de l'image
      */
     public DrawingPanel(GamePainter painter) {
@@ -83,6 +83,6 @@ public class DrawingPanel extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         g.drawImage(this.currentImage, 0, 0, getWidth(), getHeight(), 0, 0,
-                getWidth(), getHeight(), null);
+               getWidth(), getHeight(), null);
     }
 }
