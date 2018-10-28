@@ -32,6 +32,11 @@ public class LabyrintheGame implements Game {
         if (cmd == Commande.DOWN) this.level.deplacerHero(1,0);
         if (cmd == Commande.LEFT) this.level.deplacerHero(0,-1);
         if (cmd == Commande.RIGHT) this.level.deplacerHero(0,1);
+        //Diagonales
+        if (cmd == Commande.DOWNLEFT) this.level.deplacerHero(1,-1);
+        if (cmd == Commande.DOWNRIGHT) this.level.deplacerHero(1,1);
+        if (cmd == Commande.UPRIGHT) this.level.deplacerHero(-1,1);
+        if (cmd == Commande.UPLEFT) this.level.deplacerHero(-1,-1);
     }
 
     public int[][] getLabyrinthe(){
