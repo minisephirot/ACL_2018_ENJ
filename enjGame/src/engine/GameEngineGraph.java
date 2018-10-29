@@ -31,12 +31,10 @@ public class GameEngineGraph {
 
     /**
      * Construit le moteur du jeu
-     * @param game
-     *              Jeu a Lancer
-     * @param gamePainter
-     *              afficheur a utiliser
-     * @param gameController
-     *              controlleur a utiliser
+     *
+     * @param game           Jeu a Lancer
+     * @param gamePainter    afficheur a utiliser
+     * @param gameController controlleur a utiliser
      */
     public GameEngineGraph(Game game, GamePainter gamePainter, GameController gameController) {
         this.game = game;
@@ -46,45 +44,36 @@ public class GameEngineGraph {
 
     /**
      * Lance le Jeu
+     *
      * @throws InterruptedException
      */
-    public void run() throws InterruptedException{
-        Thread t = new Thread() {
-            public void run(){
-                graphicalInterface = new GraphicalInterface(gamePainter, gameController);
-                while (true){
-                    try {
-                        // demande controle utilisateur
-                        Commande c = gameController.getCommande();
-                        // fait evoluer le game
-                        game.evolve(c);
-                        // affiche le game
-                        graphicalInterface.paint();
-                        // met en attentde
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+    public void run() throws InterruptedException {
+        graphicalInterface = new GraphicalInterface(gamePainter, gameController);
+        while (true) {
+            try {
+                // demande controle utilisateur
+                Commande c = gameController.getCommande();
+                // fait evoluer le game
+                game.evolve(c);
+                // affiche le game
+                graphicalInterface.paint();
+                // met en attentde
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        };
-        EventQueue.invokeLater(()->t.start());
+        }
     }
 
     public static void main(String[] args) {
         LabyrintheGame lg = new LabyrintheGame();
         GameController gc = new LabyrintheController();
         GamePainter gp = new LabyrinthePainter(lg);
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                GameEngineGraph g = new GameEngineGraph(lg, gp, gc);
-                try {
-                    g.run();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        GameEngineGraph g = new GameEngineGraph(lg, gp, gc);
+        try {
+            g.run();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
