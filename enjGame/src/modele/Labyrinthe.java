@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Labyrinthe {
     public final static int MUR = 1;
     public final static int VIDE = 0;
-    public ArrayList<Mur> murs;
+    public Mur mur;
 
     /**
      * Représentation du labyrinthe
@@ -33,7 +33,7 @@ public class Labyrinthe {
      * Setter de la matrice du labyrinthe
      */
     public void setLabyrinthe(int[][] labyrinthe) {
-        murs = new ArrayList<>();
+        mur = new Mur();
         this.labyrinthe = labyrinthe;
         int casex = 0;
         int casey = 0;
@@ -41,7 +41,7 @@ public class Labyrinthe {
             casex = 0;
             for (int j = 0; j < labyrinthe[i].length; j++){
                 if (labyrinthe[i][j] == 1) {
-                    murs.add(new Mur(casex, casey));//new Rectangle(casex, casey, 64, 64));
+                    mur.ajouterCase(new Case(casex, casey));
                 }
                 casex += 64;
             }
@@ -49,8 +49,8 @@ public class Labyrinthe {
         }
     }
 
-    public ArrayList<Mur> getMurs() {
-        return murs;
+    public Mur getMurs() {
+        return mur;
     }
 
     /**

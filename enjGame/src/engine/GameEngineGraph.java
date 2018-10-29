@@ -52,7 +52,6 @@ public class GameEngineGraph {
      */
     public void run() throws InterruptedException {
         graphicalInterface = new GraphicalInterface(gamePainter, gameController);
-        ArrayList<Mur> murs = ((LabyrintheGame)game).getMur();
         while (true) {
             try {
                 // demande controle utilisateur

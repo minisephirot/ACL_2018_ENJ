@@ -1,15 +1,21 @@
 package modele;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Mur {
-    protected Rectangle rectangle;
-    public Mur(int x, int y) {
-        rectangle = new Rectangle(x, y, 64, 64);
+public class Mur implements Iterable<Case>{
+    private ArrayList<Case> mur;
+
+    public Mur() {
+        this.mur = new ArrayList<Case>();
     }
 
-    public Rectangle getRectangle() {
-        return rectangle;
+    public void ajouterCase(Case toadd){
+        mur.add(toadd);
     }
 
+    @Override
+    public Iterator<Case> iterator() {
+        return mur.iterator();
+    }
 }

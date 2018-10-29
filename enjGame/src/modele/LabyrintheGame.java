@@ -37,7 +37,7 @@ public class LabyrintheGame implements Game {
         }
     }
 
-    public boolean gestionCollision(ArrayList<Mur> murs, Commande cmd){
+    public boolean gestionCollision(Mur mur, Commande cmd){
         int herox = getHeroX();
         int heroy = getHeroY();
         boolean avancer = true;
@@ -50,8 +50,8 @@ public class LabyrintheGame implements Game {
         else if (cmd == Commande.RIGHT)
             heroy+=1;
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        for (Mur m : murs){
-            if (m.getRectangle().intersects(hero))
+        for (Case c : mur){
+            if (c.getRectangle().intersects(hero))
                 avancer = false;
         }
         return avancer;
@@ -61,7 +61,7 @@ public class LabyrintheGame implements Game {
         return level.getLabyrinthe();
     }
 
-    public ArrayList<Mur> getMur(){
+    public Mur getMur(){
         return level.getMur();
     }
 

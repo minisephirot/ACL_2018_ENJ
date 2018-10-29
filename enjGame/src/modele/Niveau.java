@@ -104,7 +104,7 @@ public class Niveau {
         }
     }
 
-    public ArrayList<Mur> getMur(){
+    public Mur getMur(){
         return labyrinthe.getMurs();
     }
 

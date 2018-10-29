@@ -38,7 +38,6 @@ public class LabyrinthePainter implements GamePainter {
     @Override
     public void draw(BufferedImage img) {
        int[][] lab = lg.getLabyrinthe();
-        ArrayList<Mur> murs = lg.getMur();
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         int casex = 0;
         int casey = 0;
