@@ -88,10 +88,14 @@ public class LabyrinthePainter implements GamePainter {
         Point2D lowerRight = new Point2D.Double(r1.getX() + r1.getWidth(),
                 r1.getY() + r1.getHeight());
 
-        if (r2.contains(upperRight) && r2.contains(lowerRight)){return "DROITE";}
+    /*    if (r2.contains(upperRight) && r2.contains(lowerRight)){return "DROITE";}
         else if (r2.contains(lowerRight) && r2.contains(lowerLeft)) {return "BAS";}
         else if (r2.contains(lowerLeft) && r2.contains(upperLeft)) { return "GAUCHE";}
-        else if (r2.contains(upperLeft) && r2.contains(upperRight)) {return "HAUT";}
+        else if (r2.contains(upperLeft) && r2.contains(upperRight)) {return "HAUT";}*/
+        if (r2.contains(lowerRight)){return "LOWERRIGHT";}
+        else if (r2.contains((upperRight))){ return "UPPERRIGHT";}
+        else if (r2.contains(lowerLeft)){return "LOWERLEFT";}
+        else if (r2.contains(upperLeft)){return "UPPERLEFT";}
         else {return null;}
     }
 
