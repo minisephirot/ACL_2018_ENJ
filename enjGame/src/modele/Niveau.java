@@ -108,10 +108,6 @@ public class Niveau {
         }
     }
 
-    public void setCollision(String direction) {
-        this.direction = direction;
-    }
-
     public ArrayList<Mur> getMur(){
         return labyrinthe.getMurs();
     }

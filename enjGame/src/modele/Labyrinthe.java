@@ -57,17 +57,7 @@ public class Labyrinthe {
      * Verifie si le joueur peux se deplacer vers la nouvelle case
      */
     public boolean deplacementPossible(int x, int y, String direction) {
-        if (direction == "HAUT" && x < 0) {
-            return false;
-        }else if (direction == "GAUCHE" && y < 0) {
-            return false;
-        }else if (direction == "DROITE" && y > 0) {
-            return false;
-        }else if (direction == "BAS" && x > 0){
-            return false;
-        }else{
-            return true;
-        }
+        return true;
     }
 
 }

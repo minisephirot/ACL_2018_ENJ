@@ -50,9 +50,6 @@ public class LabyrintheGame implements Game {
         return level.getPlayerY();
     }
 
-    public void collision(String direction){
-        level.setCollision(direction);}
-
     @Override
     public boolean isFinished() {
         return false;
