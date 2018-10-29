@@ -1,5 +1,7 @@
 package modele;
 
+import java.awt.*;
+
 /**
  * Hero du jeu
  */
@@ -22,9 +24,9 @@ public abstract class Entite {
     /**
      * Constructeur de l'entité
      */
-    public Entite(){
-        this.x = 2;
-        this.y = 2;
+    public Entite() {
+        this.x = 70;
+        this.y = 70;
     }
 
     /**
@@ -47,6 +49,7 @@ public abstract class Entite {
     public int getY() {
         return y;
     }
+
 
     /**
      * setter Cordoonnée Y de l'entité

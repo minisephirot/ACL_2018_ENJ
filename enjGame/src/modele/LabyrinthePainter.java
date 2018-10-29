@@ -2,10 +2,15 @@ package modele;
 
 import engine.GamePainter;
 
+import javax.annotation.processing.SupportedSourceVersion;
 import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class LabyrinthePainter implements GamePainter {
+    private final static Rectangle intersection = new Rectangle();
     /**
      * la taille des cases
      */
@@ -32,7 +37,8 @@ public class LabyrinthePainter implements GamePainter {
      */
     @Override
     public void draw(BufferedImage img) {
-        int[][] lab = lg.getLabyrinthe();
+       int[][] lab = lg.getLabyrinthe();
+        ArrayList<Mur> murs = lg.getMur();
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         int casex = 0;
         int casey = 0;
@@ -42,6 +48,7 @@ public class LabyrinthePainter implements GamePainter {
             for (int j = 0; j < lab[i].length; j++){
                 if (lab[i][j] == 1){
                     crayon.setColor(Color.RED);
+                //   murs.add(new Mur(casex, casey));//new Rectangle(casex, casey, 64, 64));
                 } else {
                     crayon.setColor(Color.green);
                 }
@@ -52,12 +59,40 @@ public class LabyrinthePainter implements GamePainter {
         }
 
         // Dessiner le hero
-        crayon.setColor(Color.blue);
-        int posx;
-        int posy;
-        posx = lg.getHeroX()*64;
-        posy = lg.getHeroY()*64;
-        crayon.fillOval(posy,posx,32,32);
+
+            crayon.setColor(Color.blue);
+
+            Rectangle rectangle1 = new Rectangle(lg.getHeroY(), lg.getHeroX(), 20, 20);
+
+           // System.out.println(murs.size());
+
+        boolean collision = false;
+            for (Mur mur : murs){
+                if (mur.getRectangle().intersects(rectangle1)) {
+                    lg.collision(checkIntersect(rectangle1, mur.getRectangle()));
+                    collision = true;
+                }
+                crayon.fillRect(lg.getHeroY(), lg.getHeroX(), 20, 20);
+            }
+            if (collision == false){
+                lg.collision(null);
+            }
+    }
+
+    private String checkIntersect(Rectangle r1, Rectangle r2) {
+        Point2D upperLeft = new Point2D.Double(r1.getX(), r1.getY());
+        Point2D upperRight = new Point2D.Double(r1.getX() + r1.getWidth(),
+                r1.getY());
+        Point2D lowerLeft = new Point2D.Double(r1.getX(), r1.getY()
+                + r1.getHeight());
+        Point2D lowerRight = new Point2D.Double(r1.getX() + r1.getWidth(),
+                r1.getY() + r1.getHeight());
+
+        if (r2.contains(upperRight) && r2.contains(lowerRight)){return "DROITE";}
+        else if (r2.contains(lowerRight) && r2.contains(lowerLeft)) {return "BAS";}
+        else if (r2.contains(lowerLeft) && r2.contains(upperLeft)) { return "GAUCHE";}
+        else if (r2.contains(upperLeft) && r2.contains(upperRight)) {return "HAUT";}
+        else {return null;}
     }
 
     @Override

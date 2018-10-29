@@ -2,7 +2,9 @@ package modele;
 
 import Exception.ExceptionTailleLaby;
 
+import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -14,6 +16,11 @@ public class Niveau {
      * Numéro du niveau
      */
     private int niveau;
+
+
+
+    public String direction;
+
 
     /**
      * Le labyrinthe
@@ -95,12 +102,18 @@ public class Niveau {
      * @param y deplacement en Y du héro
      */
     public void deplacerHero(int x, int y){
-        if (this.labyrinthe.deplacementPossible(this.getPlayerX(),this.getPlayerY(),x,y)){
-            this.hero.setX(this.getPlayerX()+x);
-            this.hero.setY(this.getPlayerY()+y);
-        }else{
-            System.out.println("Deplacement Impossible!");
+        if (this.labyrinthe.deplacementPossible(x,y, direction)) {
+            this.hero.setX(this.getPlayerX() + x);
+            this.hero.setY(this.getPlayerY() + y);
         }
+    }
+
+    public void setCollision(String direction) {
+        this.direction = direction;
+    }
+
+    public ArrayList<Mur> getMur(){
+        return labyrinthe.getMurs();
     }
 
     /**
