@@ -15,6 +15,14 @@ public abstract class Case {
         this.rectangle = new Rectangle(x, y, CASE_SIZE, CASE_SIZE);
     }
 
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
     public Rectangle getRectangle(){
         return rectangle;
     }

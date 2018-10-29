@@ -46,11 +46,13 @@ public class LabyrinthePainter implements GamePainter {
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
         for (Brique b : mur){
-            crayon.fill(b.getRectangle());
+           // crayon.fill(b.getRectangle());
+            crayon.drawImage(b.getImgBrique(), null, b.getX(), b.getY());
         }
         crayon.setColor(Color.green);
         for (Sol s : chemin){
             crayon.fill(s.getRectangle());
+            // crayon.drawImage(s.getImgBrique(), null, s.getX(), s.getY());
         }
         // Dessiner le hero
         crayon.setColor(Color.blue);
