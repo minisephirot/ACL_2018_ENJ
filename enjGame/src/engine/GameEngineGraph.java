@@ -1,11 +1,14 @@
 package engine;
 
+import com.sun.org.apache.regexp.internal.RE;
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
 import modele.LabyrinthePainter;
+import modele.Mur;
 
 import javax.print.attribute.standard.MediaSize;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameEngineGraph {
@@ -49,12 +52,16 @@ public class GameEngineGraph {
      */
     public void run() throws InterruptedException {
         graphicalInterface = new GraphicalInterface(gamePainter, gameController);
+        ArrayList<Mur> murs = ((LabyrintheGame)game).getMur();
         while (true) {
             try {
                 // demande controle utilisateur
                 Commande c = gameController.getCommande();
-                // fait evoluer le game
-                game.evolve(c);
+                //GESTION COLLISION
+                if (gestionCollision(murs, c)) {
+                    // fait evoluer le game
+                    game.evolve(c);
+                }
                 // affiche le game
                 graphicalInterface.paint();
                 // met en attentde
@@ -63,6 +70,26 @@ public class GameEngineGraph {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean gestionCollision(ArrayList<Mur> murs, Commande cmd){
+        int herox = ((LabyrintheGame)game).getHeroX();
+        int heroy = ((LabyrintheGame)game).getHeroY();
+        boolean avancer = true;
+        if (cmd == Commande.UP)
+            herox -=1;
+        else if (cmd == Commande.DOWN)
+            herox+=1;
+        else if (cmd == Commande.LEFT)
+            heroy-=1;
+        else if (cmd == Commande.RIGHT)
+            heroy+=1;
+        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        for (Mur m : murs){
+            if (m.getRectangle().intersects(hero))
+                avancer = false;
+        }
+        return avancer;
     }
 
     public static void main(String[] args) {

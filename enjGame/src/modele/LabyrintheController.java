@@ -72,19 +72,6 @@ public class LabyrintheController implements GameController {
             this.D = true;
             cmd = Commande.RIGHT;
         }
-        //Diagonales
-        if (this.D && this.S){
-            cmd = Commande.DOWNRIGHT;
-        }
-        if (this.Q && this.S){
-            cmd = Commande.DOWNLEFT;
-        }
-        if (this.Q && this.Z){
-            cmd = Commande.UPLEFT;
-        }
-        if (this.D && this.Z){
-            cmd = Commande.UPRIGHT;
-        }
     }
 
 

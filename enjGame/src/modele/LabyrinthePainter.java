@@ -59,7 +59,8 @@ public class LabyrinthePainter implements GamePainter {
         // Dessiner le hero
         crayon.setColor(Color.blue);
         Rectangle rectangle1 = new Rectangle(lg.getHeroY(), lg.getHeroX(), 20, 20);
-        Rectangle rectangle2 = null;
+        crayon.fill(rectangle1);
+     /*   Rectangle rectangle2 = null;
         Rectangle rectangle3 = null;
         int i = 0;
         boolean collision = false;
@@ -79,7 +80,7 @@ public class LabyrinthePainter implements GamePainter {
                 lg.collision(null);
             }else{
                 lg.collision(checkIntersect(rectangle1, rectangle2, rectangle3, i));
-            }
+            */
     }
 
     private String checkIntersect(Rectangle r1, Rectangle r2, Rectangle r3, int taille) {
