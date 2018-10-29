@@ -1,15 +1,8 @@
 package engine;
 
-import com.sun.org.apache.regexp.internal.RE;
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
 import modele.LabyrinthePainter;
-import modele.Mur;
-
-import javax.print.attribute.standard.MediaSize;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GameEngineGraph {
     /**

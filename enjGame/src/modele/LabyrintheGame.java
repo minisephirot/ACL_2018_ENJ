@@ -2,11 +2,11 @@ package modele;
 
 import engine.Commande;
 import engine.Game;
+import modele.elements.Case;
+import modele.elements.Mur;
+import modele.elements.Sol;
 
-import javax.swing.plaf.multi.MultiRootPaneUI;
 import java.awt.*;
-import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class LabyrintheGame implements Game {
@@ -64,6 +64,8 @@ public class LabyrintheGame implements Game {
     public Mur getMur(){
         return level.getMur();
     }
+
+    public ArrayList<Sol> getChemin(){return level.getChemin();}
 
     public int getHeroX(){
         return level.getPlayerX();

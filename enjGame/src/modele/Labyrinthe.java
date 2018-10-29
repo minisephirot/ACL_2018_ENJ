@@ -1,6 +1,10 @@
 package modele;
 
-import javax.swing.plaf.multi.MultiRootPaneUI;
+import modele.elements.Brique;
+import modele.elements.Case;
+import modele.elements.Mur;
+import modele.elements.Sol;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +14,7 @@ public class Labyrinthe {
     public final static int MUR = 1;
     public final static int VIDE = 0;
     public Mur mur;
-
+    public ArrayList<Sol> chemin;
     /**
      * Représentation du labyrinthe
      */
@@ -20,6 +24,7 @@ public class Labyrinthe {
      * Constructeur de Labyrinthe
      */
     public Labyrinthe(){
+        chemin = new ArrayList<Sol>();
     }
 
     /**
@@ -41,7 +46,9 @@ public class Labyrinthe {
             casex = 0;
             for (int j = 0; j < labyrinthe[i].length; j++){
                 if (labyrinthe[i][j] == 1) {
-                    mur.ajouterCase(new Case(casex, casey));
+                    mur.ajouterBrique(new Brique(casex, casey));
+                } else if (labyrinthe[i][j] == 0){
+                    chemin.add(new Sol(casex, casey));
                 }
                 casex += 64;
             }
@@ -51,6 +58,10 @@ public class Labyrinthe {
 
     public Mur getMurs() {
         return mur;
+    }
+
+    public ArrayList<Sol> getChemin(){
+        return chemin;
     }
 
     /**

@@ -1,6 +1,9 @@
 package modele;
 
 import engine.GamePainter;
+import modele.elements.Brique;
+import modele.elements.Mur;
+import modele.elements.Sol;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import java.awt.*;
@@ -37,23 +40,17 @@ public class LabyrinthePainter implements GamePainter {
      */
     @Override
     public void draw(BufferedImage img) {
-       int[][] lab = lg.getLabyrinthe();
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-        int casex = 0;
-        int casey = 0;
+        Mur mur = lg.getMur();
+        ArrayList<Sol> chemin = lg.getChemin();
         // Dessiner le labyrinthe
-        for (int i = 0; i < lab.length; i++){
-            casex = 0;
-            for (int j = 0; j < lab[i].length; j++){
-                if (lab[i][j] == 1){
-                    crayon.setColor(Color.RED);
-                } else {
-                    crayon.setColor(Color.green);
-                }
-                crayon.fillRect(casex, casey, 64, 64);
-                casex += 64;
-            }
-            casey+=64;
+        crayon.setColor(Color.RED);
+        for (Brique b : mur){
+            crayon.fill(b.getRectangle());
+        }
+        crayon.setColor(Color.green);
+        for (Sol s : chemin){
+            crayon.fill(s.getRectangle());
         }
         // Dessiner le hero
         crayon.setColor(Color.blue);

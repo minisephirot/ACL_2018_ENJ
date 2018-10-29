@@ -1,11 +1,11 @@
 package modele;
 
 import Exception.ExceptionTailleLaby;
+import modele.elements.Mur;
+import modele.elements.Sol;
 
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -108,6 +108,7 @@ public class Niveau {
         return labyrinthe.getMurs();
     }
 
+    public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
     /**
      * Print le labyrinthe, les joueurs en string
      */

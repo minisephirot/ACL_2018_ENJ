@@ -1,8 +1,8 @@
-package modele;
+package modele.elements;
 
 import java.awt.*;
 
-public class Case {
+public abstract class Case {
     public static int CASE_SIZE = 64;
 
     private int x;
