@@ -56,7 +56,7 @@ public class Labyrinthe {
     /**
      * Verifie si le joueur peux se deplacer vers la nouvelle case
      */
-    public boolean deplacementPossible(int x, int y, String direction) {
+    public boolean deplacementPossible(int x, int y) {
         return true;
     }
 

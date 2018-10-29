@@ -18,10 +18,6 @@ public class Niveau {
     private int niveau;
 
 
-
-    public String direction;
-
-
     /**
      * Le labyrinthe
      */
@@ -102,7 +98,7 @@ public class Niveau {
      * @param y deplacement en Y du héro
      */
     public void deplacerHero(int x, int y){
-        if (this.labyrinthe.deplacementPossible(x,y, direction)) {
+        if (this.labyrinthe.deplacementPossible(x,y)) {
             this.hero.setX(this.getPlayerX() + x);
             this.hero.setY(this.getPlayerY() + y);
         }
