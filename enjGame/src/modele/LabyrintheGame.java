@@ -13,13 +13,18 @@ public class LabyrintheGame implements Game {
 
     private Niveau level;
 
+
     public LabyrintheGame(){
         this.level = new Niveau();
-        genLabyrinth();
+        genLabyrinth(true);
     }
 
-    public void genLabyrinth(){
-        this.level.chargerNiveau("Labyrinthe1");
+    public void genLabyrinth(boolean useGenerator){
+        if (useGenerator){
+            this.level.genererNiveau();
+        }else{
+            this.level.chargerNiveau("Labyrinthe1");
+        }
     }
 
     @Override

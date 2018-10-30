@@ -18,6 +18,7 @@ public class GraphicalInterface {
      */
     public GraphicalInterface(GamePainter gamePainter, GameController gameController){
         JFrame f=new JFrame();
+        f.setTitle("Labyrinthe");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // attacher le panel contenant l'afficheur du game
@@ -28,6 +29,7 @@ public class GraphicalInterface {
         this.panel.addKeyListener(gameController);
 
         f.pack();
+        f.setLocationRelativeTo(null);
         f.setVisible(true);
         f.getContentPane().setFocusable(true);
         f.getContentPane().requestFocus();
