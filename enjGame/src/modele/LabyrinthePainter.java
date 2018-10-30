@@ -17,8 +17,8 @@ public class LabyrinthePainter implements GamePainter {
     /**
      * la taille des cases
      */
-    protected static final int WIDTH = 640;
-    protected static final int HEIGHT = 640;
+    protected static final int WIDTH = 704;
+    protected static final int HEIGHT = 704;
 
     /**
      * Le modele du jeu Labyrinthe
