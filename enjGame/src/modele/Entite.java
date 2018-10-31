@@ -9,12 +9,12 @@ public abstract class Entite {
     /**
      * Cordoonnée X de l'entité
      */
-    private int x;
+    protected int x;
 
     /**
      * Coordonnée Y de l'entité
      */
-    private int y;
+    protected int y;
 
     /**
      * Point de vie de l'entité
@@ -25,8 +25,6 @@ public abstract class Entite {
      * Constructeur de l'entité
      */
     public Entite() {
-        this.x = 70;
-        this.y = 70;
     }
 
     /**

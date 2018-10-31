@@ -58,6 +58,12 @@ public class LabyrinthePainter implements GamePainter {
         crayon.setColor(Color.blue);
         Rectangle rectangle1 = new Rectangle(lg.getHeroY(), lg.getHeroX(), 20, 20);
         crayon.fill(rectangle1);
+        //Dessiner les monstres;
+        crayon.setColor(Color.black);
+        for (Monstre m: this.lg.getMonstres()) {
+            Rectangle rectangle2 = new Rectangle(m.y,m.x,20,20);
+            crayon.fill(rectangle2);
+        }
     }
     
 

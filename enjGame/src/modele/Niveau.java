@@ -12,11 +12,16 @@ import java.util.Scanner;
  * Un Niveau du jeu
  */
 public class Niveau {
+
+
     /**
      * Numéro du niveau
      */
     private int niveau;
 
+    /**
+     * Generateur de labyrinthe
+     */
     private LabyGenerator lg;
 
     /**
@@ -30,11 +35,19 @@ public class Niveau {
     private Hero hero;
 
     /**
+     * Liste des monstres
+     */
+    private final ArrayList<Monstre> monstres;
+
+    /**
      * Constructeur de Niveau
      */
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
+        Monstre mobtest = new Monstre(this);
+        this.monstres = new ArrayList();
+        this.monstres.add(mobtest);
         this.lg = new LabyGenerator(11,11);
     }
 
@@ -139,5 +152,9 @@ public class Niveau {
             sb.append("]\n");
         }
         return sb.toString();
+    }
+
+    public ArrayList<Monstre> getMonstres() {
+        return monstres;
     }
 }
