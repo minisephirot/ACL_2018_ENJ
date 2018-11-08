@@ -50,9 +50,9 @@ public class Labyrinthe {
                 } else if (labyrinthe[i][j] == 0){
                     chemin.add(new Sol(casex, casey));
                 }
-                casex += 64;
+                casex += 32;
             }
-            casey += 64;
+            casey += 32;
         }
     }
 

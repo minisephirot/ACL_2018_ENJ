@@ -3,7 +3,7 @@ package modele.elements;
 import java.awt.*;
 
 public abstract class Case {
-    public static int CASE_SIZE = 64;
+    public static int CASE_SIZE = 32;
 
     private int x;
     private int y;
