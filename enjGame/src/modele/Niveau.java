@@ -48,7 +48,7 @@ public class Niveau {
         Monstre mobtest = new Monstre(this);
         this.monstres = new ArrayList();
         this.monstres.add(mobtest);
-        this.lg = new LabyGenerator(11,11);
+        this.lg = new LabyGenerator(23,23);
     }
 
     public int[][] getLabyrinthe(){

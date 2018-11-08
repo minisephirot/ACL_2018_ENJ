@@ -19,7 +19,7 @@ public class LabyrintheGame implements Game {
     }
 
     public void genLabyrinth(boolean useGenerator){
-        if (useGenerator){
+       if (useGenerator){
             this.level.genererNiveau();
         }else{
             this.level.chargerNiveau("Labyrinthe1");
