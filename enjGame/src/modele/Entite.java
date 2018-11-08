@@ -19,7 +19,7 @@ public abstract class Entite {
     /**
      * Point de vie de l'entité
      */
-    private int pv;
+    protected int pv;
 
     /**
      * Constructeur de l'entité
@@ -68,5 +68,12 @@ public abstract class Entite {
      */
     public void setPv(int pv) {
         this.pv = pv;
+    }
+
+    /**
+     * Getter pour verifier si entité morte
+     */
+    public boolean isDead() {
+        return this.pv <= 0;
     }
 }

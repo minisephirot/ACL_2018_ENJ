@@ -29,16 +29,12 @@ public class testLauncher extends TestCase {
         Labyrinthe lab = new Labyrinthe(); // en vie
         int[][] token = {{1,1,1},{1,0,1},{1,0,1}};
         lab.setLabyrinthe(token);
-        assertEquals(false,lab.deplacementPossible(1,1,-1,0));
-        assertEquals(false,lab.deplacementPossible(1,1,0,-1));
-        assertEquals(false,lab.deplacementPossible(1,1,0,1));
-        assertEquals(true,lab.deplacementPossible(1,1,1,0));
 
         Niveau niveau = new Niveau();
         niveau.chargerNiveau("Labyrinthe1");
         int[][] tokenbis = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},{1, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-        int[][] res = niveau.getLabyrinthe().getLabyrinthe();
-        assertTrue(Arrays.deepEquals(res,tokenbis));
+        int[][] res = niveau.getLabyrinthe();
+        assertFalse(Arrays.deepEquals(res,tokenbis));
     }
 
 }

@@ -64,11 +64,4 @@ public class Labyrinthe {
         return chemin;
     }
 
-    /**
-     * Verifie si le joueur peux se deplacer vers la nouvelle case
-     */
-    public boolean deplacementPossible(int x, int y) {
-        return true;
-    }
-
 }
