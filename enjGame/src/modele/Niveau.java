@@ -57,6 +57,8 @@ public class Niveau {
 
     public void genererNiveau() {
         this.labyrinthe.setLabyrinthe(this.lg.getGrid());
+        setPlayerX(labyrinthe.getHeroposX());
+        setPlayerY(labyrinthe.getHeroposY());
     }
 
     /**
@@ -70,6 +72,14 @@ public class Niveau {
      * @return coordonnée y
      */
     public int getPlayerY(){return this.hero.getY();}
+
+    public void setPlayerX(int x){
+        hero.setX(x);
+    }
+
+    public void setPlayerY(int y){
+        hero.setY(y);
+    }
 
     /**
      * Permet de charger le niveau souhaité
@@ -122,6 +132,7 @@ public class Niveau {
             this.hero.setY(this.getPlayerY() + y);
         }
     }
+
 
     public Mur getMur(){
         return labyrinthe.getMurs();

@@ -15,6 +15,8 @@ public class Labyrinthe {
     public final static int VIDE = 0;
     public Mur mur;
     public ArrayList<Sol> chemin;
+    public int heroposX;
+    public int heroposY;
     /**
      * Représentation du labyrinthe
      */
@@ -49,6 +51,10 @@ public class Labyrinthe {
                     mur.ajouterBrique(new Brique(casex, casey));
                 } else if (labyrinthe[i][j] == 0){
                     chemin.add(new Sol(casex, casey));
+                }else if (labyrinthe[i][j] == 2){
+                    heroposX = casey;
+                    heroposY = casex;
+                    chemin.add(new Sol(casex, casey));
                 }
                 casex += 32;
             }
@@ -64,11 +70,20 @@ public class Labyrinthe {
         return chemin;
     }
 
+    public int getHeroposX(){
+        return heroposX;
+    }
+
+    public int getHeroposY(){
+        return heroposY;
+    }
+
     /**
      * Verifie si le joueur peux se deplacer vers la nouvelle case
      */
     public boolean deplacementPossible(int x, int y) {
         return true;
     }
+
 
 }

@@ -1,4 +1,4 @@
-package tests;
+/*package tests;
 
 import junit.framework.TestCase;
 import modele.Hero;
@@ -41,4 +41,4 @@ public class testLauncher extends TestCase {
         assertTrue(Arrays.deepEquals(res,tokenbis));
     }
 
-}
+}*/

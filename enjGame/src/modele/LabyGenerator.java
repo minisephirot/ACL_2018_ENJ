@@ -112,6 +112,18 @@ public class LabyGenerator {
             }
             System.out.println("");
         }
+
+        boolean trouve = true;
+        while (trouve == true) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+
+            if (grid[x][y] == 0) {
+                grid[x][y] = 2;
+                trouve = false;
+            }
+        }
+
         //JUST FOR DEBUGGING ERASE IMMEDIATELY AFTER DONE WITH
         return grid;
     }
@@ -119,6 +131,7 @@ public class LabyGenerator {
     public int[][] getGrid() {
         return grid;
     }
+
 
     public LabyGenerator (int largeur, int hauteur) {
         width = largeur;
