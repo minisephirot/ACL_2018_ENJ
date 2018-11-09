@@ -99,8 +99,8 @@ public class Niveau {
                 strArray = line.split(",");
                 if (hauteur > 0) {
                     if (strArray.length != labyrinthe[0].length){
-                       ExceptionTailleLaby exceptionTailleLaby = new ExceptionTailleLaby();
-                       throw exceptionTailleLaby;
+                        ExceptionTailleLaby exceptionTailleLaby = new ExceptionTailleLaby();
+                        throw exceptionTailleLaby;
                     }
                     for (int i = 0; i < strArray.length; i++) {
                         labyrinthe[hauteur - 1][i] = Integer.parseInt(strArray[i]);
@@ -127,10 +127,8 @@ public class Niveau {
      * @param y deplacement en Y du héro
      */
     public void deplacerHero(int x, int y){
-        if (this.labyrinthe.deplacementPossible(x,y)) {
-            this.hero.setX(this.getPlayerX() + x);
-            this.hero.setY(this.getPlayerY() + y);
-        }
+        this.hero.setX(this.getPlayerX() + x);
+        this.hero.setY(this.getPlayerY() + y);
     }
 
 
