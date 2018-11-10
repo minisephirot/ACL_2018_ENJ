@@ -19,6 +19,7 @@ public class LabyrinthePainter implements GamePainter {
      */
     protected static final int WIDTH = 736;
     protected static final int HEIGHT = 736;
+    static int camX,camY;
 
     /**
      * Le modele du jeu Labyrinthe
@@ -40,32 +41,46 @@ public class LabyrinthePainter implements GamePainter {
      */
     @Override
     public void draw(BufferedImage img) {
+        camY = lg.getHeroY();
+        camX = lg.getHeroX();
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         Mur mur = lg.getMur();
         ArrayList<Sol> chemin = lg.getChemin();
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
         for (Brique b : mur){
-            crayon.fill(b.getRectangle());
-           // crayon.drawImage(b.getImgBrique(), null, b.getX(), b.getY());
+
+            // création du nouveau rectangle par rapport à la camera
+            Rectangle r = b.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
+
+            crayon.fill(r);
+
+//            crayon.drawImage(b.getImgBrique(), null, b.getX(), b.getY()); => dessiner les brique avec les coordonnées originaux
+//            crayon.drawImage(b.getImgBrique(), null, b.getxCamera(), b.getyCamera()); => dessiner les briques avec les coordonnées de la cam
         }
         crayon.setColor(Color.green);
         for (Sol s : chemin){
-            crayon.fill(s.getRectangle());
-            // crayon.drawImage(s.getImgBrique(), null, s.getX(), s.getY());
+            Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
+
+            crayon.fill(r);
+
+//            crayon.drawImage(s.getImgBrique(), null, s.getX(), s.getY());
+//            crayon.drawImage(s.getImgBrique(), null, s.getxCamera(), s.getyCamera());
         }
         // Dessiner le hero
         crayon.setColor(Color.blue);
-        Rectangle rectangle1 = new Rectangle(lg.getHeroY(), lg.getHeroX(), 20, 20);
+        Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);
+//        Rectangle rectangle1 = new Rectangle(lg.getHeroY(), lg.getHeroX(), 20, 20);
         crayon.fill(rectangle1);
         //Dessiner les monstres;
         crayon.setColor(Color.black);
         for (Monstre m: this.lg.getMonstres()) {
-            Rectangle rectangle2 = new Rectangle(m.y,m.x,20,20);
+            Rectangle rectangle2 = new Rectangle(m.y-camY +WIDTH/2,m.x-camX +HEIGHT/2,20,20);
+//            Rectangle rectangle2 = new Rectangle(m.y-camY ,m.x-camX ,20,20);
             crayon.fill(rectangle2);
         }
     }
-    
+
 
     @Override
     public int getWidth() {
