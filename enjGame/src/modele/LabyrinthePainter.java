@@ -54,18 +54,12 @@ public class LabyrinthePainter implements GamePainter {
             Rectangle r = b.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
 
             crayon.fill(r);
-
-//            crayon.drawImage(b.getImgBrique(), null, b.getX(), b.getY()); => dessiner les brique avec les coordonnées originaux
-//            crayon.drawImage(b.getImgBrique(), null, b.getxCamera(), b.getyCamera()); => dessiner les briques avec les coordonnées de la cam
         }
         crayon.setColor(Color.green);
         for (Sol s : chemin){
             Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
 
             crayon.fill(r);
-
-//            crayon.drawImage(s.getImgBrique(), null, s.getX(), s.getY());
-//            crayon.drawImage(s.getImgBrique(), null, s.getxCamera(), s.getyCamera());
         }
         // Dessiner le hero
         crayon.setColor(Color.blue);
@@ -74,11 +68,6 @@ public class LabyrinthePainter implements GamePainter {
         crayon.fill(rectangle1);
         //Dessiner les monstres;
         crayon.setColor(Color.black);
-        for (Monstre m: this.lg.getMonstres()) {
-            Rectangle rectangle2 = new Rectangle(m.y-camY +WIDTH/2,m.x-camX +HEIGHT/2,20,20);
-//            Rectangle rectangle2 = new Rectangle(m.y-camY ,m.x-camX ,20,20);
-            crayon.fill(rectangle2);
-        }
     }
 
 

@@ -39,9 +39,6 @@ public class LabyrintheGame implements Game {
             if (cmd == Commande.LEFT) this.level.deplacerHero(0, -1);
             if (cmd == Commande.RIGHT) this.level.deplacerHero(0, 1);
         }
-        for (Monstre m :this.level.getMonstres()) {
-            m.seRapprocher();
-        }
     }
 
     public boolean gestionCollision(Mur mur, Commande cmd){
@@ -80,10 +77,6 @@ public class LabyrintheGame implements Game {
 
     public int getHeroY(){
         return level.getPlayerY();
-    }
-
-    public ArrayList<Monstre> getMonstres(){
-        return level.getMonstres();
     }
 
     @Override

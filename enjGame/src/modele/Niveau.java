@@ -34,10 +34,6 @@ public class Niveau {
      */
     private Hero hero;
 
-    /**
-     * Liste des monstres
-     */
-    private final ArrayList<Monstre> monstres;
 
     /**
      * Constructeur de Niveau
@@ -45,9 +41,6 @@ public class Niveau {
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
-        Monstre mobtest = new Monstre(this);
-        this.monstres = new ArrayList();
-        this.monstres.add(mobtest);
         this.lg = new LabyGenerator(23,23);
     }
 
@@ -161,9 +154,5 @@ public class Niveau {
             sb.append("]\n");
         }
         return sb.toString();
-    }
-
-    public ArrayList<Monstre> getMonstres() {
-        return monstres;
     }
 }
