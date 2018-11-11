@@ -1,0 +1,7 @@
+Liste des fonctionnalités de la version v2.1 :
+
+- Version graphique de base du labyrinthe sans sprite : Noah Willaime
+- Gestion des collisions entre le joueur et chaque mur du labyrinthe : Julien Micheletti & Noah Willaime
+- Création d'une caméra ayant pour centre le joueur : Chouaib Seridi
+- Développement d'un générateur de labyrinthes aléatoires : Elliot This
+
