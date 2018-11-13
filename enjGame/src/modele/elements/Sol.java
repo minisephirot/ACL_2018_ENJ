@@ -10,12 +10,12 @@ public class Sol extends Case {
 
     public Sol(int x, int y) {
         super(x, y);
-        File path = new File("enjGame/src/res/boo.png");
+       /* File path = new File("enjGame/src/res/boo.png");
         try {
             imgSol = ImageIO.read(path);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public BufferedImage getImgBrique(){

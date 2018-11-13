@@ -10,12 +10,12 @@ public class Arrive extends Case {
 
     public Arrive(int x, int y) {
         super(x, y);
-        File path = new File("enjGame/src/res/brick.jpg");
+/*        File path = new File("enjGame/src/res/brick.jpg");
         try {
             imgArrive = ImageIO.read(path);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public BufferedImage getImgArrive(){
