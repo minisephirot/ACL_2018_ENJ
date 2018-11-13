@@ -1,6 +1,6 @@
 package modele;
 
-import Exception.ExceptionTailleLaby;
+import exception.ExceptionTailleLaby;
 import modele.elements.Arrive;
 import modele.elements.Mur;
 import modele.elements.Sol;
