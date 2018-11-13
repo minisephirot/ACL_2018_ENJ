@@ -2,9 +2,13 @@ package modele;
 
 import engine.Commande;
 import engine.Game;
+import modele.elements.Arrive;
+import modele.elements.Case;
+import modele.elements.Mur;
+import modele.elements.Sol;
 
-import java.io.File;
-import java.io.InputStream;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class LabyrintheGame implements Game {
 
@@ -12,11 +16,15 @@ public class LabyrintheGame implements Game {
 
     public LabyrintheGame(){
         this.level = new Niveau();
-        genLabyrinth();
+        genLabyrinth(true);
     }
 
-    public void genLabyrinth(){
-        this.level.chargerNiveau("Labyrinthe1");
+    public void genLabyrinth(boolean useGenerator){
+       if (useGenerator){
+            this.level.genererNiveau();
+        }else{
+            this.level.chargerNiveau("Labyrinthe1");
+        }
     }
 
     @Override
@@ -26,10 +34,54 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd) {
-        if (cmd == Commande.UP) this.level.deplacerHero(-1,0);
-        if (cmd == Commande.DOWN) this.level.deplacerHero(1,0);
-        if (cmd == Commande.LEFT) this.level.deplacerHero(0,-1);
-        if (cmd == Commande.RIGHT) this.level.deplacerHero(0,1);
+        if (gestionCollision(getMur(), cmd)) {
+            if (cmd == Commande.UP) this.level.deplacerHero(-1, 0);
+            if (cmd == Commande.DOWN) this.level.deplacerHero(1, 0);
+            if (cmd == Commande.LEFT) this.level.deplacerHero(0, -1);
+            if (cmd == Commande.RIGHT) this.level.deplacerHero(0, 1);
+        }
+    }
+
+    public boolean gestionCollision(Mur mur, Commande cmd){
+        int herox = getHeroX();
+        int heroy = getHeroY();
+        boolean avancer = true;
+        if (cmd == Commande.UP)
+            herox -=1;
+        else if (cmd == Commande.DOWN)
+            herox+=1;
+        else if (cmd == Commande.LEFT)
+            heroy-=1;
+        else if (cmd == Commande.RIGHT)
+            heroy+=1;
+        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        for (Case c : mur){
+            if (c.getRectangle().intersects(hero))
+                avancer = false;
+        }
+        return avancer;
+    }
+
+    public int[][] getLabyrinthe(){
+        return level.getLabyrinthe();
+    }
+
+    public Mur getMur(){
+        return level.getMur();
+    }
+
+    public ArrayList<Sol> getChemin(){return level.getChemin();}
+
+    public Arrive getArrive(){
+        return this.level.getArrive();
+    }
+
+    public int getHeroX(){
+        return level.getPlayerX();
+    }
+
+    public int getHeroY(){
+        return level.getPlayerY();
     }
 
     @Override

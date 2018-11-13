@@ -1,12 +1,20 @@
 package modele;
 
+import modele.elements.*;
+
+import java.util.ArrayList;
+
 /**
  * Labyrinthe d'un niveau du jeu
  */
 public class Labyrinthe {
     public final static int MUR = 1;
     public final static int VIDE = 0;
-
+    private Mur mur;
+    private Arrive arrive;
+    public ArrayList<Sol> chemin;
+    private int heroposX;
+    private int heroposY;
     /**
      * Représentation du labyrinthe
      */
@@ -16,6 +24,7 @@ public class Labyrinthe {
      * Constructeur de Labyrinthe
      */
     public Labyrinthe(){
+        chemin = new ArrayList<Sol>();
     }
 
     /**
@@ -29,14 +38,56 @@ public class Labyrinthe {
      * Setter de la matrice du labyrinthe
      */
     public void setLabyrinthe(int[][] labyrinthe) {
+        mur = new Mur();
         this.labyrinthe = labyrinthe;
+        int casex = 0;
+        int casey = 0;
+        for (int i = 0; i < labyrinthe.length; i++){
+            casex = 0;
+            for (int j = 0; j < labyrinthe[i].length; j++){
+                if (labyrinthe[i][j] == 1) {
+                    mur.ajouterBrique(new Brique(casex, casey));
+                } else if (labyrinthe[i][j] == 0){
+                    chemin.add(new Sol(casex, casey));
+                }else if (labyrinthe[i][j] == 2){
+                    heroposX = casey;
+                    heroposY = casex;
+                    chemin.add(new Sol(casex, casey));
+                }else if (labyrinthe[i][j] == 3){
+                    arrive = new Arrive(casex,casey);
+                }
+                casex += 32;
+            }
+            casey += 32;
+        }
+    }
+
+    public Mur getMurs() {
+        return mur;
+    }
+
+    public ArrayList<Sol> getChemin(){
+        return chemin;
+    }
+
+    public Arrive getArrive(){
+        return this.arrive;
+    }
+
+    public int getHeroposX(){
+        return heroposX;
+    }
+
+    public int getHeroposY(){
+        return heroposY;
     }
 
     /**
      * Verifie si le joueur peux se deplacer vers la nouvelle case
      */
-    public boolean deplacementPossible(int heroX,int heroY,int x, int y) {
-        return this.labyrinthe[heroX+x][heroY+y] == 0;
+    public boolean deplacementPossible(int x, int y) {
+        return true;
     }
+
 
 }

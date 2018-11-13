@@ -1,5 +1,7 @@
 package modele;
 
+import java.awt.*;
+
 /**
  * Hero du jeu
  */
@@ -7,25 +9,22 @@ public abstract class Entite {
     /**
      * Cordoonnée X de l'entité
      */
-    private int x;
+    protected int x;
 
     /**
      * Coordonnée Y de l'entité
      */
-    private int y;
+    protected int y;
 
     /**
      * Point de vie de l'entité
      */
-    private int pv;
+    protected int pv;
 
     /**
      * Constructeur de l'entité
      */
-    public Entite(){
-        this.x = 1;
-        this.y = 1;
-        this.pv = 1;
+    public Entite() {
     }
 
     /**
@@ -49,6 +48,7 @@ public abstract class Entite {
         return y;
     }
 
+
     /**
      * setter Cordoonnée Y de l'entité
      */
@@ -71,8 +71,9 @@ public abstract class Entite {
     }
 
     /**
-     * est-ce que l'entitée est morte
+     * Getter pour verifier si entité morte
      */
-    public boolean isDead() { return this.pv <= 0; }
-
+    public boolean isDead() {
+        return this.pv <= 0;
+    }
 }

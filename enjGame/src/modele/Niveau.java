@@ -1,18 +1,29 @@
 package modele;
 
-import exception.ExceptionTailleLaby;
+import Exception.ExceptionTailleLaby;
+import modele.elements.Arrive;
+import modele.elements.Mur;
+import modele.elements.Sol;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Un Niveau du jeu
  */
 public class Niveau {
+
+
     /**
      * Numéro du niveau
      */
     private int niveau;
+
+    /**
+     * Generateur de labyrinthe
+     */
+    private LabyGenerator lg;
 
     /**
      * Le labyrinthe
@@ -24,20 +35,24 @@ public class Niveau {
      */
     private Hero hero;
 
+
     /**
      * Constructeur de Niveau
      */
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
+        this.lg = new LabyGenerator(23,23);
     }
 
-    /**
-     * Retourne le labyrinthe du niveau
-     * @return Labyrinthe lab
-     */
-    public Labyrinthe getLabyrinthe() {
-        return labyrinthe;
+    public int[][] getLabyrinthe(){
+        return labyrinthe.getLabyrinthe();
+    }
+
+    public void genererNiveau() {
+        this.labyrinthe.setLabyrinthe(this.lg.getGrid());
+        setPlayerX(labyrinthe.getHeroposX());
+        setPlayerY(labyrinthe.getHeroposY());
     }
 
     /**
@@ -51,6 +66,14 @@ public class Niveau {
      * @return coordonnée y
      */
     public int getPlayerY(){return this.hero.getY();}
+
+    public void setPlayerX(int x){
+        hero.setX(x);
+    }
+
+    public void setPlayerY(int y){
+        hero.setY(y);
+    }
 
     /**
      * Permet de charger le niveau souhaité
@@ -70,8 +93,8 @@ public class Niveau {
                 strArray = line.split(",");
                 if (hauteur > 0) {
                     if (strArray.length != labyrinthe[0].length){
-                       ExceptionTailleLaby exceptionTailleLaby = new ExceptionTailleLaby();
-                       throw exceptionTailleLaby;
+                        ExceptionTailleLaby exceptionTailleLaby = new ExceptionTailleLaby();
+                        throw exceptionTailleLaby;
                     }
                     for (int i = 0; i < strArray.length; i++) {
                         labyrinthe[hauteur - 1][i] = Integer.parseInt(strArray[i]);
@@ -98,14 +121,18 @@ public class Niveau {
      * @param y deplacement en Y du héro
      */
     public void deplacerHero(int x, int y){
-        if (this.labyrinthe.deplacementPossible(this.getPlayerX(),this.getPlayerY(),x,y)){
-            this.hero.setX(this.getPlayerX()+x);
-            this.hero.setY(this.getPlayerY()+y);
-        }else{
-            System.out.println("Deplacement Impossible!");
-        }
+        this.hero.setX(this.getPlayerX() + x);
+        this.hero.setY(this.getPlayerY() + y);
     }
 
+
+    public Mur getMur(){
+        return labyrinthe.getMurs();
+    }
+
+    public Arrive getArrive(){return labyrinthe.getArrive();}
+
+    public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
     /**
      * Print le labyrinthe, les joueurs en string
      */

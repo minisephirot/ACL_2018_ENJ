@@ -10,6 +10,16 @@ import java.awt.event.KeyEvent;
  */
 public class LabyrintheController implements GameController {
 
+
+    /**
+     * Booleans de directions
+     */
+    boolean Z = false;
+    boolean Q = false;
+    boolean S = false;
+    boolean D = false;
+
+
     /**
      * Commade en cours
      */
@@ -45,13 +55,21 @@ public class LabyrintheController implements GameController {
     @Override
     public void keyPressed(KeyEvent e) {
         char keyPress = e.getKeyChar();
+        //Cardinaux
         if (keyPress == 'z' || keyPress == 'Z'){
+            this.Z = true;
             cmd = Commande.UP;
-        } else if (keyPress == 'q' || keyPress == 'Q'){
+        }
+        if (keyPress == 'q' || keyPress == 'Q'){
+            this.Q = true;
             cmd = Commande.LEFT;
-        } else if (keyPress == 's' || keyPress == 'S'){
+        }
+        if (keyPress == 's' || keyPress == 'S'){
+            this.S = true;
             cmd = Commande.DOWN;
-        } else if (keyPress == 'd' || keyPress == 'D'){
+        }
+        if (keyPress == 'd' || keyPress == 'D'){
+            this.D = true;
             cmd = Commande.RIGHT;
         }
     }
@@ -63,6 +81,20 @@ public class LabyrintheController implements GameController {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        cmd = Commande.IDLE;
+        char keyPress = e.getKeyChar();
+        //Cardinaux
+        if (keyPress == 'z' || keyPress == 'Z'){
+            this.Z = false;
+        }
+        if (keyPress == 'q' || keyPress == 'Q'){
+            this.Q = false;
+        }
+        if (keyPress == 's' || keyPress == 'S'){
+            this.S = false;
+        }
+        if (keyPress == 'd' || keyPress == 'D'){
+            this.D = false;
+        }
+        if (!this.Q && !this.Z && !this.D && !this.S) cmd = Commande.IDLE;
     }
 }

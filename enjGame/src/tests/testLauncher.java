@@ -2,11 +2,12 @@ package tests;
 
 import junit.framework.TestCase;
 import modele.Hero;
+import modele.LabyGenerator;
 import modele.Labyrinthe;
 import modele.Niveau;
 
+import java.awt.*;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class testLauncher extends TestCase {
 
@@ -29,16 +30,35 @@ public class testLauncher extends TestCase {
         Labyrinthe lab = new Labyrinthe(); // en vie
         int[][] token = {{1,1,1},{1,0,1},{1,0,1}};
         lab.setLabyrinthe(token);
-        assertEquals(false,lab.deplacementPossible(1,1,-1,0));
-        assertEquals(false,lab.deplacementPossible(1,1,0,-1));
-        assertEquals(false,lab.deplacementPossible(1,1,0,1));
-        assertEquals(true,lab.deplacementPossible(1,1,1,0));
 
         Niveau niveau = new Niveau();
         niveau.chargerNiveau("Labyrinthe1");
         int[][] tokenbis = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},{1, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-        int[][] res = niveau.getLabyrinthe().getLabyrinthe();
-        assertTrue(Arrays.deepEquals(res,tokenbis));
+        int[][] res = niveau.getLabyrinthe();
+        assertFalse(Arrays.deepEquals(res,tokenbis));
+    }
+
+    public void testCollisions(){
+        Rectangle rec1 = new Rectangle(10,10,10,10);
+        Rectangle hero = new Rectangle(15,15,10,10);
+        assertTrue(rec1.intersects(hero));
+    }
+
+    public void testGenerator(){
+        LabyGenerator lg = new LabyGenerator(10,10);
+        int[][] grid = lg.getGrid();
+        boolean hero = false;
+        boolean arrive = false;
+        for (int i=0;i<grid.length;i++)
+        {
+            for (int j=0;j<grid[0].length;j++)
+            {
+                if (grid[i][j]== 2) hero = true;
+                if (grid[i][j]== 3) arrive = true;
+            }
+        }
+        assertTrue(hero);
+        assertTrue(arrive);
     }
 
 }

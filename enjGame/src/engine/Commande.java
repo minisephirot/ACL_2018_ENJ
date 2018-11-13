@@ -1,5 +1,5 @@
 package engine;
 
 public enum Commande {
-    LEFT, RIGHT, UP, DOWN, IDLE;
+    LEFT, RIGHT, UP, UPLEFT, UPRIGHT, DOWN, DOWNLEFT, DOWNRIGHT, IDLE;
 }
