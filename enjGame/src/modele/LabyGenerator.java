@@ -86,8 +86,6 @@ public class LabyGenerator {
         }
     }
 
-    //Returns a complete maze, gets the carved out paths from the chemin function,
-    //then 'cleans it up' to return a useable maze format for the game.
     public int[][] generate() {
         grid = new int[width][height];
         //Initialize Grid with all walls
@@ -98,33 +96,30 @@ public class LabyGenerator {
                 grid[i][j]= 1;
             }
         }
-        //Starting from row and column 1 and 1, respectively.
+
         int sr=1,sc=1;
-        //Carve Out the Grid
+        //Creuse le chemin
         chemin(grid,sr,sc);
 
-        //JUST FOR DEBUGGING:
-        for (int i=0;i<height;i++)
-        {
-            for (int j=0;j<width;j++)
-            {
-                System.out.print(grid[j][i]);
-            }
-            System.out.println("");
-        }
-
-        boolean trouve = true;
-        while (trouve == true) {
+        //pose la case du héros et l'arrivée
+        boolean hero = true;
+        boolean arriv = true;
+        while (hero) {
             int x = (int) (Math.random() * width - 1);
             int y = (int) (Math.random() * height - 1);
-
             if (grid[x][y] == 0) {
                 grid[x][y] = 2;
-                trouve = false;
+                hero = false;
             }
         }
-
-        //JUST FOR DEBUGGING ERASE IMMEDIATELY AFTER DONE WITH
+        while (arriv) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0 && this.isDeadEnd(x,y)) {
+                grid[x][y] = 3;
+                arriv = false;
+            }
+        }
         return grid;
     }
 
@@ -132,6 +127,14 @@ public class LabyGenerator {
         return grid;
     }
 
+    public boolean isDeadEnd(int x,int y){
+        int cpt = 0;
+        if (this.grid[x-1][y] == 1) cpt++;
+        if (this.grid[x+1][y] == 1) cpt++;
+        if (this.grid[x][y-1] == 1) cpt++;
+        if (this.grid[x][y+1] == 1) cpt++;
+        return cpt == 3;
+    }
 
     public LabyGenerator (int largeur, int hauteur) {
         width = largeur;

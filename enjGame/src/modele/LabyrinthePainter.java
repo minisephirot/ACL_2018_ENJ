@@ -1,6 +1,7 @@
 package modele;
 
 import engine.GamePainter;
+import modele.elements.Arrive;
 import modele.elements.Brique;
 import modele.elements.Mur;
 import modele.elements.Sol;
@@ -46,6 +47,7 @@ public class LabyrinthePainter implements GamePainter {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         Mur mur = lg.getMur();
         ArrayList<Sol> chemin = lg.getChemin();
+        Arrive arrive = lg.getArrive();
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
         for (Brique b : mur){
@@ -61,10 +63,13 @@ public class LabyrinthePainter implements GamePainter {
 
             crayon.fill(r);
         }
+        // Dessiner l'arrive
+        crayon.setColor(Color.GRAY);
+        Rectangle rectangleArrive = arrive.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
+        crayon.fill(rectangleArrive);
         // Dessiner le hero
         crayon.setColor(Color.blue);
         Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);
-//        Rectangle rectangle1 = new Rectangle(lg.getHeroY(), lg.getHeroX(), 20, 20);
         crayon.fill(rectangle1);
         //Dessiner les monstres;
         crayon.setColor(Color.black);

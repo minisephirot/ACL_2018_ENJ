@@ -1,6 +1,7 @@
 package modele;
 
 import Exception.ExceptionTailleLaby;
+import modele.elements.Arrive;
 import modele.elements.Mur;
 import modele.elements.Sol;
 
@@ -128,6 +129,8 @@ public class Niveau {
     public Mur getMur(){
         return labyrinthe.getMurs();
     }
+
+    public Arrive getArrive(){return labyrinthe.getArrive();}
 
     public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
     /**

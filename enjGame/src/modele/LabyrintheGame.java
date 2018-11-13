@@ -2,6 +2,7 @@ package modele;
 
 import engine.Commande;
 import engine.Game;
+import modele.elements.Arrive;
 import modele.elements.Case;
 import modele.elements.Mur;
 import modele.elements.Sol;
@@ -70,6 +71,10 @@ public class LabyrintheGame implements Game {
     }
 
     public ArrayList<Sol> getChemin(){return level.getChemin();}
+
+    public Arrive getArrive(){
+        return this.level.getArrive();
+    }
 
     public int getHeroX(){
         return level.getPlayerX();

@@ -1,9 +1,6 @@
 package modele;
 
-import modele.elements.Brique;
-import modele.elements.Case;
-import modele.elements.Mur;
-import modele.elements.Sol;
+import modele.elements.*;
 
 import java.util.ArrayList;
 
@@ -13,10 +10,11 @@ import java.util.ArrayList;
 public class Labyrinthe {
     public final static int MUR = 1;
     public final static int VIDE = 0;
-    public Mur mur;
+    private Mur mur;
+    private Arrive arrive;
     public ArrayList<Sol> chemin;
-    public int heroposX;
-    public int heroposY;
+    private int heroposX;
+    private int heroposY;
     /**
      * Représentation du labyrinthe
      */
@@ -55,6 +53,8 @@ public class Labyrinthe {
                     heroposX = casey;
                     heroposY = casex;
                     chemin.add(new Sol(casex, casey));
+                }else if (labyrinthe[i][j] == 3){
+                    arrive = new Arrive(casex,casey);
                 }
                 casex += 32;
             }
@@ -68,6 +68,10 @@ public class Labyrinthe {
 
     public ArrayList<Sol> getChemin(){
         return chemin;
+    }
+
+    public Arrive getArrive(){
+        return this.arrive;
     }
 
     public int getHeroposX(){

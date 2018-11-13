@@ -1,12 +1,12 @@
-/*package tests;
+package tests;
 
 import junit.framework.TestCase;
 import modele.Hero;
 import modele.Labyrinthe;
 import modele.Niveau;
 
+import java.awt.*;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class testLauncher extends TestCase {
 
@@ -37,4 +37,10 @@ public class testLauncher extends TestCase {
         assertFalse(Arrays.deepEquals(res,tokenbis));
     }
 
-}*/
+    public void testCollisions(){
+        Rectangle rec1 = new Rectangle(10,10,10,10);
+        Rectangle hero = new Rectangle(15,15,10,10);
+        assertTrue(rec1.intersects(hero));
+    }
+
+}
