@@ -2,6 +2,7 @@ package tests;
 
 import junit.framework.TestCase;
 import modele.Hero;
+import modele.LabyGenerator;
 import modele.Labyrinthe;
 import modele.Niveau;
 
@@ -41,6 +42,23 @@ public class testLauncher extends TestCase {
         Rectangle rec1 = new Rectangle(10,10,10,10);
         Rectangle hero = new Rectangle(15,15,10,10);
         assertTrue(rec1.intersects(hero));
+    }
+
+    public void testGenerator(){
+        LabyGenerator lg = new LabyGenerator(10,10);
+        int[][] grid = lg.getGrid();
+        boolean hero = false;
+        boolean arrive = false;
+        for (int i=0;i<grid.length;i++)
+        {
+            for (int j=0;j<grid[0].length;j++)
+            {
+                if (grid[i][j]== 2) hero = true;
+                if (grid[i][j]== 3) arrive = true;
+            }
+        }
+        assertTrue(hero);
+        assertTrue(arrive);
     }
 
 }
