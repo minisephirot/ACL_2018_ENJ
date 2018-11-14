@@ -10,7 +10,7 @@ public class Sol extends Case {
 
     public Sol(int x, int y) {
         super(x, y);
-        File path = new File("enjGame/src/res/boo.png");
+        File path = new File("enjGame/src/res/sol.png");
         try {
             imgSol = ImageIO.read(path);
         } catch (IOException e) {
@@ -18,7 +18,7 @@ public class Sol extends Case {
         }
     }
 
-    public BufferedImage getImgBrique(){
+    public BufferedImage getImgSol(){
         return imgSol;
     }
 }

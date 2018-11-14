@@ -20,6 +20,8 @@ public class LabyrinthePainter implements GamePainter {
      */
     protected static final int WIDTH = 736;
     protected static final int HEIGHT = 736;
+    protected static final int BRIQUE = 0;
+    protected static final int BRIQUEPROF = 1;
     static int camX,camY;
 
     /**
@@ -51,18 +53,19 @@ public class LabyrinthePainter implements GamePainter {
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
         for (Brique b : mur){
-
             // création du nouveau rectangle par rapport à la camera
             Rectangle r = b.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
-
-            crayon.fill(r);
+            if (b.getType() == BRIQUE) {
+                crayon.drawImage(b.getImgBrique(), null, r.x, r.y);
+            }else{
+                crayon.drawImage(b.getImgBriqueProf(), null, r.x, r.y);
+            }
         }
-        crayon.setColor(Color.green);
         for (Sol s : chemin){
             Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
-
-            crayon.fill(r);
+            crayon.drawImage(s.getImgSol(), null, r.x, r.y);
         }
+        crayon.setColor(Color.green);
         // Dessiner l'arrive
         crayon.setColor(Color.GRAY);
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY,camX, WIDTH, HEIGHT);

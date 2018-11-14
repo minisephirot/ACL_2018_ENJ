@@ -46,7 +46,15 @@ public class Labyrinthe {
             casex = 0;
             for (int j = 0; j < labyrinthe[i].length; j++){
                 if (labyrinthe[i][j] == 1) {
-                    mur.ajouterBrique(new Brique(casex, casey));
+                    if (i+1 < labyrinthe.length) {
+                        if (labyrinthe[i+1][j] == 0) {
+                            mur.ajouterBrique(new Brique(casex, casey, 1));
+                        } else {
+                            mur.ajouterBrique(new Brique(casex, casey, 0));
+                        }
+                    }else{
+                        mur.ajouterBrique(new Brique(casex, casey, 0));
+                    }
                 } else if (labyrinthe[i][j] == 0){
                     chemin.add(new Sol(casex, casey));
                 }else if (labyrinthe[i][j] == 2){
