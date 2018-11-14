@@ -2,6 +2,7 @@ package modele;
 
 import modele.elements.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -41,6 +42,7 @@ public class Labyrinthe {
         mur = new Mur();
         mur.toutCasser();
         chemin.clear();
+        int rand = (int)(Math.random() * 2);
         this.labyrinthe = labyrinthe;
         int casex = 0;
         int casey = 0;
@@ -49,7 +51,7 @@ public class Labyrinthe {
             for (int j = 0; j < labyrinthe[i].length; j++){
                 if (labyrinthe[i][j] == 1) {
                     if (i+1 < labyrinthe.length) {
-                        if (labyrinthe[i+1][j] == 0) {
+                        if (labyrinthe[i+1][j] == 0 || labyrinthe[i+1][j] == 2) {
                             mur.ajouterBrique(new Brique(casex, casey, 1));
                         } else {
                             mur.ajouterBrique(new Brique(casex, casey, 0));
@@ -58,11 +60,11 @@ public class Labyrinthe {
                         mur.ajouterBrique(new Brique(casex, casey, 0));
                     }
                 } else if (labyrinthe[i][j] == 0){
-                    chemin.add(new Sol(casex, casey));
+                    chemin.add(new Sol(casex, casey, rand));
                 }else if (labyrinthe[i][j] == 2){
                     heroposX = casey;
                     heroposY = casex;
-                    chemin.add(new Sol(casex, casey));
+                    chemin.add(new Sol(casex, casey, rand));
                 }else if (labyrinthe[i][j] == 3){
                     arrive = new Arrive(casex,casey);
                 }

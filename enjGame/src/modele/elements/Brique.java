@@ -1,27 +1,24 @@
 package modele.elements;
 
+import com.sun.prism.Texture;
+import modele.TextureFactory;
+
 import javax.imageio.ImageIO;
+import javax.xml.soap.Text;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class Brique extends Case {
     private BufferedImage imgBrique;
     private BufferedImage imgBriqueProf;
     private int type;
 
-    public Brique(int x, int y, int type) {
+    public Brique(int x, int y, int type)  {
         super(x, y);
         this.type = type;
-        File path = new File("enjGame/src/res/mur.jpg");
-        File path2 = new File("enjGame/src/res/murProf.jpg");
-        try {
-            imgBrique = ImageIO.read(path);
-            imgBriqueProf = ImageIO.read(path2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        imgBrique = TextureFactory.getImgBrique(1);
+        imgBriqueProf = TextureFactory.getImgBriqueProf(1);
     }
 
     public int getType(){

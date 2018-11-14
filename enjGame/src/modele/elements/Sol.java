@@ -1,5 +1,7 @@
 package modele.elements;
 
+import modele.TextureFactory;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,14 +10,9 @@ import java.io.IOException;
 public class Sol extends Case {
     private BufferedImage imgSol;
 
-    public Sol(int x, int y) {
+    public Sol(int x, int y, int rand) {
         super(x, y);
-        File path = new File("enjGame/src/res/sol.png");
-        try {
-            imgSol = ImageIO.read(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        imgSol = TextureFactory.getImgSol(rand);
     }
 
     public BufferedImage getImgSol(){
