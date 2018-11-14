@@ -42,7 +42,7 @@ public class Niveau {
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
-        this.lg = new LabyGenerator(23,23);
+        this.lg = new LabyGenerator(51,51);
     }
 
     public int[][] getLabyrinthe(){
@@ -50,7 +50,7 @@ public class Niveau {
     }
 
     public void genererNiveau() {
-        this.labyrinthe.setLabyrinthe(this.lg.getGrid());
+        this.labyrinthe.setLabyrinthe(this.lg.generate());
         setPlayerX(labyrinthe.getHeroposX());
         setPlayerY(labyrinthe.getHeroposY());
     }
