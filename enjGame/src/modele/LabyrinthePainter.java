@@ -55,11 +55,7 @@ public class LabyrinthePainter implements GamePainter {
         for (Brique b : mur){
             // création du nouveau rectangle par rapport à la camera
             Rectangle r = b.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
-            if (b.getType() == BRIQUE) {
-                crayon.drawImage(b.getImgBrique(), null, r.x, r.y);
-            }else{
-                crayon.drawImage(b.getImgBriqueProf(), null, r.x, r.y);
-            }
+            crayon.drawImage(b.getImgBrique(), null, r.x, r.y);
         }
         for (Sol s : chemin){
             Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
