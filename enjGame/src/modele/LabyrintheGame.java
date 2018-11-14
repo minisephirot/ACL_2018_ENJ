@@ -7,14 +7,18 @@ import modele.elements.Case;
 import modele.elements.Mur;
 import modele.elements.Sol;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class LabyrintheGame implements Game {
 
     private Niveau level;
+    private boolean gameWin;
+    private int floor;
 
     public LabyrintheGame(){
+        this.gameWin = false;
         this.level = new Niveau();
         genLabyrinth(true);
     }
@@ -34,12 +38,26 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd) {
+        if (gameWon()){
+            this.gameWin = true;
+            this.incrementFloor();
+            new Timer(5000, e -> resetGame()).start();
+            this.genLabyrinth(true);
+        }
         if (gestionCollision(getMur(), cmd)) {
             if (cmd == Commande.UP) this.level.deplacerHero(-1, 0);
             if (cmd == Commande.DOWN) this.level.deplacerHero(1, 0);
             if (cmd == Commande.LEFT) this.level.deplacerHero(0, -1);
             if (cmd == Commande.RIGHT) this.level.deplacerHero(0, 1);
         }
+    }
+
+    private boolean gameWon() {
+        int herox = getHeroX();
+        int heroy = getHeroY();
+        Arrive arrive = this.getArrive();
+        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        return arrive.getRectangle().intersects(hero);
     }
 
     public boolean gestionCollision(Mur mur, Commande cmd){
@@ -87,5 +105,21 @@ public class LabyrintheGame implements Game {
     @Override
     public boolean isFinished() {
         return false;
+    }
+
+    public boolean getGameWin() {
+        return this.gameWin;
+    }
+
+    public void resetGame(){
+        this.gameWin = false;
+    }
+
+    public String getFloor() {
+        return this.floor+"";
+    }
+
+    public void incrementFloor(){
+        this.floor++;
     }
 }

@@ -39,6 +39,8 @@ public class Labyrinthe {
      */
     public void setLabyrinthe(int[][] labyrinthe) {
         mur = new Mur();
+        mur.toutCasser();
+        chemin.clear();
         this.labyrinthe = labyrinthe;
         int casex = 0;
         int casey = 0;

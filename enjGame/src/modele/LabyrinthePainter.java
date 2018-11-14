@@ -76,6 +76,14 @@ public class LabyrinthePainter implements GamePainter {
         crayon.fill(rectangle1);
         //Dessiner les monstres;
         crayon.setColor(Color.black);
+        // Dessiner la condition de victoire et les étages:
+        crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        crayon.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        crayon.drawString("Etage n°"+lg.getFloor(), 20, 50);
+        if(lg.getGameWin()) {
+            crayon.drawString("Bravo ! Vous êtes a l'étage n°"+lg.getFloor(), this.getHeight()/2, this.getWidth()/2);
+        }
+
     }
 
 

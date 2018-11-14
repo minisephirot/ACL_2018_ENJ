@@ -16,6 +16,8 @@ public class Mur implements Iterable<Brique>{
         mur.add(toadd);
     }
 
+    public void toutCasser(){ mur.clear();}
+
     @Override
     public Iterator<Brique> iterator() {
         return mur.iterator();
