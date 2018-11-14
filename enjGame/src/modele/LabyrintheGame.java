@@ -24,6 +24,7 @@ public class LabyrintheGame implements Game {
     }
 
     public void genLabyrinth(boolean useGenerator){
+        TextureFactory.genererCombinaison();
        if (useGenerator){
             this.level.genererNiveau();
         }else{

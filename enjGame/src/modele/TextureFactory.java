@@ -51,5 +51,6 @@ public class TextureFactory {
     public static void genererCombinaison(){
         numeroSol = rng.nextInt(NBSPRITESOL);
         numeroMur = rng.nextInt(NBSPRITEMUR);
+        System.out.println("numéro sol : "+numeroSol + "\n numero mur :" + numeroMur);
     }
 }
