@@ -125,6 +125,7 @@ public class Niveau {
         this.hero.setY(this.getPlayerY() + y);
     }
 
+    public Hero getHero(){ return hero;}
 
     public Mur getMur(){
         return labyrinthe.getMurs();

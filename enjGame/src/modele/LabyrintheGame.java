@@ -84,6 +84,7 @@ public class LabyrintheGame implements Game {
         return level.getLabyrinthe();
     }
 
+    public Hero getHero(){ return level.getHero();}
     public Mur getMur(){
         return level.getMur();
     }

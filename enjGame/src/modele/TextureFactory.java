@@ -10,16 +10,22 @@ public class TextureFactory {
     private static BufferedImage imgBriqueProf;
     private static BufferedImage imgSol;
     private static BufferedImage imgSol2;
+    private static BufferedImage imgHero;
 
     public TextureFactory() throws IOException {
          imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
          imgBriqueProf = ImageIO.read(getClass().getResource("/res/murProf.jpg"));
          imgSol = ImageIO.read(getClass().getResource("/res/sol.png"));
          imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
+         imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
     }
 
     public static BufferedImage getImgBrique(int rand) {
         return imgBrique;
+    }
+
+    public static BufferedImage getImgHero() {
+        return imgHero;
     }
 
     public static BufferedImage getImgBriqueProf(int rand) {
