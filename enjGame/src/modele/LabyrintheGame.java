@@ -88,7 +88,7 @@ public class LabyrintheGame implements Game {
             heroy += 1*sprint;
             changerDirection(DROITE);
         }
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        Rectangle hero = new Rectangle(heroy+2, herox, 16, 20);
         for (Case c : mur){
             if (c.getRectangle().intersects(hero))
                 avancer = false;

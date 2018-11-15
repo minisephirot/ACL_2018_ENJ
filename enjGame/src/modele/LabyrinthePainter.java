@@ -67,15 +67,18 @@ public class LabyrinthePainter implements GamePainter {
             Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
             crayon.drawImage(s.getImgSol(), null, r.x, r.y);
         }
+
         crayon.setColor(Color.green);
 
         // Dessiner l'arrive
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
         crayon.drawImage(arrive.getImgArrive(),null,rectangleArrive.x,rectangleArrive.y);
 
+
         // Dessiner le hero
         Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);
         crayon.drawImage(lg.getHero().getImgHero(), null, rectangle1.x + 2, rectangle1.y - 16);
+
 
         //Dessiner les monstres;
 
