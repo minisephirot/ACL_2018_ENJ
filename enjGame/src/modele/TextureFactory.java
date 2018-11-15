@@ -8,16 +8,20 @@ import java.util.Random;
 public class TextureFactory {
 
     //Logic
-    private final static int NBSPRITEMUR = 1;
-    private final static int NBSPRITESOL = 2;
+    private final static int NBSPRITEMUR = 2;
+    private final static int NBSPRITESOL = 4;
     private static final Random rng = new Random();
     private static int numeroSol;
     private static int numeroMur;
     //Texture
     private static BufferedImage imgBrique;
     private static BufferedImage imgBriqueP;
+    private static BufferedImage imgBrique2;
+    private static BufferedImage imgBriqueP2;
     private static BufferedImage imgSol;
     private static BufferedImage imgSol2;
+    private static BufferedImage imgSol3;
+    private static BufferedImage imgSol4;
     private static BufferedImage imgHero;
     private static BufferedImage imgArrive;
     private static BufferedImage imgArrive2;
@@ -25,8 +29,12 @@ public class TextureFactory {
     public TextureFactory() throws IOException {
         imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
         imgBriqueP = ImageIO.read(getClass().getResource("/res/murProf.jpg"));
+        imgBrique2 = ImageIO.read(getClass().getResource("/res/murgele.png"));
+        imgBriqueP2 = ImageIO.read(getClass().getResource("/res/murgeleProf.png"));
         imgSol = ImageIO.read(getClass().getResource("/res/sol.png"));
         imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
+        imgSol3 = ImageIO.read(getClass().getResource("/res/grass.jpeg"));
+        imgSol4 = ImageIO.read(getClass().getResource("/res/solgele.png"));
         imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
         imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
         imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
@@ -37,6 +45,9 @@ public class TextureFactory {
             case 0:
                 if (isProfondeur) return imgBriqueP;
                 return imgBrique;
+            case 1:
+                if (isProfondeur) return imgBriqueP2;
+                return imgBrique2;
             default:
                 if (isProfondeur) return imgBriqueP;
                 return imgBrique;
@@ -58,6 +69,10 @@ public class TextureFactory {
                 return imgSol;
             case 1:
                 return imgSol2;
+            case 2:
+                return imgSol3;
+            case 3:
+                return imgSol4;
             default:
                 return imgSol;
         }

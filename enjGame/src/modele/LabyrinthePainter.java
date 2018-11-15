@@ -23,6 +23,8 @@ public class LabyrinthePainter implements GamePainter {
     protected static final int BRIQUE = 0;
     protected static final int BRIQUEPROF = 1;
     static int camX,camY;
+    protected Font font;
+    protected Font font2;
 
     /**
      * Le modele du jeu Labyrinthe
@@ -37,6 +39,8 @@ public class LabyrinthePainter implements GamePainter {
      */
     public LabyrinthePainter(LabyrintheGame game) {
         this.lg = game;
+        this.font = new Font("Comic Sans MS", Font.BOLD, 20);
+        this.font2 = new Font("Impact", Font.BOLD, 50);
     }
 
     /**
@@ -47,6 +51,7 @@ public class LabyrinthePainter implements GamePainter {
         camY = lg.getHeroY();
         camX = lg.getHeroX();
         Graphics2D crayon = (Graphics2D) img.getGraphics();
+        crayon.setFont(this.font);
         Mur mur = lg.getMur();
         ArrayList<Sol> chemin = lg.getChemin();
         Arrive arrive = lg.getArrive();
@@ -72,10 +77,10 @@ public class LabyrinthePainter implements GamePainter {
         crayon.setColor(Color.black);
         // Dessiner la condition de victoire et les étages:
         crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        crayon.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-        crayon.drawString("Etage n°"+lg.getFloor(), 20, 50);
+        crayon.drawString("Etage n°"+lg.getFloor(), 20, 30);
         if(lg.getGameWin()) {
-            crayon.drawString("Bravo ! Vous êtes a l'étage n°"+lg.getFloor(), this.getHeight()/2, this.getWidth()/2);
+            crayon.setFont(this.font2);
+            crayon.drawString("Bravo !", this.getHeight()/2-200, this.getWidth()/2);
         }
 
     }
