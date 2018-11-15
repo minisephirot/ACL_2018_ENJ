@@ -13,12 +13,13 @@ public class LabyrintheController implements GameController {
 
     /**
      * Booleans de directions
+        0 = Z
+        1 = S
+        2 = Q
+        3 = D
+        4 = SPRINT
      */
-    boolean Z = false;
-    boolean Q = false;
-    boolean S = false;
-    boolean D = false;
-
+    private boolean[] keyPressed;
 
     /**
      * Commade en cours
@@ -30,6 +31,7 @@ public class LabyrintheController implements GameController {
      */
     public LabyrintheController(){
         this.cmd = Commande.IDLE;
+        this.keyPressed = new boolean[5];
     }
 
     /**
@@ -40,6 +42,15 @@ public class LabyrintheController implements GameController {
     public Commande getCommande() {
         return cmd;
     }
+
+    /**
+     * Retourne le tableau de touches appuyées en continue
+     * @return tableau de boolean
+     */
+    public boolean[] getToucheAppuyee(){
+        return this.keyPressed;
+    }
+
 
     /**
      * ne fais rien
@@ -57,20 +68,24 @@ public class LabyrintheController implements GameController {
         char keyPress = e.getKeyChar();
         //Cardinaux
         if (keyPress == 'z' || keyPress == 'Z'){
-            this.Z = true;
+            this.keyPressed[0] = true;
             cmd = Commande.UP;
         }
         if (keyPress == 'q' || keyPress == 'Q'){
-            this.Q = true;
+            this.keyPressed[2] = true;
             cmd = Commande.LEFT;
         }
         if (keyPress == 's' || keyPress == 'S'){
-            this.S = true;
+            this.keyPressed[1] = true;
             cmd = Commande.DOWN;
         }
         if (keyPress == 'd' || keyPress == 'D'){
-            this.D = true;
+            this.keyPressed[3] = true;
             cmd = Commande.RIGHT;
+        }
+        if (keyPress == ' '){
+            this.keyPressed[4] = true;
+            cmd = Commande.SPRINT;
         }
     }
 
@@ -84,17 +99,20 @@ public class LabyrintheController implements GameController {
         char keyPress = e.getKeyChar();
         //Cardinaux
         if (keyPress == 'z' || keyPress == 'Z'){
-            this.Z = false;
+            this.keyPressed[0] = false;
         }
         if (keyPress == 'q' || keyPress == 'Q'){
-            this.Q = false;
+            this.keyPressed[2] = false;
         }
         if (keyPress == 's' || keyPress == 'S'){
-            this.S = false;
+            this.keyPressed[1] = false;
         }
         if (keyPress == 'd' || keyPress == 'D'){
-            this.D = false;
+            this.keyPressed[3] = false;
         }
-        if (!this.Q && !this.Z && !this.D && !this.S) cmd = Commande.IDLE;
+        if (keyPress == ' ') {
+            this.keyPressed[4] = false;
+        }
+        cmd = Commande.IDLE;
     }
 }

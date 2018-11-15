@@ -49,8 +49,10 @@ public class GameEngineGraph {
             try {
                 // demande controle utilisateur
                 Commande c = gameController.getCommande();
+                //On récupère les touches appuyées en continue
+                boolean[] tab = gameController.getToucheAppuyee();
                 // fait evoluer le game
-                game.evolve(c);
+                game.evolve(c, tab);
                 // affiche le game
                 graphicalInterface.paint();
                 // met en attentde
