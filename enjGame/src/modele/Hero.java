@@ -7,9 +7,10 @@ import java.awt.image.BufferedImage;
  */
 public class Hero extends Entite {
     private BufferedImage imgHero;
+    private int direction;
 
     public Hero() {
-        imgHero = TextureFactory.getImgHero();
+        imgHero = TextureFactory.getImgHero(1);
         this.pv = 3;
 
     }
@@ -19,6 +20,9 @@ public class Hero extends Entite {
     }
 
     public void attaquer(){
+    }
+    public void changerDirection(int dir){
+        imgHero = TextureFactory.getImgHero(dir);
     }
 
 }

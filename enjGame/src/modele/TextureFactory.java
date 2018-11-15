@@ -22,7 +22,7 @@ public class TextureFactory {
     private static BufferedImage imgSol2;
     private static BufferedImage imgSol3;
     private static BufferedImage imgSol4;
-    private static BufferedImage imgHero;
+    private static BufferedImage imgHero[];
     private static BufferedImage imgArrive;
     private static BufferedImage imgArrive2;
 
@@ -35,7 +35,13 @@ public class TextureFactory {
         imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
         imgSol3 = ImageIO.read(getClass().getResource("/res/grass.jpeg"));
         imgSol4 = ImageIO.read(getClass().getResource("/res/solgele.png"));
-        imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
+        imgHero = new BufferedImage[4];
+        imgHero[0] = ImageIO.read(getClass().getResource("/res/luigdown.png"));
+        imgHero[1] = ImageIO.read(getClass().getResource("/res/luigup.png"));
+        imgHero[2] = ImageIO.read(getClass().getResource("/res/luigleft.png"));
+        imgHero[3] = ImageIO.read(getClass().getResource("/res/luigright.png"));
+
+
         imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
         imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
     }
@@ -54,8 +60,8 @@ public class TextureFactory {
         }
     }
 
-    public static BufferedImage getImgHero() {
-        return imgHero;
+    public static BufferedImage getImgHero(int dir) {
+        return imgHero[dir];
     }
 
     public static BufferedImage getImgArrive(boolean leftside) {
