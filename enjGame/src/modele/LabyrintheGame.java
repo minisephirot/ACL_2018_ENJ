@@ -16,6 +16,10 @@ public class LabyrintheGame implements Game {
     private Niveau level;
     private boolean gameWin;
     private int floor;
+    private final static int HAUT = 0;
+    private final static int BAS = 1;
+    private final static int GAUCHE = 2;
+    private final static int DROITE = 3;
 
     public LabyrintheGame(){
         this.gameWin = false;
@@ -70,14 +74,19 @@ public class LabyrintheGame implements Game {
         int heroy = getHeroY();
         int sprint = (tab[4] == true)?2:1;
         boolean avancer = true;
-        if (cmd == Commande.UP || tab[0])
-            herox -=1*sprint;
-        else if (cmd == Commande.DOWN || tab[1])
-            herox+=1*sprint;
-        else if (cmd == Commande.LEFT || tab[2])
-            heroy-=1*sprint;
-        else if (cmd == Commande.RIGHT || tab[3])
-            heroy+=1*sprint;
+        if (cmd == Commande.UP || tab[0]) {
+            herox -= 1*sprint;
+            changerDirection(HAUT);
+        } else if (cmd == Commande.DOWN || tab[1]) {
+            herox += 1*sprint;
+            changerDirection(BAS);
+        }else if (cmd == Commande.LEFT || tab[2]) {
+            heroy -= 1*sprint;
+            changerDirection(GAUCHE);
+        }else if (cmd == Commande.RIGHT || tab[3]) {
+            heroy += 1*sprint;
+            changerDirection(DROITE);
+        }
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
         for (Case c : mur){
             if (c.getRectangle().intersects(hero))
@@ -93,6 +102,10 @@ public class LabyrintheGame implements Game {
     public Hero getHero(){ return level.getHero();}
     public Mur getMur(){
         return level.getMur();
+    }
+
+    public void changerDirection(int dir){
+        level.changerDirection(dir);
     }
 
     public ArrayList<Sol> getChemin(){return level.getChemin();}

@@ -3,6 +3,7 @@ package modele;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Random;
 
 public class TextureFactory {
@@ -22,9 +23,10 @@ public class TextureFactory {
     private static BufferedImage imgSol2;
     private static BufferedImage imgSol3;
     private static BufferedImage imgSol4;
-    private static BufferedImage imgHero;
+    private static BufferedImage imgHero[];
     private static BufferedImage imgArrive;
     private static BufferedImage imgArrive2;
+   // private static BufferedImage animHaut[];
 
     public TextureFactory() throws IOException {
         imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
@@ -35,7 +37,23 @@ public class TextureFactory {
         imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
         imgSol3 = ImageIO.read(getClass().getResource("/res/grass.jpeg"));
         imgSol4 = ImageIO.read(getClass().getResource("/res/solgele.png"));
-        imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
+      /*  animHaut = new BufferedImage[9];
+        animHaut[0] = ImageIO.read(getClass().getResource("/res/luig1.png"));
+        animHaut[1] = ImageIO.read(getClass().getResource("/res/luig2.png"));
+        animHaut[2] = ImageIO.read(getClass().getResource("/res/luig3.png"));
+        animHaut[3] = ImageIO.read(getClass().getResource("/res/luig4.png"));
+        animHaut[4] = ImageIO.read(getClass().getResource("/res/luig5.png"));
+        animHaut[5] = ImageIO.read(getClass().getResource("/res/luig6.png"));
+        animHaut[6] = ImageIO.read(getClass().getResource("/res/luig7.png"));
+        animHaut[7] = ImageIO.read(getClass().getResource("/res/luig8.png"));*/
+
+        imgHero = new BufferedImage[4];
+        imgHero[0] = ImageIO.read(getClass().getResource("/res/luigdown.png"));
+        imgHero[1] = ImageIO.read(getClass().getResource("/res/luigup.png"));
+        imgHero[2] = ImageIO.read(getClass().getResource("/res/luigleft.png"));
+        imgHero[3] = ImageIO.read(getClass().getResource("/res/luigright.png"));
+
+
         imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
         imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
     }
@@ -54,8 +72,8 @@ public class TextureFactory {
         }
     }
 
-    public static BufferedImage getImgHero() {
-        return imgHero;
+    public static BufferedImage getImgHero(int dir) {
+        return imgHero[dir];
     }
 
     public static BufferedImage getImgArrive(boolean leftside) {
