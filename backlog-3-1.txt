@@ -1,0 +1,7 @@
+Liste des fonctionnalités de la version v3.1 :
+
+- Implementation d'un système de sprint : Noah & Elliot
+- Affichage des sprites du Labyrinthe, création d'une classe générant des combinaisons graphiques aléatoires de labyrinthes : Elliot & Julien
+- Système de profondeur dans les sprites : Julien
+- Les labyrinthes se suivent avec des étages : Elliot
+- Changement de direction du héro : Julien
