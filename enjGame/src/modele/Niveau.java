@@ -68,14 +68,6 @@ public class Niveau {
     }
 
     /**
-     * Retourne le labyrinthe du niveau
-     * @return Labyrinthe lab
-     */
-    public Labyrinthe getLabyrinthe() {
-        return labyrinthe;
-    }
-
-    /**
      * Retourne la coordonnée X du hero
      * @return coordonnée x
      */

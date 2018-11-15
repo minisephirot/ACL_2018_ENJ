@@ -1,5 +1,6 @@
 package tests;
 
+import engine.TextureFactory;
 import junit.framework.TestCase;
 import modele.Hero;
 import modele.LabyGenerator;
@@ -7,12 +8,18 @@ import modele.Labyrinthe;
 import modele.Niveau;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class testLauncher extends TestCase {
 
     public testLauncher(String testMethodName) {
         super(testMethodName);
+        try {
+            new TextureFactory();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void testHero() throws Exception { //Teste la classe héro : ses déplacements et ses pv
