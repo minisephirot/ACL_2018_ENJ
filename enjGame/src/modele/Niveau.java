@@ -4,6 +4,7 @@ import Exception.ExceptionTailleLaby;
 import modele.elements.Arrive;
 import modele.elements.Mur;
 import modele.elements.Sol;
+import modele.elements.Teleporteur;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class Niveau {
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
-        this.lg = new LabyGenerator(51,51);
+        this.lg = new LabyGenerator(15,15);
     }
 
     public int[][] getLabyrinthe(){
@@ -103,6 +104,8 @@ public class Niveau {
                 hauteur++;
             }
             this.labyrinthe.setLabyrinthe(labyrinthe);
+            setPlayerX(this.labyrinthe.getHeroposX());
+            setPlayerY(this.labyrinthe.getHeroposY());
         }
         catch (FileNotFoundException exception){
             System.out.println("Le fichier n'existe pas");
@@ -134,6 +137,14 @@ public class Niveau {
     }
 
     public Arrive getArrive(){return labyrinthe.getArrive();}
+
+    public Teleporteur getTp1(){
+        return this.labyrinthe.getTp1();
+    }
+
+    public Teleporteur getTp2(){
+        return this.labyrinthe.getTp2();
+    }
 
     public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
     /**

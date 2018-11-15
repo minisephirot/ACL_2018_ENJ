@@ -1,10 +1,7 @@
 package modele;
 
 import engine.GamePainter;
-import modele.elements.Arrive;
-import modele.elements.Brique;
-import modele.elements.Mur;
-import modele.elements.Sol;
+import modele.elements.*;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import java.awt.*;
@@ -55,6 +52,8 @@ public class LabyrinthePainter implements GamePainter {
         Mur mur = lg.getMur();
         ArrayList<Sol> chemin = lg.getChemin();
         Arrive arrive = lg.getArrive();
+        Teleporteur tp1 = lg.getTp1();
+        Teleporteur tp2 = lg.getTp2();
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
         for (Brique b : mur){
@@ -67,6 +66,12 @@ public class LabyrinthePainter implements GamePainter {
             crayon.drawImage(s.getImgSol(), null, r.x, r.y);
         }
         crayon.setColor(Color.green);
+        //Dessiner le téléporteur 1
+        Rectangle rectangleTp1 = tp1.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
+        crayon.drawImage(tp1.getImgTp(),null,rectangleTp1.x,rectangleTp1.y);
+        //Dessiner le téléporteur 2
+        Rectangle rectangleTp2 = tp2.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
+        crayon.drawImage(tp2.getImgTp(),null,rectangleTp2.x,rectangleTp2.y);
         // Dessiner l'arrive
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
         crayon.drawImage(arrive.getImgArrive(),null,rectangleArrive.x,rectangleArrive.y);

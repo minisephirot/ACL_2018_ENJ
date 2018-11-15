@@ -2,10 +2,8 @@ package modele;
 
 import engine.Commande;
 import engine.Game;
-import modele.elements.Arrive;
-import modele.elements.Case;
-import modele.elements.Mur;
-import modele.elements.Sol;
+import modele.elements.*;
+import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +22,7 @@ public class LabyrintheGame implements Game {
     public LabyrintheGame(){
         this.gameWin = false;
         this.level = new Niveau();
-        genLabyrinth(true);
+        genLabyrinth(false);
     }
 
     public void genLabyrinth(boolean useGenerator){
@@ -43,6 +41,18 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd) {
+        if (teleport1() && getTp1().getActive()){
+            this.level.setPlayerX(getTp1().getVoisinX());
+            this.level.setPlayerY(getTp1().getVoisinY());
+            getTp1().setActive(false);
+            getTp2().setActive(false);
+            System.out.println(getTp1().getActive());
+        }else if (teleport2() && getTp2().getActive()){
+            this.level.setPlayerX(getTp2().getVoisinX());
+            this.level.setPlayerY(getTp2().getVoisinY());
+            getTp1().setActive(false);
+            getTp2().setActive(false);
+        }
         if (gameWon()){
             this.gameWin = true;
             this.incrementFloor();
@@ -55,6 +65,24 @@ public class LabyrintheGame implements Game {
             if (cmd == Commande.LEFT) this.level.deplacerHero(0, -1);
             if (cmd == Commande.RIGHT) this.level.deplacerHero(0, 1);
         }
+    }
+
+    private boolean teleport1(){
+        int herox = getHeroX();
+        int heroy = getHeroY();
+
+        Teleporteur tp1 = this.getTp1();
+        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        return tp1.getRectangle().intersects(hero);
+    }
+
+    private boolean teleport2(){
+        int herox = getHeroX();
+        int heroy = getHeroY();
+
+        Teleporteur tp2 = this.getTp2();
+        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        return tp2.getRectangle().intersects(hero);
     }
 
     private boolean gameWon() {
@@ -108,6 +136,15 @@ public class LabyrintheGame implements Game {
     public Arrive getArrive(){
         return this.level.getArrive();
     }
+
+    public Teleporteur getTp1(){
+        return this.level.getTp1();
+    }
+
+    public Teleporteur getTp2(){
+        return this.level.getTp2();
+    }
+
 
     public int getHeroX(){
         return level.getPlayerX();

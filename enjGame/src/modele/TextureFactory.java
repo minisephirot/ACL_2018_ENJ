@@ -26,6 +26,7 @@ public class TextureFactory {
     private static BufferedImage imgHero[];
     private static BufferedImage imgArrive;
     private static BufferedImage imgArrive2;
+    private static BufferedImage imgTp;
    // private static BufferedImage animHaut[];
 
     public TextureFactory() throws IOException {
@@ -54,6 +55,7 @@ public class TextureFactory {
         imgHero[3] = ImageIO.read(getClass().getResource("/res/luigright.png"));
 
 
+        imgTp = ImageIO.read(getClass().getResource("/res/teleporteur.png"));
         imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
         imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
     }
@@ -74,6 +76,10 @@ public class TextureFactory {
 
     public static BufferedImage getImgHero(int dir) {
         return imgHero[dir];
+    }
+
+    public static BufferedImage getImgTp() {
+        return imgTp;
     }
 
     public static BufferedImage getImgArrive(boolean leftside) {

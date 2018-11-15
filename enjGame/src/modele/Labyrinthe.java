@@ -13,6 +13,8 @@ public class Labyrinthe {
     public final static int VIDE = 0;
     private Mur mur;
     private Arrive arrive;
+    private Teleporteur tp1;
+    private Teleporteur tp2;
     public ArrayList<Sol> chemin;
     private int heroposX;
     private int heroposY;
@@ -46,6 +48,9 @@ public class Labyrinthe {
         this.labyrinthe = labyrinthe;
         int casex = 0;
         int casey = 0;
+        int posTpx = 0;
+        int posTpy = 0;
+        int nbTp = 0;
         for (int i = 0; i < labyrinthe.length; i++){
             casex = 0;
             for (int j = 0; j < labyrinthe[i].length; j++){
@@ -73,6 +78,17 @@ public class Labyrinthe {
                     }else{
                      arrive = new Arrive(casex,casey,Math.random() < 0.5);
                     }
+                }else if (labyrinthe[i][j] == 4){
+                    if (nbTp == 0){
+                        posTpx = casex;
+                        posTpy = casey;
+                        nbTp += 1;
+                    }else {
+                        tp1 = new Teleporteur(posTpx, posTpy, casex, casey);
+                        tp2 = new Teleporteur(casex, casey, posTpx, posTpy);
+                        chemin.add(new Sol(casex, casey, rand));
+                        chemin.add(new Sol(posTpx, posTpy, rand));
+                    }
                 }
                 casex += 32;
             }
@@ -90,6 +106,14 @@ public class Labyrinthe {
 
     public Arrive getArrive(){
         return this.arrive;
+    }
+
+    public Teleporteur getTp1(){
+        return this.tp1;
+    }
+
+    public Teleporteur getTp2(){
+        return this.tp2;
     }
 
     public int getHeroposX(){
