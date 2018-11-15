@@ -1,6 +1,6 @@
 package modele.elements;
 
-import modele.TextureFactory;
+import engine.TextureFactory;
 
 import java.awt.image.BufferedImage;
 

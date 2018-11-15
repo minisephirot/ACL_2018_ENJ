@@ -46,7 +46,6 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd, boolean[] tab) {
-    public void evolve(Commande cmd) {
         if (teleport1() && getTp1().getActive()){
             this.level.setPlayerX(getTp1().getVoisinX());
             this.level.setPlayerY(getTp1().getVoisinY());
