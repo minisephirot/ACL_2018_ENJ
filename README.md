@@ -9,8 +9,8 @@ Le labyrinthe va s'afficher dans la console :
         - Les 0 représentent les cases vides dans lesquelles le héro peut se déplacer
         - H concerne la position du héro dans le labyrinthe
 
-Pour déplacer le héro, il faut rentrer "z", "q", "s" ou "d" dans la console.
-
+Pour déplacer le héro : il faut utiliser les touches "z", "q", "s" ou "d".
+Pour sprinter : la touche "espace".
 
 Diagramme UML du projet :
 
