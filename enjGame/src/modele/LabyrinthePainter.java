@@ -25,6 +25,7 @@ public class LabyrinthePainter implements GamePainter {
     static int camX,camY;
     protected Font font;
     protected Font font2;
+    protected Font font3;
 
     /**
      * Le modele du jeu Labyrinthe
@@ -41,6 +42,7 @@ public class LabyrinthePainter implements GamePainter {
         this.lg = game;
         this.font = new Font("Comic Sans MS", Font.BOLD, 20);
         this.font2 = new Font("Impact", Font.BOLD, 50);
+        this.font3 = new Font("Comic Sans MS", Font.CENTER_BASELINE,14);
     }
 
     /**
@@ -102,6 +104,16 @@ public class LabyrinthePainter implements GamePainter {
         Rectangle staminabar = new Rectangle(20, 50, width_bar*2, 15);
         crayon.setColor(Color.green);
         crayon.fill(staminabar);
+        Stroke oldstroke = crayon.getStroke();
+        crayon.setStroke(new BasicStroke(2));
+        crayon.setColor(Color.GRAY);
+        crayon.drawRect(18, 48, 127, 17);
+        crayon.setStroke(oldstroke);
+
+        crayon.setColor(Color.black);
+        crayon.setFont(font3);
+        crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        crayon.drawString("Endurance", 40, 62);
     }
 
 
