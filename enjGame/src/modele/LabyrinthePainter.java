@@ -70,9 +70,7 @@ public class LabyrinthePainter implements GamePainter {
             Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
             crayon.drawImage(s.getImgSol(), null, r.x, r.y);
         }
-
         crayon.setColor(Color.green);
-
         //Dessiner le téléporteur 1
         Rectangle rectangleTp1 = tp1.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
         crayon.drawImage(tp1.getImgTp(),null,rectangleTp1.x,rectangleTp1.y);
@@ -84,13 +82,17 @@ public class LabyrinthePainter implements GamePainter {
         crayon.drawImage(arrive.getImgArrive(),null,rectangleArrive.x,rectangleArrive.y);
         //Dessiner piege
         for (Piege p : pieges) {
-            Rectangle rectanglePiege = p.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
-            crayon.drawImage(p.getImgPiege(), null, rectanglePiege.x, rectanglePiege.y);
+            if (p.getActive()){
+                Rectangle rectanglePiege = p.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
+                crayon.drawImage(p.getImgPiege(), null, rectanglePiege.x, rectanglePiege.y);
+            }
         }
         //Dessiner cases magiques
         for (Magique m : magiques) {
-            Rectangle rectanglePiege = m.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
-            crayon.drawImage(m.getImgMagique(), null, rectanglePiege.x, rectanglePiege.y);
+            if (m.getActive()){
+                Rectangle rectanglePiege = m.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
+                crayon.drawImage(m.getImgMagique(), null, rectanglePiege.x, rectanglePiege.y);
+            }
         }
         // Dessiner le hero
         Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);

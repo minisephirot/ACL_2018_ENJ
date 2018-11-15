@@ -1,20 +1,13 @@
 import engine.GameController;
 import engine.GameEngineGraph;
 import engine.GamePainter;
+import engine.TextureFactory;
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
 import modele.LabyrinthePainter;
-import engine.TextureFactory;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class main {
 
@@ -46,7 +39,7 @@ public class main {
         frame.validate();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        newGame(liste.getSelectedIndex());
+        newGame(0);
 
     }
 

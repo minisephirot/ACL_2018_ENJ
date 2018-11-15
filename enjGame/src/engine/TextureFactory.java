@@ -27,9 +27,10 @@ public class TextureFactory {
     private static BufferedImage imgArrive;
     private static BufferedImage imgArrive2;
     private static BufferedImage imgTp;
+    private static BufferedImage imgTpDisabled;
     private static BufferedImage imgPiege;
     private static BufferedImage imgMagique;
-   // private static BufferedImage animHaut[];
+    // private static BufferedImage animHaut[];
     private static BufferedImage imgMenu;
 
     public TextureFactory() {
@@ -49,6 +50,7 @@ public class TextureFactory {
             imgHero[2] = ImageIO.read(getClass().getResource("/res/luigleft.png"));
             imgHero[3] = ImageIO.read(getClass().getResource("/res/luigright.png"));
             imgTp = ImageIO.read(getClass().getResource("/res/teleporteur.png"));
+            imgTpDisabled = ImageIO.read(getClass().getResource("/res/teleporteurdis.png"));
             imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
             imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
             imgPiege = ImageIO.read(getClass().getResource("/res/piege.png"));
@@ -62,10 +64,10 @@ public class TextureFactory {
         animHaut[5] = ImageIO.read(getClass().getResource("/res/luig6.png"));
         animHaut[6] = ImageIO.read(getClass().getResource("/res/luig7.png"));
         animHaut[7] = ImageIO.read(getClass().getResource("/res/luig8.png"));*/
-
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
+    }
 
     public static BufferedImage getImgMenu(){return imgMenu;}
 
@@ -87,8 +89,9 @@ public class TextureFactory {
         return imgHero[dir];
     }
 
-    public static BufferedImage getImgTp() {
-        return imgTp;
+    public static BufferedImage getImgTp(boolean activated) {
+        if (activated) return imgTp;
+        return imgTpDisabled;
     }
 
     public static BufferedImage getImgPiege(){return imgPiege;}

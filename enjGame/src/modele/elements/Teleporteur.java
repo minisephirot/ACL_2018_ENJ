@@ -12,7 +12,7 @@ public class Teleporteur extends Case {
 
     public Teleporteur(int x, int y, int voisinX, int voisinY) {
         super(x, y);
-        imgTp = TextureFactory.getImgTp();
+        imgTp = TextureFactory.getImgTp(true);
         this.voisinX = voisinX;
         this.voisinY = voisinY;
         active = true;
@@ -28,6 +28,7 @@ public class Teleporteur extends Case {
 
     public void setActive(boolean active){
         this.active = active;
+        imgTp = TextureFactory.getImgTp(active);
     }
 
     public int getVoisinX(){

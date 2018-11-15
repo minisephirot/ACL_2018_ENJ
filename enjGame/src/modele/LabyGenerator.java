@@ -102,22 +102,58 @@ public class LabyGenerator {
         chemin(grid,sr,sc);
 
         //pose la case du héros et l'arrivée
-        boolean hero = true;
-        boolean arriv = true;
-        while (hero) {
+        boolean cherche = true;
+        while (cherche) {
             int x = (int) (Math.random() * width - 1);
             int y = (int) (Math.random() * height - 1);
             if (grid[x][y] == 0) {
                 grid[x][y] = 2;
-                hero = false;
+                cherche = false;
             }
         }
-        while (arriv) {
+        cherche = true;
+        while (cherche) {
             int x = (int) (Math.random() * width - 1);
             int y = (int) (Math.random() * height - 1);
             if (grid[x][y] == 0 && this.isDeadEnd(x,y)) {
                 grid[x][y] = 3;
-                arriv = false;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 4;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 4;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 5;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 6;
+                cherche = false;
             }
         }
         return grid;

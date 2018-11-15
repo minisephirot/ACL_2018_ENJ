@@ -46,32 +46,14 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd, boolean[] tab) {
-        if (teleport1() && getTp1().getActive()){
-            this.level.setPlayerX(getTp1().getVoisinX());
-            this.level.setPlayerY(getTp1().getVoisinY());
-            getTp1().setActive(false);
-            getTp2().setActive(false);
-        }else if (teleport2() && getTp2().getActive()){
-            this.level.setPlayerX(getTp2().getVoisinX());
-            this.level.setPlayerY(getTp2().getVoisinY());
-            getTp1().setActive(false);
-            getTp2().setActive(false);
-        }
-        if(piege() && level.getPiegeTrigger().getActive()){
-            this.getHero().enleverPv();
-            level.getPiegeTrigger().setActive(false);
-        }
-        if (magique() && level.getMagiqueTrigger().getActive()){
-            this.getHero().gagnerPv();
-            level.getMagiqueTrigger().setActive(false);
-        }
         if (gameWon()){
             this.gameWin = true;
             this.incrementFloor();
             new Timer(5000, e -> resetGame()).start();
             this.genLabyrinth(0);
         }
-        int sprint = (tab[4] == true)?2:1;
+        this.gestionCases();
+        int sprint = (tab[4]) ? 2 : 1;
         this.level.sprintHandler(tab[4]);
         if (!this.level.heroSprint())
             sprint = 1;
@@ -82,6 +64,26 @@ public class LabyrintheGame implements Game {
             else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
         }
         System.out.println(getHero().getPv());
+    }
+
+    private void gestionCases() {
+        if (teleport1() && this.level.getTp1().getActive()){
+            this.level.setPlayerX(this.level.getTp1().getVoisinX());
+            this.level.setPlayerY(this.level.getTp1().getVoisinY());
+            this.cooldownTP();
+        }else if (teleport2() && this.level.getTp2().getActive()){
+            this.level.setPlayerX(this.level.getTp2().getVoisinX());
+            this.level.setPlayerY(this.level.getTp2().getVoisinY());
+            this.cooldownTP();
+        }
+        if(piege() && level.getPiegeTrigger().getActive()){
+            this.getHero().enleverPv();
+            level.getPiegeTrigger().setActive(false);
+        }
+        if (magique() && level.getMagiqueTrigger().getActive()){
+            this.getHero().gagnerPv();
+            level.getMagiqueTrigger().setActive(false);
+        }
     }
 
     private boolean piege(){
@@ -114,8 +116,7 @@ public class LabyrintheGame implements Game {
     private boolean teleport1(){
         int herox = getHeroX();
         int heroy = getHeroY();
-
-        Teleporteur tp1 = this.getTp1();
+        Teleporteur tp1 = this.level.getTp1();
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
         return tp1.getRectangle().intersects(hero);
     }
@@ -123,8 +124,7 @@ public class LabyrintheGame implements Game {
     private boolean teleport2(){
         int herox = getHeroX();
         int heroy = getHeroY();
-
-        Teleporteur tp2 = this.getTp2();
+        Teleporteur tp2 = this.level.getTp2();
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
         return tp2.getRectangle().intersects(hero);
     }
@@ -140,19 +140,19 @@ public class LabyrintheGame implements Game {
     public boolean gestionCollision(Mur mur, Commande cmd, boolean[] tab){
         int herox = getHeroX();
         int heroy = getHeroY();
-        int sprint = (tab[4] == true)?2:1;
+        int sprint = (tab[4]) ? 2 : 1;
         boolean avancer = true;
         if (cmd == Commande.UP || tab[0]) {
-            herox -= 1*sprint;
+            herox -= sprint;
             changerDirection(HAUT);
         } else if (cmd == Commande.DOWN || tab[1]) {
-            herox += 1*sprint;
+            herox += sprint;
             changerDirection(BAS);
         }else if (cmd == Commande.LEFT || tab[2]) {
-            heroy -= 1*sprint;
+            heroy -= sprint;
             changerDirection(GAUCHE);
         }else if (cmd == Commande.RIGHT || tab[3]) {
-            heroy += 1*sprint;
+            heroy += sprint;
             changerDirection(DROITE);
         }
         Rectangle hero = new Rectangle(heroy+2, herox, 16, 20);
@@ -182,13 +182,14 @@ public class LabyrintheGame implements Game {
         return this.level.getArrive();
     }
 
-    public Teleporteur getTp1(){
-        return this.level.getTp1();
+    public void cooldownTP(){
+        this.level.getTp1().setActive(false);
+        this.level.getTp2().setActive(false);
+        System.out.println("Timer lancé");
+        new Timer(10000, e -> this.level.getTp1().setActive(true)).start();
+        new Timer(10000, e -> this.level.getTp2().setActive(true)).start();
     }
 
-    public Teleporteur getTp2(){
-        return this.level.getTp2();
-    }
 
     public ArrayList<Piege> getPiege(){
         return this.level.getPieges();
@@ -229,5 +230,13 @@ public class LabyrintheGame implements Game {
 
     public int getStamina(){
         return this.level.getStamina();
+    }
+
+    public Teleporteur getTp1() {
+        return this.level.getTp1();
+    }
+
+    public Teleporteur getTp2() {
+        return this.level.getTp2();
     }
 }
