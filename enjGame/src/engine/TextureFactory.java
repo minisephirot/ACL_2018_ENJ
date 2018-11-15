@@ -1,4 +1,4 @@
-package modele;
+package engine;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

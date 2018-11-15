@@ -2,6 +2,7 @@ package modele;
 
 import engine.Commande;
 import engine.Game;
+import engine.TextureFactory;
 import modele.elements.Arrive;
 import modele.elements.Case;
 import modele.elements.Mur;

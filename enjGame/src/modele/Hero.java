@@ -1,7 +1,8 @@
 package modele;
 
+import engine.TextureFactory;
+
 import java.awt.image.BufferedImage;
-import java.sql.Time;
 
 /**
  * Hero du jeu
