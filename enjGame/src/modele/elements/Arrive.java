@@ -1,24 +1,21 @@
 package modele.elements;
 
-import javax.imageio.ImageIO;
+import modele.TextureFactory;
+
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Arrive extends Case {
     private BufferedImage imgArrive;
+    private boolean leftside;
 
-    public Arrive(int x, int y) {
+    public Arrive(int x, int y,boolean leftside) {
         super(x, y);
-        File path = new File("enjGame/src/res/brick.jpg");
-        try {
-            imgArrive = ImageIO.read(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.leftside = leftside;
+        imgArrive = TextureFactory.getImgArrive(leftside);
     }
 
     public BufferedImage getImgArrive(){
         return imgArrive;
     }
+
 }

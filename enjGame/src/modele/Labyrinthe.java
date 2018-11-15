@@ -66,7 +66,13 @@ public class Labyrinthe {
                     heroposY = casex;
                     chemin.add(new Sol(casex, casey, rand));
                 }else if (labyrinthe[i][j] == 3){
-                    arrive = new Arrive(casex,casey);
+                    if (labyrinthe[i][j-1] == 0){
+                        arrive = new Arrive(casex,casey,true);
+                    }else if(labyrinthe[i][j+1] == 0){
+                        arrive = new Arrive(casex,casey,false);
+                    }else{
+                     arrive = new Arrive(casex,casey,Math.random() < 0.5);
+                    }
                 }
                 casex += 32;
             }

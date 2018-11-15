@@ -19,13 +19,17 @@ public class TextureFactory {
     private static BufferedImage imgSol;
     private static BufferedImage imgSol2;
     private static BufferedImage imgHero;
+    private static BufferedImage imgArrive;
+    private static BufferedImage imgArrive2;
 
     public TextureFactory() throws IOException {
-         imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
-         imgBriqueP = ImageIO.read(getClass().getResource("/res/murProf.jpg"));
-         imgSol = ImageIO.read(getClass().getResource("/res/sol.png"));
-         imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
-         imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
+        imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
+        imgBriqueP = ImageIO.read(getClass().getResource("/res/murProf.jpg"));
+        imgSol = ImageIO.read(getClass().getResource("/res/sol.png"));
+        imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
+        imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
+        imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
+        imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
     }
 
     public static BufferedImage getImgBrique(boolean isProfondeur) {
@@ -42,6 +46,12 @@ public class TextureFactory {
     public static BufferedImage getImgHero() {
         return imgHero;
     }
+
+    public static BufferedImage getImgArrive(boolean leftside) {
+        if (leftside)return imgArrive;
+        return imgArrive2;
+    }
+
     public static BufferedImage getImgSol() {
         switch (numeroSol){
             case 0:
