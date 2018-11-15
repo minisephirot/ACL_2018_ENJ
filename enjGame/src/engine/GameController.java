@@ -11,4 +11,10 @@ public interface GameController extends KeyListener {
      * @return commande faite par le joueur
      */
     public Commande getCommande();
+
+    /**
+     * Retourne le tableau de touches appuyées en continue
+     * @return tableau de boolean
+     */
+    public boolean[] getToucheAppuyee();
 }

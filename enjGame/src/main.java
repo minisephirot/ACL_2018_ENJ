@@ -4,7 +4,7 @@ import engine.GamePainter;
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
 import modele.LabyrinthePainter;
-import modele.TextureFactory;
+import engine.TextureFactory;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

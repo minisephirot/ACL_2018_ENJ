@@ -8,8 +8,9 @@ public interface Game {
     /**
      * Action du jeu en fonction des commandes utilisateur
      * @param cmd Commande effectuer par l'utilisateur
+     * @param tab Liste des touches appuyées en continue
      */
-    public void evolve(Commande cmd);
+    public void evolve(Commande cmd, boolean[] tab);
 
     /**
      * Permet de savoir si le jeu est terminer

@@ -26,6 +26,10 @@ public class GameEngineGraph {
     private GraphicalInterface graphicalInterface;
 
     /**
+     * Temps au moment où le moteur du jeu démarre
+     */
+
+    /**
      * Construit le moteur du jeu
      *
      * @param game           Jeu a Lancer
@@ -44,13 +48,16 @@ public class GameEngineGraph {
      * @throws InterruptedException
      */
     public void run() throws InterruptedException {
+        int loops;
         graphicalInterface = new GraphicalInterface(gamePainter, gameController);
         while (true) {
             try {
                 // demande controle utilisateur
                 Commande c = gameController.getCommande();
+                //On récupère les touches appuyées en continue
+                boolean[] tab = gameController.getToucheAppuyee();
                 // fait evoluer le game
-                game.evolve(c);
+                game.evolve(c, tab);
                 // affiche le game
                 graphicalInterface.paint();
                 // met en attentde
