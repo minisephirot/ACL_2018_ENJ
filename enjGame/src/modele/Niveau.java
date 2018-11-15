@@ -46,6 +46,18 @@ public class Niveau {
         this.lg = new LabyGenerator(15,15);
     }
 
+    public boolean heroSprint(){
+        return hero.canSprint();
+    }
+
+    public void sprintHandler(boolean isSprinting){
+        hero.handleStamina(isSprinting);
+    }
+
+    public int getStamina(){
+        return this.hero.getStamina();
+    }
+
     public int[][] getLabyrinthe(){
         return labyrinthe.getLabyrinthe();
     }

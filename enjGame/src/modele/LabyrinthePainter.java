@@ -22,6 +22,7 @@ public class LabyrinthePainter implements GamePainter {
     static int camX,camY;
     protected Font font;
     protected Font font2;
+    protected Font font3;
 
     /**
      * Le modele du jeu Labyrinthe
@@ -38,6 +39,7 @@ public class LabyrinthePainter implements GamePainter {
         this.lg = game;
         this.font = new Font("Comic Sans MS", Font.BOLD, 20);
         this.font2 = new Font("Impact", Font.BOLD, 50);
+        this.font3 = new Font("Comic Sans MS", Font.CENTER_BASELINE,14);
     }
 
     /**
@@ -54,6 +56,7 @@ public class LabyrinthePainter implements GamePainter {
         Arrive arrive = lg.getArrive();
         Teleporteur tp1 = lg.getTp1();
         Teleporteur tp2 = lg.getTp2();
+
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
         for (Brique b : mur){
@@ -65,7 +68,9 @@ public class LabyrinthePainter implements GamePainter {
             Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
             crayon.drawImage(s.getImgSol(), null, r.x, r.y);
         }
+
         crayon.setColor(Color.green);
+
         //Dessiner le téléporteur 1
         Rectangle rectangleTp1 = tp1.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
         crayon.drawImage(tp1.getImgTp(),null,rectangleTp1.x,rectangleTp1.y);
@@ -79,8 +84,13 @@ public class LabyrinthePainter implements GamePainter {
         Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);
         crayon.drawImage(lg.getHero().getImgHero(), null, rectangle1.x + 2, rectangle1.y - 16);
         //Dessiner les monstres;
-        crayon.setColor(Color.black);
+
+        //RECTANGLE INFO
+        crayon.setColor(Color.WHITE);
+        crayon.fillRect(10, 10, 145,75);
+
         // Dessiner la condition de victoire et les étages:
+        crayon.setColor(Color.black);
         crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         crayon.drawString("Etage n°"+lg.getFloor(), 20, 30);
         if(lg.getGameWin()) {
@@ -88,6 +98,23 @@ public class LabyrinthePainter implements GamePainter {
             crayon.drawString("Bravo !", this.getHeight()/2-200, this.getWidth()/2);
         }
 
+        //STAMINA BAR
+        int stamina = lg.getStamina();
+        int stamina_percentage = (stamina * 100) / 200;
+        int width_bar = (125 *stamina_percentage) / 200;
+        Rectangle staminabar = new Rectangle(20, 50, width_bar*2, 15);
+        crayon.setColor(Color.green);
+        crayon.fill(staminabar);
+        Stroke oldstroke = crayon.getStroke();
+        crayon.setStroke(new BasicStroke(2));
+        crayon.setColor(Color.GRAY);
+        crayon.drawRect(18, 48, 127, 17);
+        crayon.setStroke(oldstroke);
+
+        crayon.setColor(Color.black);
+        crayon.setFont(font3);
+        crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        crayon.drawString("Endurance", 40, 62);
     }
 
 

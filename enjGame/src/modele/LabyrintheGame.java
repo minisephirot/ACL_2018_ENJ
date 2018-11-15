@@ -2,6 +2,11 @@ package modele;
 
 import engine.Commande;
 import engine.Game;
+import engine.TextureFactory;
+import modele.elements.Arrive;
+import modele.elements.Case;
+import modele.elements.Mur;
+import modele.elements.Sol;
 import modele.elements.*;
 import org.w3c.dom.css.Rect;
 
@@ -40,6 +45,7 @@ public class LabyrintheGame implements Game {
     }
 
     @Override
+    public void evolve(Commande cmd, boolean[] tab) {
     public void evolve(Commande cmd) {
         if (teleport1() && getTp1().getActive()){
             this.level.setPlayerX(getTp1().getVoisinX());
@@ -59,11 +65,15 @@ public class LabyrintheGame implements Game {
             new Timer(5000, e -> resetGame()).start();
             this.genLabyrinth(true);
         }
-        if (gestionCollision(getMur(), cmd)) {
-            if (cmd == Commande.UP) this.level.deplacerHero(-1, 0);
-            if (cmd == Commande.DOWN) this.level.deplacerHero(1, 0);
-            if (cmd == Commande.LEFT) this.level.deplacerHero(0, -1);
-            if (cmd == Commande.RIGHT) this.level.deplacerHero(0, 1);
+        int sprint = (tab[4] == true)?2:1;
+        this.level.sprintHandler(tab[4]);
+        if (!this.level.heroSprint())
+            sprint = 1;
+        if (gestionCollision(getMur(), cmd, tab)) {
+            if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1*sprint, 0);
+            else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1*sprint, 0);
+            else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1*sprint);
+            else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
         }
     }
 
@@ -93,24 +103,25 @@ public class LabyrintheGame implements Game {
         return arrive.getRectangle().intersects(hero);
     }
 
-    public boolean gestionCollision(Mur mur, Commande cmd){
+    public boolean gestionCollision(Mur mur, Commande cmd, boolean[] tab){
         int herox = getHeroX();
         int heroy = getHeroY();
+        int sprint = (tab[4] == true)?2:1;
         boolean avancer = true;
-        if (cmd == Commande.UP) {
-            herox -= 1;
+        if (cmd == Commande.UP || tab[0]) {
+            herox -= 1*sprint;
             changerDirection(HAUT);
-        } else if (cmd == Commande.DOWN) {
-            herox += 1;
+        } else if (cmd == Commande.DOWN || tab[1]) {
+            herox += 1*sprint;
             changerDirection(BAS);
-        }else if (cmd == Commande.LEFT) {
-            heroy -= 1;
+        }else if (cmd == Commande.LEFT || tab[2]) {
+            heroy -= 1*sprint;
             changerDirection(GAUCHE);
-        }else if (cmd == Commande.RIGHT) {
-            heroy += 1;
+        }else if (cmd == Commande.RIGHT || tab[3]) {
+            heroy += 1*sprint;
             changerDirection(DROITE);
         }
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        Rectangle hero = new Rectangle(heroy+2, herox, 16, 20);
         for (Case c : mur){
             if (c.getRectangle().intersects(hero))
                 avancer = false;
@@ -173,5 +184,9 @@ public class LabyrintheGame implements Game {
 
     public void incrementFloor(){
         this.floor++;
+    }
+
+    public int getStamina(){
+        return this.level.getStamina();
     }
 }
