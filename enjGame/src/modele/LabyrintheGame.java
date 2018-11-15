@@ -17,18 +17,18 @@ public class LabyrintheGame implements Game {
     private boolean gameWin;
     private int floor;
 
-    public LabyrintheGame(){
+    public LabyrintheGame(int numLab){
         this.gameWin = false;
         this.level = new Niveau();
-        genLabyrinth(true);
+        genLabyrinth(numLab);
     }
 
-    public void genLabyrinth(boolean useGenerator){
+    public void genLabyrinth(int numerolab){
         TextureFactory.genererCombinaison();
-       if (useGenerator){
+        if (numerolab == 0){
             this.level.genererNiveau();
         }else{
-            this.level.chargerNiveau("Labyrinthe1");
+            this.level.chargerNiveau("Labyrinthe"+numerolab);
         }
     }
 
@@ -43,7 +43,7 @@ public class LabyrintheGame implements Game {
             this.gameWin = true;
             this.incrementFloor();
             new Timer(5000, e -> resetGame()).start();
-            this.genLabyrinth(true);
+            this.genLabyrinth(0);
         }
         if (gestionCollision(getMur(), cmd)) {
             if (cmd == Commande.UP) this.level.deplacerHero(-1, 0);

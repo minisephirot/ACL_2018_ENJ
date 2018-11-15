@@ -25,20 +25,29 @@ public class TextureFactory {
     private static BufferedImage imgHero;
     private static BufferedImage imgArrive;
     private static BufferedImage imgArrive2;
+    private static BufferedImage imgMenu;
 
-    public TextureFactory() throws IOException {
-        imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
-        imgBriqueP = ImageIO.read(getClass().getResource("/res/murProf.jpg"));
-        imgBrique2 = ImageIO.read(getClass().getResource("/res/murgele.png"));
-        imgBriqueP2 = ImageIO.read(getClass().getResource("/res/murgeleProf.png"));
-        imgSol = ImageIO.read(getClass().getResource("/res/sol.png"));
-        imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
-        imgSol3 = ImageIO.read(getClass().getResource("/res/grass.jpeg"));
-        imgSol4 = ImageIO.read(getClass().getResource("/res/solgele.png"));
-        imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
-        imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
-        imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
+    public TextureFactory() {
+        try {
+            imgMenu = ImageIO.read(getClass().getResource("/res/LB.jpg"));
+            imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
+            imgBriqueP = ImageIO.read(getClass().getResource("/res/murProf.jpg"));
+            imgBrique2 = ImageIO.read(getClass().getResource("/res/murgele.png"));
+            imgBriqueP2 = ImageIO.read(getClass().getResource("/res/murgeleProf.png"));
+            imgSol = ImageIO.read(getClass().getResource("/res/sol.png"));
+            imgSol2 = ImageIO.read(getClass().getResource("/res/sol.jpg"));
+            imgSol3 = ImageIO.read(getClass().getResource("/res/grass.jpeg"));
+            imgSol4 = ImageIO.read(getClass().getResource("/res/solgele.png"));
+            imgHero = ImageIO.read(getClass().getResource("/res/luigup.png"));
+            imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
+            imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
+        } catch (IOException e) {
+            System.out.println("Impossible de charger les fichiers");
+        }
+
     }
+
+    public static BufferedImage getImgMenu(){return imgMenu;}
 
     public static BufferedImage getImgBrique(boolean isProfondeur) {
         switch (numeroMur){
@@ -81,6 +90,5 @@ public class TextureFactory {
     public static void genererCombinaison(){
         numeroSol = rng.nextInt(NBSPRITESOL);
         numeroMur = rng.nextInt(NBSPRITEMUR);
-        System.out.println("numéro sol : "+numeroSol + "\n numero mur :" + numeroMur);
     }
 }
