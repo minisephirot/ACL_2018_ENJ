@@ -33,6 +33,10 @@ public class Niveau {
      */
     private Hero hero;
 
+    /**
+     * Liste des monstres
+     */
+    private final ArrayList<Monstre> monstres;
 
     /**
      * Constructeur de Niveau
@@ -40,6 +44,7 @@ public class Niveau {
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
+        this.monstres = new ArrayList();
         this.lg = new LabyGenerator(15,15);
     }
 
@@ -138,6 +143,10 @@ public class Niveau {
     }
 
     public Hero getHero(){ return hero; }
+
+    public ArrayList<Monstre> getMonstres() {
+        return monstres;
+    }
 
     public void changerDirection(int dir){ hero.changerDirection(dir);}
 

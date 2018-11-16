@@ -48,7 +48,7 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd, boolean[] tab) {
-        if (gameWon()){
+        if (isFinished()){
             this.gameWin = true;
             if (this.numerolab == 0){
                 this.genLabyrinth(this.numerolab);
@@ -66,6 +66,9 @@ public class LabyrintheGame implements Game {
             else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1*sprint, 0);
             else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1*sprint);
             else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
+        }
+        for (Monstre m :this.level.getMonstres()) {
+            m.seRapprocher();
         }
     }
 
@@ -134,7 +137,8 @@ public class LabyrintheGame implements Game {
         return tp2.getRectangle().intersects(hero);
     }
 
-    private boolean gameWon() {
+    @Override
+    public boolean isFinished() {
         int herox = getHeroX();
         int heroy = getHeroY();
         Arrive arrive = this.getArrive();
@@ -204,9 +208,8 @@ public class LabyrintheGame implements Game {
         return level.getPlayerY();
     }
 
-    @Override
-    public boolean isFinished() {
-        return false;
+    public ArrayList<Monstre> getMonstres(){
+        return level.getMonstres();
     }
 
     public boolean getGameWin() {
