@@ -34,6 +34,8 @@ public class TextureFactory {
      private static BufferedImage animBas[];
      private static BufferedImage animDroite[];
     private static BufferedImage imgMenu;
+    private static BufferedImage imgFamtome;
+    private static BufferedImage imgGoomba;
     private static boolean tresor = false;
 
     public TextureFactory() {
@@ -59,6 +61,8 @@ public class TextureFactory {
             imgTresor = ImageIO.read(getClass().getResource("/res/tresor.png"));
             imgPiege = ImageIO.read(getClass().getResource("/res/piege.png"));
             imgMagique = ImageIO.read(getClass().getResource("/res/bonus.png"));
+            imgFamtome = ImageIO.read(getClass().getResource("/res/boo.png"));
+            imgGoomba = ImageIO.read(getClass().getResource("/res/goomba.png"));
             animBas = new BufferedImage[9];
             animDroite = new BufferedImage[9];
             animBas[0] = ImageIO.read(getClass().getResource("/res/bas/luigB1.png"));
@@ -147,5 +151,10 @@ public class TextureFactory {
 
     public static void setTresor() {
         tresor = true;
+    }
+
+    public static BufferedImage getImgMonstre(boolean famtome) {
+        if (famtome) return imgFamtome;
+        return imgGoomba;
     }
 }

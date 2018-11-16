@@ -54,7 +54,7 @@ public class LabyrintheGame implements Game {
             if (this.numerolab == 0){
                 this.genLabyrinth(this.numerolab);
                 this.incrementFloor();
-                new Timer(5000, e -> resetGame()).start();
+                new Timer(2000, e -> resetGame()).start();
             }
         }
         this.gestionCases();

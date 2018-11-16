@@ -152,14 +152,15 @@ public class Niveau {
         return monstres;
     }
 
-    public void ajouterMonstre(int x, int y){
-        this.monstres.add(new Monstre(this,x,y));
+    public void ajouterMonstre(int x, int y,boolean nocoll){
+        this.monstres.add(new Monstre(this,x,y, nocoll));
     }
 
     public void poserMonstres(){
         this.monstres.clear();
         int[][] lab = this.getLabyrinthe();
         int nbmonstre = 0;
+        boolean needboo = true;
         Random rng = new Random();
         while(nbmonstre < 2){
             int x = rng.nextInt(lab[01].length);
@@ -167,8 +168,8 @@ public class Niveau {
             if (lab[x][y] == 0) {
                 int type = rng.nextInt(1);
                 if (type == 0){
-                    System.out.println(x*32 + " ; " +y*32);
-                    this.ajouterMonstre(x,y);
+                    this.ajouterMonstre(x*32,y*32,needboo);
+                    if(needboo) needboo = !needboo;
                     nbmonstre++;
                 }
             }

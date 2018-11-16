@@ -1,5 +1,8 @@
 package modele;
 
+import engine.TextureFactory;
+
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
@@ -14,8 +17,11 @@ public class Monstre extends Entite {
 
     private Random rng = new Random();
 
-    public Monstre(Niveau niveau, int x , int y) {
+    private boolean famtome;
+
+    public Monstre(Niveau niveau, int x , int y, boolean nocoll) {
         this.level = niveau;
+        this.famtome = nocoll;
         this.x = x;
         this.y = y;
     }
@@ -41,4 +47,9 @@ public class Monstre extends Entite {
             this.y += 1;
         }
     }
+
+    public BufferedImage getImgMonstre(){
+        return TextureFactory.getImgMonstre(this.famtome);
+    }
+
 }
