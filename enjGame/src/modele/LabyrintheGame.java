@@ -60,8 +60,7 @@ public class LabyrintheGame implements Game {
         this.gestionCases();
         int sprint = (tab[4]) ? 2 : 1;
         this.level.sprintHandler(tab[4]);
-        if (!this.level.heroSprint())
-            sprint = 1;
+        if (!this.level.heroSprint()) sprint = 1;
         if (gestionCollision(getMur(), cmd, tab)) {
             if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1*sprint, 0);
             else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1*sprint, 0);
@@ -70,6 +69,9 @@ public class LabyrintheGame implements Game {
         }
         for (Monstre m :this.level.getMonstres()) {
             m.seRapprocher();
+            if (!m.isFamtome()){
+                this.gestionCollision(getMur(),m);
+            }
         }
     }
 
@@ -145,6 +147,38 @@ public class LabyrintheGame implements Game {
         Arrive arrive = this.getArrive();
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
         return arrive.getRectangle().intersects(hero);
+    }
+
+    public void gestionCollision(Mur mur, Monstre m){
+        int x = m.x;
+        int y = m.y;
+        int dir = m.getDirection();
+        boolean avancer = true;
+        if (dir == 0) {
+            x -= 1;
+        } else if (dir == 1) {
+            x += 1;
+        }else if (dir == 2) {
+            y -= 1;
+        }else if (dir == 3) {
+            y += 1;
+        }
+        Rectangle mob = new Rectangle(y, x, 32, 32);
+        for (Case c : mur){
+            if (c.getRectangle().intersects(mob))
+                avancer = false;
+        }
+        if (avancer){
+            if (dir == 0) {
+                m.x -= 1;
+            } else if (dir == 1) {
+                m.x += 1;
+            }else if (dir == 2) {
+                m.y -= 1;
+            }else if (dir == 3) {
+                m.y += 1;
+            }
+        }
     }
 
     public boolean gestionCollision(Mur mur, Commande cmd, boolean[] tab){
