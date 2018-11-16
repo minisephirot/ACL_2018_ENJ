@@ -1,17 +1,27 @@
 import engine.GameController;
 import engine.GameEngineGraph;
 import engine.GamePainter;
+import engine.TextureFactory;
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
 import modele.LabyrinthePainter;
-import engine.TextureFactory;
 
-import java.io.IOException;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Scanner;
 
 public class main {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrez un entier : \n1 : Labyrinthe 1\n2 : Labyrinthe 2\n3 : Labyrinthe 3\n4 : Labyrinthe 4\n0 : Labyrinthe aléatoire\n");
+        int res = sc.nextInt();
+        newGame(res);
+    }
+
+    private static void newGame(int selectedIndex) {
         TextureFactory textureFactory = new TextureFactory();
-        LabyrintheGame lg = new LabyrintheGame();
+        LabyrintheGame lg = new LabyrintheGame(selectedIndex);
         GameController gc = new LabyrintheController();
         GamePainter gp = new LabyrinthePainter(lg);
         GameEngineGraph g = new GameEngineGraph(lg, gp, gc);

@@ -1,10 +1,8 @@
 package modele;
 
 import engine.GamePainter;
-import modele.elements.Arrive;
-import modele.elements.Brique;
-import modele.elements.Mur;
-import modele.elements.Sol;
+import engine.TextureFactory;
+import modele.elements.*;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import java.awt.*;
@@ -57,6 +55,10 @@ public class LabyrinthePainter implements GamePainter {
         Mur mur = lg.getMur();
         ArrayList<Sol> chemin = lg.getChemin();
         Arrive arrive = lg.getArrive();
+        Teleporteur tp1 = lg.getTp1();
+        Teleporteur tp2 = lg.getTp2();
+        ArrayList<Piege> pieges = lg.getPiege();
+        ArrayList<Magique> magiques = lg.getMagique();
 
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
@@ -69,19 +71,34 @@ public class LabyrinthePainter implements GamePainter {
             Rectangle r = s.getRectangleCamera(camY,camX,WIDTH,HEIGHT);
             crayon.drawImage(s.getImgSol(), null, r.x, r.y);
         }
-
         crayon.setColor(Color.green);
-
+        //Dessiner le téléporteur 1
+        Rectangle rectangleTp1 = tp1.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
+        crayon.drawImage(tp1.getImgTp(),null,rectangleTp1.x,rectangleTp1.y);
+        //Dessiner le téléporteur 2
+        Rectangle rectangleTp2 = tp2.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
+        crayon.drawImage(tp2.getImgTp(),null,rectangleTp2.x,rectangleTp2.y);
         // Dessiner l'arrive
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
+        crayon.drawImage(TextureFactory.getImgSol(), null, rectangleArrive.x, rectangleArrive.y);
         crayon.drawImage(arrive.getImgArrive(),null,rectangleArrive.x,rectangleArrive.y);
-
-
+        //Dessiner piege
+        for (Piege p : pieges) {
+            if (p.getActive()){
+                Rectangle rectanglePiege = p.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
+                crayon.drawImage(p.getImgPiege(), null, rectanglePiege.x, rectanglePiege.y);
+            }
+        }
+        //Dessiner cases magiques
+        for (Magique m : magiques) {
+            if (m.getActive()){
+                Rectangle rectanglePiege = m.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
+                crayon.drawImage(m.getImgMagique(), null, rectanglePiege.x, rectanglePiege.y);
+            }
+        }
         // Dessiner le hero
         Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);
         crayon.drawImage(lg.getHero().getImgHero(), null, rectangle1.x + 2, rectangle1.y - 16);
-
-
         //Dessiner les monstres;
 
         //RECTANGLE INFO
@@ -93,8 +110,11 @@ public class LabyrinthePainter implements GamePainter {
         crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         crayon.drawString("Etage n°"+lg.getFloor(), 20, 30);
         if(lg.getGameWin()) {
+            crayon.setColor(Color.gray);
+            crayon.fillOval(this.getHeight()/2-this.getHeight()/6, this.getWidth()/2-65, 250,100);
+            crayon.setColor(Color.black);
             crayon.setFont(this.font2);
-            crayon.drawString("Bravo !", this.getHeight()/2-200, this.getWidth()/2);
+            crayon.drawString("Bravo !", this.getHeight()/2-this.getHeight()/8, this.getWidth()/2);
         }
 
         //STAMINA BAR
