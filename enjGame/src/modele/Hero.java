@@ -49,6 +49,10 @@ public class Hero extends Entite {
         this.pv -= 1;
     }
 
+    public void gagnerPv(){
+        this.pv +=1;
+    }
+
     public int getPv(){
         return pv;
     }

@@ -14,6 +14,8 @@ public class Labyrinthe {
     private Mur mur;
     private Arrive arrive;
     private ArrayList<Piege> pieges;
+    private ArrayList<Magique> magiques;
+    private Magique magiqueTrigger;
     private Piege piegeTrigger;
     private Teleporteur tp1;
     private Teleporteur tp2;
@@ -31,6 +33,7 @@ public class Labyrinthe {
     public Labyrinthe(){
         chemin = new ArrayList<Sol>();
         pieges = new ArrayList<Piege>();
+        magiques = new ArrayList<Magique>();
     }
 
     /**
@@ -95,11 +98,25 @@ public class Labyrinthe {
                 }else if (labyrinthe[i][j] == 5){
                     pieges.add(new Piege(casex, casey));
                     chemin.add(new Sol(casex, casey, rand));
+                }else if (labyrinthe[i][j] == 6){
+                    magiques.add(new Magique(casex, casey));
+                    chemin.add(new Sol(casex, casey, rand));
                 }
                 casex += 32;
             }
             casey += 32;
         }
+    }
+
+    public ArrayList<Magique> getMagiques(){
+        return magiques;
+    }
+    public Magique getMagiqueTrigger() {
+        return magiqueTrigger;
+    }
+
+    public void setMagiqueTrigger(Magique magiqueTrigger) {
+        this.magiqueTrigger = magiqueTrigger;
     }
 
     public Piege getPiegeTrigger(){

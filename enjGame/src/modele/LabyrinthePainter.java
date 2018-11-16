@@ -57,6 +57,7 @@ public class LabyrinthePainter implements GamePainter {
         Teleporteur tp1 = lg.getTp1();
         Teleporteur tp2 = lg.getTp2();
         ArrayList<Piege> pieges = lg.getPiege();
+        ArrayList<Magique> magiques = lg.getMagique();
 
         // Dessiner le labyrinthe
         crayon.setColor(Color.RED);
@@ -85,6 +86,11 @@ public class LabyrinthePainter implements GamePainter {
         for (Piege p : pieges) {
             Rectangle rectanglePiege = p.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
             crayon.drawImage(p.getImgPiege(), null, rectanglePiege.x, rectanglePiege.y);
+        }
+        //Dessiner cases magiques
+        for (Magique m : magiques) {
+            Rectangle rectanglePiege = m.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
+            crayon.drawImage(m.getImgMagique(), null, rectanglePiege.x, rectanglePiege.y);
         }
         // Dessiner le hero
         Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);

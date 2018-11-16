@@ -61,6 +61,10 @@ public class LabyrintheGame implements Game {
             this.getHero().enleverPv();
             level.getPiegeTrigger().setActive(false);
         }
+        if (magique() && level.getMagiqueTrigger().getActive()){
+            this.getHero().gagnerPv();
+            level.getMagiqueTrigger().setActive(false);
+        }
         if (gameWon()){
             this.gameWin = true;
             this.incrementFloor();
@@ -92,6 +96,20 @@ public class LabyrintheGame implements Game {
         }
         return false;
     }
+
+    private boolean magique(){
+        int herox = getHeroX();
+        int heroy = getHeroY();
+        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        for (Magique m : this.getMagique()){
+            if (m.getRectangle().intersects(hero)){
+                level.setMagiqueTrigger(m);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private boolean teleport1(){
         int herox = getHeroX();
@@ -174,6 +192,10 @@ public class LabyrintheGame implements Game {
 
     public ArrayList<Piege> getPiege(){
         return this.level.getPieges();
+    }
+
+    public ArrayList<Magique> getMagique(){
+        return this.level.getMagiques();
     }
 
     public int getHeroX(){

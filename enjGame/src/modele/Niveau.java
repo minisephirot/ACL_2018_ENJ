@@ -166,6 +166,17 @@ public class Niveau {
         return this.labyrinthe.getPieges();
     }
 
+    public Magique getMagiqueTrigger(){
+        return labyrinthe.getMagiqueTrigger();
+    }
+
+    public void setMagiqueTrigger(Magique magiqueTrigger){
+        labyrinthe.setMagiqueTrigger(magiqueTrigger);
+    }
+    public ArrayList<Magique> getMagiques(){
+        return this.labyrinthe.getMagiques();
+    }
+
     public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
     /**
      * Print le labyrinthe, les joueurs en string
