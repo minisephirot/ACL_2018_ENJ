@@ -1,10 +1,7 @@
 package modele;
 
 import Exception.ExceptionTailleLaby;
-import modele.elements.Arrive;
-import modele.elements.Mur;
-import modele.elements.Sol;
-import modele.elements.Teleporteur;
+import modele.elements.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -156,6 +153,17 @@ public class Niveau {
 
     public Teleporteur getTp2(){
         return this.labyrinthe.getTp2();
+    }
+
+    public Piege getPiegeTrigger(){
+        return labyrinthe.getPiegeTrigger();
+    }
+
+    public void setPiegeTrigger(Piege piegeTrigger){
+        labyrinthe.setPiegeTrigger(piegeTrigger);
+    }
+    public ArrayList<Piege> getPieges(){
+        return this.labyrinthe.getPieges();
     }
 
     public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}

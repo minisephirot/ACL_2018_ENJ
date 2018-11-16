@@ -27,6 +27,7 @@ public class TextureFactory {
     private static BufferedImage imgArrive;
     private static BufferedImage imgArrive2;
     private static BufferedImage imgTp;
+    private static BufferedImage imgPiege;
    // private static BufferedImage animHaut[];
 
     public TextureFactory() throws IOException {
@@ -58,6 +59,7 @@ public class TextureFactory {
         imgTp = ImageIO.read(getClass().getResource("/res/teleporteur.png"));
         imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
         imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
+        imgPiege = ImageIO.read(getClass().getResource("/res/piege.png"));
     }
 
     public static BufferedImage getImgBrique(boolean isProfondeur) {
@@ -81,6 +83,8 @@ public class TextureFactory {
     public static BufferedImage getImgTp() {
         return imgTp;
     }
+
+    public static BufferedImage getImgPiege(){return imgPiege;}
 
     public static BufferedImage getImgArrive(boolean leftside) {
         if (leftside)return imgArrive;

@@ -51,12 +51,15 @@ public class LabyrintheGame implements Game {
             this.level.setPlayerY(getTp1().getVoisinY());
             getTp1().setActive(false);
             getTp2().setActive(false);
-            System.out.println(getTp1().getActive());
         }else if (teleport2() && getTp2().getActive()){
             this.level.setPlayerX(getTp2().getVoisinX());
             this.level.setPlayerY(getTp2().getVoisinY());
             getTp1().setActive(false);
             getTp2().setActive(false);
+        }
+        if(piege() && level.getPiegeTrigger().getActive()){
+            this.getHero().enleverPv();
+            level.getPiegeTrigger().setActive(false);
         }
         if (gameWon()){
             this.gameWin = true;
@@ -74,6 +77,20 @@ public class LabyrintheGame implements Game {
             else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1*sprint);
             else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
         }
+        System.out.println(getHero().getPv());
+    }
+
+    private boolean piege(){
+        int herox = getHeroX();
+        int heroy = getHeroY();
+        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
+        for (Piege p : this.getPiege()){
+            if (p.getRectangle().intersects(hero)){
+                level.setPiegeTrigger(p);
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean teleport1(){
@@ -155,6 +172,9 @@ public class LabyrintheGame implements Game {
         return this.level.getTp2();
     }
 
+    public ArrayList<Piege> getPiege(){
+        return this.level.getPieges();
+    }
 
     public int getHeroX(){
         return level.getPlayerX();

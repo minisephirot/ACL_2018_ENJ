@@ -44,6 +44,15 @@ public class Hero extends Entite {
 
     public void attaquer(){
     }
+
+    public void enleverPv(){
+        this.pv -= 1;
+    }
+
+    public int getPv(){
+        return pv;
+    }
+
     public void changerDirection(int dir){
         imgHero = TextureFactory.getImgHero(dir);
     }

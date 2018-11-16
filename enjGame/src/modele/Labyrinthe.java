@@ -13,6 +13,8 @@ public class Labyrinthe {
     public final static int VIDE = 0;
     private Mur mur;
     private Arrive arrive;
+    private ArrayList<Piege> pieges;
+    private Piege piegeTrigger;
     private Teleporteur tp1;
     private Teleporteur tp2;
     public ArrayList<Sol> chemin;
@@ -28,6 +30,7 @@ public class Labyrinthe {
      */
     public Labyrinthe(){
         chemin = new ArrayList<Sol>();
+        pieges = new ArrayList<Piege>();
     }
 
     /**
@@ -89,11 +92,22 @@ public class Labyrinthe {
                         chemin.add(new Sol(casex, casey, rand));
                         chemin.add(new Sol(posTpx, posTpy, rand));
                     }
+                }else if (labyrinthe[i][j] == 5){
+                    pieges.add(new Piege(casex, casey));
+                    chemin.add(new Sol(casex, casey, rand));
                 }
                 casex += 32;
             }
             casey += 32;
         }
+    }
+
+    public Piege getPiegeTrigger(){
+        return piegeTrigger;
+    }
+
+    public void setPiegeTrigger(Piege piegeTrigger){
+       this.piegeTrigger = piegeTrigger;
     }
 
     public Mur getMurs() {
@@ -114,6 +128,10 @@ public class Labyrinthe {
 
     public Teleporteur getTp2(){
         return this.tp2;
+    }
+
+    public ArrayList<Piege> getPieges() {
+        return pieges;
     }
 
     public int getHeroposX(){
