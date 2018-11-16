@@ -21,13 +21,13 @@ public class Hero extends Entite {
     }
 
     public boolean canSprint() {
-        return stamina >= 50;
+        return stamina >= 11;
     }
 
     public void handleStamina(boolean sprinting){
         if (sprinting){
             this.stamina -= 1;
-            if (this.stamina <= 49) this.stamina = 49;
+            if (this.stamina <= 10) this.stamina = 10;
         }else{
             this.stamina += 1;
             if (this.stamina >= 200) this.stamina = 200;

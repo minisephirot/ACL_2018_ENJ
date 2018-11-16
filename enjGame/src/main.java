@@ -8,42 +8,19 @@ import modele.LabyrinthePainter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class main {
 
     public static void main(String[] args){
-
-        //init
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-        frame.setTitle("Le labyrinthe");
-        TextureFactory textureFactory = new TextureFactory();
-
-        //Menu
-        JLabel label = new JLabel(new ImageIcon(TextureFactory.getImgMenu()));
-        label.setLayout(new FlowLayout());
-        Object[] elem = new Object[]{"Labyrinthe Infinis (le vrai jeu)","Labyrinthe 1", "Labyrinthe 2", "Labyrinthe 3", "Labyrinthe 4"};
-        JComboBox liste = new JComboBox(elem);
-        JButton starter = new JButton("Démarrer");
-
-        starter.addActionListener(e -> {
-            frame.dispose();
-        });
-
-        label.add(liste);
-        label.add(starter);
-        panel.add(label);
-        frame.setContentPane(panel);
-        frame.setPreferredSize(new Dimension(800,583));
-        frame.pack();
-        frame.validate();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        newGame(0);
-
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrez un entier : \n1 : Labyrinthe 1\n2 : Labyrinthe 2\n3 : Labyrinthe 3\n4 : Labyrinthe 4\n0 : Labyrinthe aléatoire\n");
+        int res = sc.nextInt();
+        newGame(res);
     }
 
-    public static void newGame(int selectedIndex) {
+    private static void newGame(int selectedIndex) {
+        TextureFactory textureFactory = new TextureFactory();
         LabyrintheGame lg = new LabyrintheGame(selectedIndex);
         GameController gc = new LabyrintheController();
         GamePainter gp = new LabyrinthePainter(lg);

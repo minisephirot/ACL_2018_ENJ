@@ -13,8 +13,8 @@ public class Teleporteur extends Case {
     public Teleporteur(int x, int y, int voisinX, int voisinY) {
         super(x, y);
         imgTp = TextureFactory.getImgTp(true);
-        this.voisinX = voisinX;
-        this.voisinY = voisinY;
+        this.voisinX = voisinY;
+        this.voisinY = voisinX;
         active = true;
     }
 

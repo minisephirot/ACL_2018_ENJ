@@ -50,6 +50,10 @@ public class Labyrinthe {
         mur = new Mur();
         mur.toutCasser();
         chemin.clear();
+        pieges.clear();
+        magiques.clear();
+        tp1 = null;
+        tp2 = null;
         int rand = (int)(Math.random() * 2);
         this.labyrinthe = labyrinthe;
         int casex = 0;

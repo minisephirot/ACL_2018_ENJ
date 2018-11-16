@@ -30,8 +30,10 @@ public class TextureFactory {
     private static BufferedImage imgTpDisabled;
     private static BufferedImage imgPiege;
     private static BufferedImage imgMagique;
+    private static BufferedImage imgTresor;
     // private static BufferedImage animHaut[];
     private static BufferedImage imgMenu;
+    private static boolean tresor = false;
 
     public TextureFactory() {
         try {
@@ -53,6 +55,7 @@ public class TextureFactory {
             imgTpDisabled = ImageIO.read(getClass().getResource("/res/teleporteurdis.png"));
             imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
             imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
+            imgTresor = ImageIO.read(getClass().getResource("/res/tresor.png"));
             imgPiege = ImageIO.read(getClass().getResource("/res/piege.png"));
             imgMagique = ImageIO.read(getClass().getResource("/res/bonus.png"));
         /*  animHaut = new BufferedImage[9];
@@ -99,6 +102,7 @@ public class TextureFactory {
     public static BufferedImage getImgMagique(){return imgMagique;}
 
     public static BufferedImage getImgArrive(boolean leftside) {
+        if (tresor) return imgTresor;
         if (leftside)return imgArrive;
         return imgArrive2;
     }
@@ -121,5 +125,9 @@ public class TextureFactory {
     public static void genererCombinaison(){
         numeroSol = rng.nextInt(NBSPRITESOL);
         numeroMur = rng.nextInt(NBSPRITEMUR);
+    }
+
+    public static void setTresor() {
+        tresor = true;
     }
 }

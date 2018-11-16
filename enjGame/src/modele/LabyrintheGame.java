@@ -8,7 +8,6 @@ import modele.elements.Case;
 import modele.elements.Mur;
 import modele.elements.Sol;
 import modele.elements.*;
-import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +34,7 @@ public class LabyrintheGame implements Game {
         if (numerolab == 0){
             this.level.genererNiveau();
         }else{
+            TextureFactory.setTresor();
             this.level.chargerNiveau("Labyrinthe"+numerolab);
         }
     }
@@ -63,18 +63,19 @@ public class LabyrintheGame implements Game {
             else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1*sprint);
             else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
         }
-        System.out.println(getHero().getPv());
     }
 
     private void gestionCases() {
         if (teleport1() && this.level.getTp1().getActive()){
             this.level.setPlayerX(this.level.getTp1().getVoisinX());
             this.level.setPlayerY(this.level.getTp1().getVoisinY());
-            this.cooldownTP();
+            this.level.getTp1().setActive(false);
+            this.level.getTp2().setActive(false);
         }else if (teleport2() && this.level.getTp2().getActive()){
             this.level.setPlayerX(this.level.getTp2().getVoisinX());
             this.level.setPlayerY(this.level.getTp2().getVoisinY());
-            this.cooldownTP();
+            this.level.getTp1().setActive(false);
+            this.level.getTp2().setActive(false);
         }
         if(piege() && level.getPiegeTrigger().getActive()){
             this.getHero().enleverPv();
@@ -168,6 +169,7 @@ public class LabyrintheGame implements Game {
     }
 
     public Hero getHero(){ return level.getHero();}
+
     public Mur getMur(){
         return level.getMur();
     }
@@ -181,15 +183,6 @@ public class LabyrintheGame implements Game {
     public Arrive getArrive(){
         return this.level.getArrive();
     }
-
-    public void cooldownTP(){
-        this.level.getTp1().setActive(false);
-        this.level.getTp2().setActive(false);
-        System.out.println("Timer lancé");
-        new Timer(10000, e -> this.level.getTp1().setActive(true)).start();
-        new Timer(10000, e -> this.level.getTp2().setActive(true)).start();
-    }
-
 
     public ArrayList<Piege> getPiege(){
         return this.level.getPieges();

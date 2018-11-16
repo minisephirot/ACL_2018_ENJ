@@ -1,6 +1,7 @@
 package modele;
 
 import engine.GamePainter;
+import engine.TextureFactory;
 import modele.elements.*;
 
 import javax.annotation.processing.SupportedSourceVersion;
@@ -79,6 +80,7 @@ public class LabyrinthePainter implements GamePainter {
         crayon.drawImage(tp2.getImgTp(),null,rectangleTp2.x,rectangleTp2.y);
         // Dessiner l'arrive
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY,camX, WIDTH, HEIGHT);
+        crayon.drawImage(TextureFactory.getImgSol(), null, rectangleArrive.x, rectangleArrive.y);
         crayon.drawImage(arrive.getImgArrive(),null,rectangleArrive.x,rectangleArrive.y);
         //Dessiner piege
         for (Piege p : pieges) {
