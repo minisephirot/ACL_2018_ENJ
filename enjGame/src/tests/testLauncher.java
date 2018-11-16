@@ -15,11 +15,7 @@ public class testLauncher extends TestCase {
 
     public testLauncher(String testMethodName) {
         super(testMethodName);
-        try {
-            new TextureFactory();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new TextureFactory();
     }
 
     public void testHero() throws Exception { //Teste la classe héro : ses déplacements et ses pv
