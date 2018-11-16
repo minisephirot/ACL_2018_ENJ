@@ -3,8 +3,12 @@ package modele;
 import exception.ExceptionTailleLaby;
 import modele.elements.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -148,6 +152,29 @@ public class Niveau {
         return monstres;
     }
 
+    public void ajouterMonstre(int x, int y){
+        this.monstres.add(new Monstre(this,x,y));
+    }
+
+    public void poserMonstres(){
+        this.monstres.clear();
+        int[][] lab = this.getLabyrinthe();
+        int nbmonstre = 0;
+        Random rng = new Random();
+        while(nbmonstre < 2){
+            int x = rng.nextInt(lab[01].length);
+            int y = rng.nextInt(lab.length);
+            if (lab[x][y] == 0) {
+                int type = rng.nextInt(1);
+                if (type == 0){
+                    System.out.println(x*32 + " ; " +y*32);
+                    this.ajouterMonstre(x,y);
+                    nbmonstre++;
+                }
+            }
+        }
+    }
+
     public void changerDirection(int dir){ hero.changerDirection(dir);}
 
     public Mur getMur(){
@@ -171,6 +198,7 @@ public class Niveau {
     public void setPiegeTrigger(Piege piegeTrigger){
         labyrinthe.setPiegeTrigger(piegeTrigger);
     }
+
     public ArrayList<Piege> getPieges(){
         return this.labyrinthe.getPieges();
     }
@@ -182,6 +210,7 @@ public class Niveau {
     public void setMagiqueTrigger(Magique magiqueTrigger){
         labyrinthe.setMagiqueTrigger(magiqueTrigger);
     }
+
     public ArrayList<Magique> getMagiques(){
         return this.labyrinthe.getMagiques();
     }

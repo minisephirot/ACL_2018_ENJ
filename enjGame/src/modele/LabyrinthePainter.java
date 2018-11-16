@@ -96,9 +96,11 @@ public class LabyrinthePainter implements GamePainter {
                 crayon.drawImage(m.getImgMagique(), null, rectanglePiege.x, rectanglePiege.y);
             }
         }
+
+        //Monstres
+        crayon.setColor(Color.black);
         for (Monstre m: this.lg.getMonstres()) {
             Rectangle rectangle2 = new Rectangle(m.y-camY +WIDTH/2,m.x-camX +HEIGHT/2,20,20);
-//            Rectangle rectangle2 = new Rectangle(m.y-camY ,m.x-camX ,20,20);
             crayon.fill(rectangle2);
         }
         // Dessiner le hero

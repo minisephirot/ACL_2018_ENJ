@@ -8,7 +8,6 @@ import modele.Labyrinthe;
 import modele.Niveau;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class testLauncher extends TestCase {
@@ -20,9 +19,9 @@ public class testLauncher extends TestCase {
 
     public void testHero() throws Exception { //Teste la classe héro : ses déplacements et ses pv
         Hero julien = new Hero(); // en vie
-        assertEquals(false,julien.isDead());
+        assertFalse(julien.isDead());
         julien.setPv(-666); // On le tue
-        assertEquals(true,julien.isDead());
+        assertTrue(julien.isDead());
         julien.setX(3);
         julien.setY(42);
         assertEquals(3,julien.getX());

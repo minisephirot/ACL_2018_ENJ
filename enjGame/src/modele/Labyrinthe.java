@@ -9,8 +9,7 @@ import java.util.ArrayList;
  * Labyrinthe d'un niveau du jeu
  */
 public class Labyrinthe {
-    public final static int MUR = 1;
-    public final static int VIDE = 0;
+
     private Mur mur;
     private Arrive arrive;
     private ArrayList<Piege> pieges;
@@ -20,6 +19,7 @@ public class Labyrinthe {
     private Teleporteur tp1;
     private Teleporteur tp2;
     public ArrayList<Sol> chemin;
+
     private int heroposX;
     private int heroposY;
     /**
@@ -115,6 +115,7 @@ public class Labyrinthe {
     public ArrayList<Magique> getMagiques(){
         return magiques;
     }
+
     public Magique getMagiqueTrigger() {
         return magiqueTrigger;
     }
@@ -162,13 +163,5 @@ public class Labyrinthe {
     public int getHeroposY(){
         return heroposY;
     }
-
-    /**
-     * Verifie si le joueur peux se deplacer vers la nouvelle case
-     */
-    public boolean deplacementPossible(int x, int y) {
-        return true;
-    }
-
 
 }

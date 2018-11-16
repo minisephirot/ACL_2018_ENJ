@@ -56,7 +56,7 @@ public class TextureFactory {
             imgTpDisabled = ImageIO.read(getClass().getResource("/res/teleporteurdis.png"));
             imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
             imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
-            imgTresor = ImageIO.read(getClass().getResource("/res/pushtontresorSTP.png"));
+            imgTresor = ImageIO.read(getClass().getResource("/res/tresor.png"));
             imgPiege = ImageIO.read(getClass().getResource("/res/piege.png"));
             imgMagique = ImageIO.read(getClass().getResource("/res/bonus.png"));
             animBas = new BufferedImage[9];

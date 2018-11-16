@@ -39,6 +39,7 @@ public class LabyrintheGame implements Game {
             TextureFactory.setTresor();
             this.level.chargerNiveau("Labyrinthe"+numerolab);
         }
+        this.level.poserMonstres();
     }
 
     @Override
