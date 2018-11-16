@@ -31,7 +31,8 @@ public class TextureFactory {
     private static BufferedImage imgPiege;
     private static BufferedImage imgMagique;
     private static BufferedImage imgTresor;
-    // private static BufferedImage animHaut[];
+     private static BufferedImage animBas[];
+     private static BufferedImage animDroite[];
     private static BufferedImage imgMenu;
     private static boolean tresor = false;
 
@@ -55,18 +56,27 @@ public class TextureFactory {
             imgTpDisabled = ImageIO.read(getClass().getResource("/res/teleporteurdis.png"));
             imgArrive = ImageIO.read(getClass().getResource("/res/stairLeft.png"));
             imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
-            imgTresor = ImageIO.read(getClass().getResource("/res/tresor.png"));
+            imgTresor = ImageIO.read(getClass().getResource("/res/luigup.png"));
             imgPiege = ImageIO.read(getClass().getResource("/res/piege.png"));
             imgMagique = ImageIO.read(getClass().getResource("/res/bonus.png"));
-        /*  animHaut = new BufferedImage[9];
-        animHaut[0] = ImageIO.read(getClass().getResource("/res/luig1.png"));
-        animHaut[1] = ImageIO.read(getClass().getResource("/res/luig2.png"));
-        animHaut[2] = ImageIO.read(getClass().getResource("/res/luig3.png"));
-        animHaut[3] = ImageIO.read(getClass().getResource("/res/luig4.png"));
-        animHaut[4] = ImageIO.read(getClass().getResource("/res/luig5.png"));
-        animHaut[5] = ImageIO.read(getClass().getResource("/res/luig6.png"));
-        animHaut[6] = ImageIO.read(getClass().getResource("/res/luig7.png"));
-        animHaut[7] = ImageIO.read(getClass().getResource("/res/luig8.png"));*/
+            animBas = new BufferedImage[9];
+            animDroite = new BufferedImage[9];
+            animBas[0] = ImageIO.read(getClass().getResource("/res/bas/luigB1.png"));
+            animBas[1] = ImageIO.read(getClass().getResource("/res/bas/luigB2.png"));
+            animBas[2] = ImageIO.read(getClass().getResource("/res/bas/luigB3.png"));
+            animBas[3] = ImageIO.read(getClass().getResource("/res/bas/luigB4.png"));
+            animBas[4] = ImageIO.read(getClass().getResource("/res/bas/luigB5.png"));
+            animBas[5] = ImageIO.read(getClass().getResource("/res/bas/luigB6.png"));
+            animBas[6] = ImageIO.read(getClass().getResource("/res/bas/luigB7.png"));
+            animBas[7] = ImageIO.read(getClass().getResource("/res/bas/luigB8.png"));
+            animDroite[0] = ImageIO.read(getClass().getResource("/res/droite/luigD1.png"));
+            animDroite[1] = ImageIO.read(getClass().getResource("/res/droite/luigD2.png"));
+            animDroite[2] = ImageIO.read(getClass().getResource("/res/droite/luigD3.png"));
+            animDroite[3] = ImageIO.read(getClass().getResource("/res/droite/luigD4.png"));
+            animDroite[4] = ImageIO.read(getClass().getResource("/res/droite/luigD5.png"));
+            animDroite[5] = ImageIO.read(getClass().getResource("/res/droite/luigD6.png"));
+            animDroite[6] = ImageIO.read(getClass().getResource("/res/droite/luigD7.png"));
+            animDroite[7] = ImageIO.read(getClass().getResource("/res/droite/luigD8.png"));
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
@@ -88,8 +98,16 @@ public class TextureFactory {
         }
     }
 
-    public static BufferedImage getImgHero(int dir) {
-        return imgHero[dir];
+    public static BufferedImage getImgHero(int dir, int anim) {
+        if (dir == 1){
+            return animBas[anim];
+        }else if (dir == 3){
+            return animDroite[anim];
+        }else if (dir == 0){
+            return imgHero[0];
+        }else{
+            return imgHero[2];
+        }
     }
 
     public static BufferedImage getImgTp(boolean activated) {

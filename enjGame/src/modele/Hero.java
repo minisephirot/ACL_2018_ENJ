@@ -12,9 +12,11 @@ public class Hero extends Entite {
     private int anim;
     private int direction;
     private int stamina;
+    private int animation = 0;
+    private int sprite = 0;
 
     public Hero() {
-        imgHero = TextureFactory.getImgHero(1);
+        imgHero = TextureFactory.getImgHero(1, 0);
         this.pv = 3;
         anim = 0;
         this.stamina = 200;
@@ -58,7 +60,15 @@ public class Hero extends Entite {
     }
 
     public void changerDirection(int dir){
-        imgHero = TextureFactory.getImgHero(dir);
+        if (sprite < 7) {
+            if (animation % 10 == 0) {
+                imgHero = TextureFactory.getImgHero(dir, sprite);
+                sprite++;
+            }
+        }else{
+            sprite = 0;
+        }
+        animation++;
     }
 
 }
