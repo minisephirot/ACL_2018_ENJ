@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class LabyrintheGame implements Game {
 
+    private final int numerolab;
     private Niveau level;
     private boolean gameWin;
     private int floor;
@@ -27,6 +28,7 @@ public class LabyrintheGame implements Game {
         this.gameWin = false;
         this.level = new Niveau();
         genLabyrinth(numLab);
+        this.numerolab = numLab;
     }
 
     public void genLabyrinth(int numerolab){
@@ -48,9 +50,11 @@ public class LabyrintheGame implements Game {
     public void evolve(Commande cmd, boolean[] tab) {
         if (gameWon()){
             this.gameWin = true;
-            this.incrementFloor();
-            new Timer(5000, e -> resetGame()).start();
-            this.genLabyrinth(0);
+            if (this.numerolab == 0){
+                this.genLabyrinth(this.numerolab);
+                this.incrementFloor();
+                new Timer(5000, e -> resetGame()).start();
+            }
         }
         this.gestionCases();
         int sprint = (tab[4]) ? 2 : 1;

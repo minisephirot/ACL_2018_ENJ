@@ -110,8 +110,11 @@ public class LabyrinthePainter implements GamePainter {
         crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         crayon.drawString("Etage n°"+lg.getFloor(), 20, 30);
         if(lg.getGameWin()) {
+            crayon.setColor(Color.gray);
+            crayon.fillOval(this.getHeight()/2-this.getHeight()/6, this.getWidth()/2-65, 250,100);
+            crayon.setColor(Color.black);
             crayon.setFont(this.font2);
-            crayon.drawString("Bravo !", this.getHeight()/2-200, this.getWidth()/2);
+            crayon.drawString("Bravo !", this.getHeight()/2-this.getHeight()/8, this.getWidth()/2);
         }
 
         //STAMINA BAR
