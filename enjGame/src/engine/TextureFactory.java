@@ -31,8 +31,12 @@ public class TextureFactory {
     private static BufferedImage imgPiege;
     private static BufferedImage imgMagique;
     private static BufferedImage imgTresor;
-     private static BufferedImage animBas[];
-     private static BufferedImage animDroite[];
+    private static BufferedImage animBas[];
+    private static BufferedImage animDroite[];
+    private static BufferedImage attaqueDroite[];
+    private static BufferedImage attaqueGauche[];
+    private static BufferedImage attaqueHaut[];
+    private static BufferedImage attaqueBas[];
     private static BufferedImage imgMenu;
     private static BufferedImage imgFamtome;
     private static BufferedImage imgGoomba;
@@ -81,6 +85,34 @@ public class TextureFactory {
             animDroite[5] = ImageIO.read(getClass().getResource("/res/droite/luigD6.png"));
             animDroite[6] = ImageIO.read(getClass().getResource("/res/droite/luigD7.png"));
             animDroite[7] = ImageIO.read(getClass().getResource("/res/droite/luigD8.png"));
+            attaqueHaut = new BufferedImage[6];
+            attaqueBas = new BufferedImage[6];
+            attaqueGauche = new BufferedImage[6];
+            attaqueDroite = new BufferedImage[6];
+            attaqueHaut[0] = ImageIO.read(getClass().getResource("/res/attaque/attaqueU1.png"));
+            attaqueHaut[1] = ImageIO.read(getClass().getResource("/res/attaque/attaqueU2.png"));
+            attaqueHaut[2] = ImageIO.read(getClass().getResource("/res/attaque/attaqueU3.png"));
+            attaqueHaut[3] = ImageIO.read(getClass().getResource("/res/attaque/attaqueU4.png"));
+            attaqueHaut[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueU5.png"));
+            attaqueHaut[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueU6.png"));
+            attaqueBas[0] = ImageIO.read(getClass().getResource("/res/attaque/attaqueD1.png"));
+            attaqueBas[1] = ImageIO.read(getClass().getResource("/res/attaque/attaqueD2.png"));
+            attaqueBas[2] = ImageIO.read(getClass().getResource("/res/attaque/attaqueD3.png"));
+            attaqueBas[3] = ImageIO.read(getClass().getResource("/res/attaque/attaqueD4.png"));
+            attaqueBas[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueD5.png"));
+            attaqueBas[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueD6.png"));
+            attaqueGauche[0] = ImageIO.read(getClass().getResource("/res/attaque/attaqueL1.png"));
+            attaqueGauche[1] = ImageIO.read(getClass().getResource("/res/attaque/attaqueL2.png"));
+            attaqueGauche[2] = ImageIO.read(getClass().getResource("/res/attaque/attaqueL3.png"));
+            attaqueGauche[3] = ImageIO.read(getClass().getResource("/res/attaque/attaqueL4.png"));
+            attaqueGauche[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueL5.png"));
+            attaqueGauche[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueL6.png"));
+            attaqueDroite[0] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR1.png"));
+            attaqueDroite[1] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR2.png"));
+            attaqueDroite[2] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR3.png"));
+            attaqueDroite[3] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR4.png"));
+            attaqueDroite[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR5.png"));
+            attaqueDroite[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR6.png"));
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
@@ -111,6 +143,18 @@ public class TextureFactory {
             return imgHero[0];
         }else{
             return imgHero[2];
+        }
+    }
+
+    public static BufferedImage getImgAttaque(int dir, int anim){
+        if (dir == 1){
+            return attaqueBas[anim];
+        }else if (dir == 3){
+            return attaqueDroite[anim];
+        }else if (dir == 0){
+            return attaqueHaut[anim];
+        }else{
+            return attaqueGauche[anim];
         }
     }
 

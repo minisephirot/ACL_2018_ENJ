@@ -100,8 +100,10 @@ public class LabyrinthePainter implements GamePainter {
         //Monstres
         crayon.setColor(Color.black);
         for (Monstre m: this.lg.getMonstres()) {
-            Rectangle rectanglemob = new Rectangle(m.y-camY +WIDTH/2,m.x-camX +HEIGHT/2,20,20);
-            crayon.drawImage(m.getImgMonstre(), null, rectanglemob.x, rectanglemob.y);
+            if (!m.isDead()) {
+                Rectangle rectanglemob = new Rectangle(m.y - camY + WIDTH / 2, m.x - camX + HEIGHT / 2, 20, 20);
+                crayon.drawImage(m.getImgMonstre(), null, rectanglemob.x, rectanglemob.y);
+            }
         }
         // Dessiner le hero
         Rectangle rectangle1 = new Rectangle(lg.getHeroY()-camY +WIDTH/2, lg.getHeroX()-camX +HEIGHT/2, 20, 20);

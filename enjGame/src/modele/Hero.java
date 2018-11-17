@@ -60,6 +60,7 @@ public class Hero extends Entite {
     }
 
     public void changerDirection(int dir){
+        direction = dir;
         if (sprite < 7) {
             if (animation % 10 == 0) {
                 imgHero = TextureFactory.getImgHero(dir, sprite);
@@ -69,6 +70,18 @@ public class Hero extends Entite {
             sprite = 0;
         }
         animation++;
+    }
+
+    public void attaqueAnimation(int anim){
+        imgHero = TextureFactory.getImgAttaque(direction, anim);
+    }
+
+    public int getWidth(){
+        return this.imgHero.getWidth();
+    }
+
+    public int getHeight(){
+        return this.imgHero.getHeight();
     }
 
 }

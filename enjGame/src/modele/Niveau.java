@@ -192,6 +192,8 @@ public class Niveau {
         return this.labyrinthe.getTp2();
     }
 
+    public void heroAttaque(int anim) { this.hero.attaqueAnimation(anim);}
+
     public Piege getPiegeTrigger(){
         return labyrinthe.getPiegeTrigger();
     }

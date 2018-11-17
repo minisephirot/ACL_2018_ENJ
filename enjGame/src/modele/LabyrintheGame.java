@@ -8,6 +8,7 @@ import modele.elements.Case;
 import modele.elements.Mur;
 import modele.elements.Sol;
 import modele.elements.*;
+import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,12 +24,16 @@ public class LabyrintheGame implements Game {
     private final static int BAS = 1;
     private final static int GAUCHE = 2;
     private final static int DROITE = 3;
+    private int gestionAttaqueAnimation;
+    private int animationImg;
 
     public LabyrintheGame(int numLab){
         this.gameWin = false;
         this.level = new Niveau();
         genLabyrinth(numLab);
         this.numerolab = numLab;
+        this.gestionAttaqueAnimation = 0;
+        this.animationImg = 0;
     }
 
     public void genLabyrinth(int numerolab){
@@ -67,10 +72,39 @@ public class LabyrintheGame implements Game {
             else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1*sprint);
             else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
         }
+        if (cmd == Commande.ATTAQUE && tab[5]){
+            if (this.animationImg < 6){
+                this.level.heroAttaque(this.animationImg);
+                if (gestionAttaqueAnimation%5 == 0)
+                    this.animationImg++;
+                this.gestionAttaqueAnimation++;
+                gestionAttaque();
+            }
+        } else {
+            this.gestionAttaqueAnimation = 0;
+            this.animationImg = 0;
+        }
         for (Monstre m :this.level.getMonstres()) {
-            m.seRapprocher();
-            if (!m.isFamtome()){
-                this.gestionCollision(getMur(),m);
+            if (!m.isDead()) {
+                m.seRapprocher();
+                if (!m.isFamtome()) {
+                    this.gestionCollision(getMur(), m);
+                }
+            }
+        }
+    }
+
+    private void gestionAttaque(){
+        int heightH = this.level.getHero().getHeight();
+        int widthH = this.level.getHero().getWidth();
+        int heroX = this.level.getPlayerX();
+        int heroY = this.level.getPlayerY();
+
+        Rectangle hero = new Rectangle(heroY, heroX, widthH, heightH);
+        for (Monstre m : this.level.getMonstres()){
+            Rectangle mob = new Rectangle(m.getY(), m.getX(), 32, 32);
+            if (hero.intersects(mob)){
+                m.takeDammage();
             }
         }
     }

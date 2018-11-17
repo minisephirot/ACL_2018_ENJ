@@ -21,6 +21,7 @@ public class Monstre extends Entite {
     private int direction;
 
     public Monstre(Niveau niveau, int x , int y, boolean nocoll) {
+        this.pv = 1;
         this.level = niveau;
         this.famtome = nocoll;
         this.x = x;
@@ -67,4 +68,7 @@ public class Monstre extends Entite {
         return TextureFactory.getImgMonstre(this.famtome);
     }
 
+    public void takeDammage(){
+        this.pv -= 1;
+    }
 }
