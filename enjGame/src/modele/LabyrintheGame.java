@@ -85,11 +85,9 @@ public class LabyrintheGame implements Game {
             this.animationImg = 0;
         }
         for (Monstre m :this.level.getMonstres()) {
-            if (!m.isDead()) {
-                m.seRapprocher();
-                if (!m.isFamtome()) {
-                    this.gestionCollision(getMur(), m);
-                }
+            m.seRapprocher();
+            if (!m.isFamtome()) {
+                this.gestionCollision(getMur(), m);
             }
         }
     }
@@ -101,12 +99,16 @@ public class LabyrintheGame implements Game {
         int heroY = this.level.getPlayerY();
 
         Rectangle hero = new Rectangle(heroY, heroX, widthH, heightH);
+        ArrayList<Monstre> deadMonsters = new ArrayList<Monstre>();
         for (Monstre m : this.level.getMonstres()){
             Rectangle mob = new Rectangle(m.getY(), m.getX(), 32, 32);
             if (hero.intersects(mob)){
                 m.takeDammage();
+                if (m.isDead())
+                    deadMonsters.add(m);
             }
         }
+        this.level.killMonstres(deadMonsters);
     }
 
     private void gestionCases() {

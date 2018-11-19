@@ -52,6 +52,10 @@ public class Niveau {
         this.lg = new LabyGenerator(15,15);
     }
 
+    public void killMonstres(ArrayList<Monstre> toKill){
+        this.monstres.removeAll(toKill);
+    }
+
     public boolean heroSprint(){
         return hero.canSprint();
     }
