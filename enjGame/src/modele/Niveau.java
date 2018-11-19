@@ -176,6 +176,14 @@ public class Niveau {
         }
     }
 
+    public void dammageHero(){
+        this.hero.enleverPv();
+    }
+
+    public void unsetInvincibleHero(){
+        this.hero.noInvincible();
+    }
+
     public void changerDirection(int dir){ hero.changerDirection(dir);}
 
     public Mur getMur(){

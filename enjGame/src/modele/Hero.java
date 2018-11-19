@@ -14,12 +14,14 @@ public class Hero extends Entite {
     private int stamina;
     private int animation = 0;
     private int sprite = 0;
+    private boolean invicible;
 
     public Hero() {
         imgHero = TextureFactory.getImgHero(1, 0);
         this.pv = 3;
         anim = 0;
         this.stamina = 200;
+        this.invicible = false;
     }
 
     public boolean canSprint() {
@@ -44,11 +46,15 @@ public class Hero extends Entite {
         return imgHero;
     }
 
-    public void attaquer(){
+    public void enleverPv(){
+        if (!invicible) {
+            this.pv -= 1;
+            this.invicible = true;
+        }
     }
 
-    public void enleverPv(){
-        this.pv -= 1;
+    public void noInvincible(){
+        this.invicible = false;
     }
 
     public void gagnerPv(){

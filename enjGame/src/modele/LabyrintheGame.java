@@ -26,6 +26,7 @@ public class LabyrintheGame implements Game {
     private final static int DROITE = 3;
     private int gestionAttaqueAnimation;
     private int animationImg;
+    private int dammageProofHero;
 
     public LabyrintheGame(int numLab){
         this.gameWin = false;
@@ -34,6 +35,7 @@ public class LabyrintheGame implements Game {
         this.numerolab = numLab;
         this.gestionAttaqueAnimation = 0;
         this.animationImg = 0;
+        this.dammageProofHero = 0;
     }
 
     public void genLabyrinth(int numerolab){
@@ -90,6 +92,29 @@ public class LabyrintheGame implements Game {
                 if (!m.isFamtome()) {
                     this.gestionCollision(getMur(), m);
                 }
+            }
+        }
+        if (dammageProofHero > 0){
+            dammageProofHero--;
+            if (dammageProofHero == 0)
+                this.level.unsetInvincibleHero();
+        } else {
+            gestionMonstresAttaque();
+        }
+    }
+
+    private void gestionMonstresAttaque(){
+        int heightH = this.level.getHero().getHeight();
+        int widthH = this.level.getHero().getWidth();
+        int heroX = this.level.getPlayerX();
+        int heroY = this.level.getPlayerY();
+
+        Rectangle hero = new Rectangle(heroY, heroX, widthH, heightH);
+        for (Monstre m : this.level.getMonstres()){
+            Rectangle mob = new Rectangle(m.getY(), m.getX(), 32, 32);
+            if (hero.intersects(mob) && dammageProofHero == 0){
+                this.level.dammageHero();
+                this.dammageProofHero += 250;
             }
         }
     }
@@ -307,5 +332,9 @@ public class LabyrintheGame implements Game {
 
     public Teleporteur getTp2() {
         return this.level.getTp2();
+    }
+
+    public int getDammageProofHero(){
+        return this.dammageProofHero;
     }
 }
