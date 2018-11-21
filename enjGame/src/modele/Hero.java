@@ -15,6 +15,7 @@ public class Hero extends Entite {
     private int animation = 0;
     private int sprite = 0;
     private boolean invicible;
+    private int pvMax=3;
 
     public Hero() {
         imgHero = TextureFactory.getImgHero(1, 0);
@@ -47,7 +48,7 @@ public class Hero extends Entite {
     }
 
     public void enleverPv(){
-        if (!invicible) {
+        if (!invicible && pv > 0) {
             this.pv -= 1;
             this.invicible = true;
         }
@@ -59,6 +60,7 @@ public class Hero extends Entite {
 
     public void gagnerPv(){
         this.pv +=1;
+        this.pvMax++;
     }
 
     public int getPv(){
@@ -90,4 +92,11 @@ public class Hero extends Entite {
         return this.imgHero.getHeight();
     }
 
+    public int getPvMax() {
+        return pvMax;
+    }
+
+    public void incrementPvMax() {
+        pvMax++;
+    }
 }

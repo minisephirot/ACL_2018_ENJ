@@ -42,6 +42,8 @@ public class TextureFactory {
     private static BufferedImage imgMenu;
     private static BufferedImage imgFamtome;
     private static BufferedImage imgGoomba;
+    private static BufferedImage imgPv;
+    private static BufferedImage imgPvLost;
     private static boolean tresor = false;
 
     public TextureFactory() {
@@ -64,6 +66,8 @@ public class TextureFactory {
             imgMagique = ImageIO.read(getClass().getResource("/res/bonus.png"));
             imgFamtome = ImageIO.read(getClass().getResource("/res/boo.png"));
             imgGoomba = ImageIO.read(getClass().getResource("/res/goomba.png"));
+            imgPv = ImageIO.read(getClass().getResource("/res/life.png"));
+            imgPvLost = ImageIO.read(getClass().getResource("/res/nolife.png"));
             animBas = new BufferedImage[9];
             animDroite = new BufferedImage[9];
             animHaut = new BufferedImage[9];
@@ -128,12 +132,16 @@ public class TextureFactory {
             attaqueDroite[3] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR4.png"));
             attaqueDroite[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR5.png"));
             attaqueDroite[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR6.png"));
+
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
     }
 
     public static BufferedImage getImgMenu(){return imgMenu;}
+
+    public static BufferedImage getImgPv(){return imgPv;}
+    public static BufferedImage getImgPvLost(){return imgPvLost;}
 
     public static BufferedImage getImgBrique(boolean isProfondeur) {
         switch (numeroMur){

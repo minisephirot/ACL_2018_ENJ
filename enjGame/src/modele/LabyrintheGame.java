@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class LabyrintheGame implements Game {
 
     private final int numerolab;
-    private Niveau level;
+    private  Niveau level;
     private boolean gameWin;
     private int floor;
     private final static int HAUT = 0;
@@ -56,49 +56,51 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd, boolean[] tab) {
-        if (isFinished()){
-            this.gameWin = true;
-            if (this.numerolab == 0){
-                this.genLabyrinth(this.numerolab);
-                this.incrementFloor();
-                new Timer(2000, e -> resetGame()).start();
+            if (isFinished()) {
+                this.gameWin = true;
+                if (this.numerolab == 0) {
+                    this.genLabyrinth(this.numerolab);
+                    this.incrementFloor();
+                    new Timer(2000, e -> resetGame()).start();
+                }
             }
-        }
-        this.gestionCases();
-        int sprint = (tab[4]) ? 2 : 1;
-        this.level.sprintHandler(tab[4]);
-        if (!this.level.heroSprint()) sprint = 1;
-        if (gestionCollision(getMur(), cmd, tab)) {
-            if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1*sprint, 0);
-            else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1*sprint, 0);
-            else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1*sprint);
-            else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
-        }
-        if (cmd == Commande.ATTAQUE && tab[5]){
-            if (this.animationImg < 6){
-                this.level.heroAttaque(this.animationImg);
-                if (gestionAttaqueAnimation%5 == 0)
-                    this.animationImg++;
-                this.gestionAttaqueAnimation++;
-                gestionAttaque();
+
+            this.gestionCases();
+            int sprint = (tab[4]) ? 2 : 1;
+            this.level.sprintHandler(tab[4]);
+            if (!this.level.heroSprint()) sprint = 1;
+            if (gestionCollision(getMur(), cmd, tab)) {
+                if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1 * sprint, 0);
+                else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1 * sprint, 0);
+                else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1 * sprint);
+                else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1 * sprint);
             }
-        } else {
-            this.gestionAttaqueAnimation = 0;
-            this.animationImg = 0;
-        }
-        for (Monstre m :this.level.getMonstres()) {
-            m.seRapprocher();
-            if (!m.isFamtome()) {
-                this.gestionCollision(getMur(), m);
+            if (cmd == Commande.ATTAQUE && tab[5]) {
+                if (this.animationImg < 6) {
+                    this.level.heroAttaque(this.animationImg);
+                    if (gestionAttaqueAnimation % 5 == 0)
+                        this.animationImg++;
+                    this.gestionAttaqueAnimation++;
+                    gestionAttaque();
+                }
+            } else {
+                this.gestionAttaqueAnimation = 0;
+                this.animationImg = 0;
             }
-        }
-        if (dammageProofHero > 0){
-            dammageProofHero--;
-            if (dammageProofHero == 0)
-                this.level.unsetInvincibleHero();
-        } else {
-            gestionMonstresAttaque();
-        }
+            for (Monstre m : this.level.getMonstres()) {
+                m.seRapprocher();
+                if (!m.isFamtome()) {
+                    this.gestionCollision(getMur(), m);
+                }
+            }
+            if (dammageProofHero > 0) {
+                dammageProofHero--;
+                if (dammageProofHero == 0)
+                    this.level.unsetInvincibleHero();
+            } else {
+                gestionMonstresAttaque();
+            }
+
     }
 
     private void gestionMonstresAttaque(){
@@ -208,6 +210,12 @@ public class LabyrintheGame implements Game {
         Arrive arrive = this.getArrive();
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
         return arrive.getRectangle().intersects(hero);
+    }
+
+    @Override
+    public boolean isOver() {
+
+        return getHero().isDead();
     }
 
     public void gestionCollision(Mur mur, Monstre m){

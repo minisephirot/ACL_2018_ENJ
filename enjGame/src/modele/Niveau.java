@@ -146,8 +146,10 @@ public class Niveau {
      * @param y deplacement en Y du héro
      */
     public void deplacerHero(int x, int y){
+        if (!hero.isDead()){
         this.hero.setX(this.getPlayerX() + x);
         this.hero.setY(this.getPlayerY() + y);
+        }
     }
 
     public Hero getHero(){ return hero; }
