@@ -49,6 +49,16 @@ public class testLauncher extends TestCase {
         assertTrue(rec1.intersects(hero));
     }
 
+    public void testStamina() {
+        Hero julien = new Hero();
+        julien.handleStamina(true);
+        assertTrue(julien.getStamina() < 200);
+        for (int i=0 ; i < 200 ; i++){
+            julien.handleStamina(true);
+        }
+        assertFalse(julien.canSprint());
+    }
+
     public void testGenerator(){
         LabyGenerator lg = new LabyGenerator(10,10);
         int[][] grid = lg.getGrid();
