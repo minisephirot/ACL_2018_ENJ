@@ -124,12 +124,16 @@ public class Niveau {
         }
         catch (FileNotFoundException exception){
             System.out.println("Le fichier n'existe pas");
+            System.exit(0);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(0);
         } catch (ExceptionTailleLaby exceptionTailleLaby) {
             System.out.println(exceptionTailleLaby.getMessage());
+            System.exit(0);
         } catch (NumberFormatException numberException){
             System.out.println("Fichier corrompu");
+            System.exit(0);
         }
     }
 
