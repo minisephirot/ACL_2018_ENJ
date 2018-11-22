@@ -84,7 +84,7 @@ public class LabyrintheController implements GameController {
             this.keyPressed[3] = true;
             cmd = Commande.RIGHT;
         }
-        if (keyPress == KeyEvent.VK_SHIFT){
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
             this.keyPressed[4] = true;
             cmd = Commande.SPRINT;
         }
@@ -115,7 +115,7 @@ public class LabyrintheController implements GameController {
         if (keyPress == 'd' || keyPress == 'D'){
             this.keyPressed[3] = false;
         }
-        if (keyPress == KeyEvent.VK_SHIFT) {
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
             this.keyPressed[4] = false;
         }
         if (keyPress == ' '){
