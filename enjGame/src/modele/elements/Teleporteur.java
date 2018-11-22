@@ -43,8 +43,8 @@ public class Teleporteur extends Case {
 
     @Override
     public void handleSpecialEffect(Hero h) {
-        h.setX(this.tpjumele.getX());
-        h.setY(this.tpjumele.getY());
+        h.setX(this.tpjumele.getY());
+        h.setY(this.tpjumele.getX());
         this.setActive(false);
     }
 }

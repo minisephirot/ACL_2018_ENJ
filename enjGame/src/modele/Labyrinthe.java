@@ -85,8 +85,8 @@ public class Labyrinthe {
                         posTpy = casey;
                         nbTp += 1;
                     }else {
-                        tp1 = new Teleporteur(posTpy, posTpx, null);
-                        tp2 = new Teleporteur(casey, casex, tp1);
+                        tp1 = new Teleporteur(posTpx, posTpy, null);
+                        tp2 = new Teleporteur(casex, casey, tp1);
                         tp1.setTpjumele(tp2);
                         this.casesSpeciales.add(tp1);
                         this.casesSpeciales.add(tp2);
