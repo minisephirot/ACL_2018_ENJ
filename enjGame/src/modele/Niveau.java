@@ -16,12 +16,6 @@ import java.util.Scanner;
  */
 public class Niveau {
 
-
-    /**
-     * Numéro du niveau
-     */
-    private int niveau;
-
     /**
      * Generateur de labyrinthe
      */
@@ -48,7 +42,7 @@ public class Niveau {
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
-        this.monstres = new ArrayList();
+        this.monstres = new ArrayList<>();
         this.lg = new LabyGenerator(15,15);
     }
 
@@ -116,8 +110,7 @@ public class Niveau {
                 strArray = line.split(",");
                 if (hauteur > 0) {
                     if (strArray.length != labyrinthe[0].length){
-                        ExceptionTailleLaby exceptionTailleLaby = new ExceptionTailleLaby();
-                        throw exceptionTailleLaby;
+                        throw new ExceptionTailleLaby();
                     }
                     for (int i = 0; i < strArray.length; i++) {
                         labyrinthe[hauteur - 1][i] = Integer.parseInt(strArray[i]);
@@ -169,13 +162,13 @@ public class Niveau {
         boolean needboo = true;
         Random rng = new Random();
         while(nbmonstre < 2){
-            int x = rng.nextInt(lab[01].length);
+            int x = rng.nextInt(lab[1].length);
             int y = rng.nextInt(lab.length);
             if (lab[x][y] == 0) {
                 int type = rng.nextInt(1);
                 if (type == 0){
                     this.ajouterMonstre(x*32,y*32,needboo);
-                    if(needboo) needboo = !needboo;
+                    if(needboo) needboo = false;
                     nbmonstre++;
                 }
             }
@@ -198,41 +191,14 @@ public class Niveau {
 
     public Arrive getArrive(){return labyrinthe.getArrive();}
 
-    public Teleporteur getTp1(){
-        return this.labyrinthe.getTp1();
-    }
-
-    public Teleporteur getTp2(){
-        return this.labyrinthe.getTp2();
-    }
-
     public void heroAttaque(int anim) { this.hero.attaqueAnimation(anim);}
 
-    public Piege getPiegeTrigger(){
-        return labyrinthe.getPiegeTrigger();
-    }
-
-    public void setPiegeTrigger(Piege piegeTrigger){
-        labyrinthe.setPiegeTrigger(piegeTrigger);
-    }
-
-    public ArrayList<Piege> getPieges(){
-        return this.labyrinthe.getPieges();
-    }
-
-    public Magique getMagiqueTrigger(){
-        return labyrinthe.getMagiqueTrigger();
-    }
-
-    public void setMagiqueTrigger(Magique magiqueTrigger){
-        labyrinthe.setMagiqueTrigger(magiqueTrigger);
-    }
-
-    public ArrayList<Magique> getMagiques(){
-        return this.labyrinthe.getMagiques();
+    public ArrayList<Case> getCasesSpeciales(){
+        return this.labyrinthe.getCasesSpeciales();
     }
 
     public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
+
     /**
      * Print le labyrinthe, les joueurs en string
      */
@@ -250,7 +216,7 @@ public class Niveau {
                 if (playerX == i && playerY == j){
                     sb.append("H,");
                 }else{
-                    sb.append(labyrinthe[i][j]+",");
+                    sb.append(labyrinthe[i][j]).append(",");
                 }
             }
             sb.setLength(sb.length() - 1);

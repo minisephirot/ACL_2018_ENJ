@@ -2,7 +2,6 @@ package modele;
 
 import modele.elements.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -10,15 +9,10 @@ import java.util.ArrayList;
  */
 public class Labyrinthe {
 
-    private Mur mur;
+    private Mur murs;
     private Arrive arrive;
-    private ArrayList<Piege> pieges;
-    private ArrayList<Magique> magiques;
-    private Magique magiqueTrigger;
-    private Piege piegeTrigger;
-    private Teleporteur tp1;
-    private Teleporteur tp2;
-    public ArrayList<Sol> chemin;
+    private ArrayList<Case> casesSpeciales;
+    private ArrayList<Sol> chemin;
 
     private int heroposX;
     private int heroposY;
@@ -31,9 +25,8 @@ public class Labyrinthe {
      * Constructeur de Labyrinthe
      */
     public Labyrinthe(){
-        chemin = new ArrayList<Sol>();
-        pieges = new ArrayList<Piege>();
-        magiques = new ArrayList<Magique>();
+        chemin = new ArrayList<>();
+        casesSpeciales = new ArrayList<>();
     }
 
     /**
@@ -47,15 +40,13 @@ public class Labyrinthe {
      * Setter de la matrice du labyrinthe
      */
     public void setLabyrinthe(int[][] labyrinthe) {
-        mur = new Mur();
-        mur.toutCasser();
+        murs = new Mur();
+        murs.toutCasser();
         chemin.clear();
-        pieges.clear();
-        magiques.clear();
-        tp1 = null;
-        tp2 = null;
+        casesSpeciales.clear();
         int rand = (int)(Math.random() * 2);
         this.labyrinthe = labyrinthe;
+        Teleporteur tp1,tp2;
         int casex = 0;
         int casey = 0;
         int posTpx = 0;
@@ -67,12 +58,12 @@ public class Labyrinthe {
                 if (labyrinthe[i][j] == 1) {
                     if (i+1 < labyrinthe.length) {
                         if (labyrinthe[i+1][j] == 1) {
-                            mur.ajouterBrique(new Brique(casex, casey, false));
+                            murs.ajouterBrique(new Brique(casex, casey, false));
                         } else {
-                            mur.ajouterBrique(new Brique(casex, casey, true));
+                            murs.ajouterBrique(new Brique(casex, casey, true));
                         }
                     }else{
-                        mur.ajouterBrique(new Brique(casex, casey, false));
+                        murs.ajouterBrique(new Brique(casex, casey, false));
                     }
                 } else if (labyrinthe[i][j] == 0){
                     chemin.add(new Sol(casex, casey, rand));
@@ -94,16 +85,19 @@ public class Labyrinthe {
                         posTpy = casey;
                         nbTp += 1;
                     }else {
-                        tp1 = new Teleporteur(posTpx, posTpy, casex, casey);
-                        tp2 = new Teleporteur(casex, casey, posTpx, posTpy);
+                        tp1 = new Teleporteur(posTpy, posTpx, null);
+                        tp2 = new Teleporteur(casey, casex, tp1);
+                        tp1.setTpjumele(tp2);
+                        this.casesSpeciales.add(tp1);
+                        this.casesSpeciales.add(tp2);
                         chemin.add(new Sol(casex, casey, rand));
                         chemin.add(new Sol(posTpx, posTpy, rand));
                     }
                 }else if (labyrinthe[i][j] == 5){
-                    pieges.add(new Piege(casex, casey));
+                    this.casesSpeciales.add(new Piege(casex, casey));
                     chemin.add(new Sol(casex, casey, rand));
                 }else if (labyrinthe[i][j] == 6){
-                    magiques.add(new Magique(casex, casey));
+                    this.casesSpeciales.add(new Magique(casex, casey));
                     chemin.add(new Sol(casex, casey, rand));
                 }
                 casex += 32;
@@ -112,28 +106,12 @@ public class Labyrinthe {
         }
     }
 
-    public ArrayList<Magique> getMagiques(){
-        return magiques;
-    }
-
-    public Magique getMagiqueTrigger() {
-        return magiqueTrigger;
-    }
-
-    public void setMagiqueTrigger(Magique magiqueTrigger) {
-        this.magiqueTrigger = magiqueTrigger;
-    }
-
-    public Piege getPiegeTrigger(){
-        return piegeTrigger;
-    }
-
-    public void setPiegeTrigger(Piege piegeTrigger){
-       this.piegeTrigger = piegeTrigger;
+    public ArrayList<Case> getCasesSpeciales() {
+        return casesSpeciales;
     }
 
     public Mur getMurs() {
-        return mur;
+        return murs;
     }
 
     public ArrayList<Sol> getChemin(){
@@ -142,18 +120,6 @@ public class Labyrinthe {
 
     public Arrive getArrive(){
         return this.arrive;
-    }
-
-    public Teleporteur getTp1(){
-        return this.tp1;
-    }
-
-    public Teleporteur getTp2(){
-        return this.tp2;
-    }
-
-    public ArrayList<Piege> getPieges() {
-        return pieges;
     }
 
     public int getHeroposX(){

@@ -1,41 +1,50 @@
 package modele.elements;
 
 import engine.TextureFactory;
+import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
 public class Teleporteur extends Case {
     private BufferedImage imgTp;
-    private int voisinX;
-    private int voisinY;
     private boolean active;
+    private Teleporteur tpjumele;
 
-    public Teleporteur(int x, int y, int voisinX, int voisinY) {
+    public Teleporteur(int x, int y, Teleporteur tpjumele) {
         super(x, y);
         imgTp = TextureFactory.getImgTp(true);
-        this.voisinX = voisinY;
-        this.voisinY = voisinX;
+        this.tpjumele = tpjumele;
         active = true;
     }
 
-    public BufferedImage getImgTp(){
+    public BufferedImage getImg(){
         return imgTp;
     }
 
-    public boolean getActive(){
+    public boolean isActive(){
         return active;
     }
 
     public void setActive(boolean active){
         this.active = active;
+        if(this.getTpjumele().isActive()){
+            this.getTpjumele().setActive(false);
+        }
         imgTp = TextureFactory.getImgTp(active);
     }
 
-    public int getVoisinX(){
-        return voisinX;
+    public Teleporteur getTpjumele() {
+        return tpjumele;
     }
 
-    public int getVoisinY(){
-        return voisinY;
+    public void setTpjumele(Teleporteur tpjumele) {
+        this.tpjumele = tpjumele;
+    }
+
+    @Override
+    public void handleSpecialEffect(Hero h) {
+        h.setX(this.tpjumele.getX());
+        h.setY(this.tpjumele.getY());
+        this.setActive(false);
     }
 }

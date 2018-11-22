@@ -1,6 +1,7 @@
 package modele.elements;
 
 import engine.TextureFactory;
+import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
@@ -12,7 +13,17 @@ public class Sol extends Case {
         imgSol = TextureFactory.getImgSol();
     }
 
-    public BufferedImage getImgSol(){
+    @Override
+    public BufferedImage getImg() {
         return imgSol;
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    public void handleSpecialEffect(Hero h) {
     }
 }

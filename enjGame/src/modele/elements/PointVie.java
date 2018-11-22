@@ -1,6 +1,7 @@
 package modele.elements;
 
 import engine.TextureFactory;
+import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
@@ -12,6 +13,21 @@ public class PointVie extends Case {
         super(x, y);
         imgPv = TextureFactory.getImgPv();
         imgPvLost = TextureFactory.getImgPvLost();
+
+    }
+
+    @Override
+    public BufferedImage getImg() {
+        return null;
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    public void handleSpecialEffect(Hero h) {
 
     }
 

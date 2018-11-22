@@ -7,8 +7,6 @@ import modele.elements.Arrive;
 import modele.elements.Case;
 import modele.elements.Mur;
 import modele.elements.Sol;
-import modele.elements.*;
-import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -139,68 +137,14 @@ public class LabyrintheGame implements Game {
     }
 
     private void gestionCases() {
-        if (teleport1() && this.level.getTp1().getActive()){
-            this.level.setPlayerX(this.level.getTp1().getVoisinX());
-            this.level.setPlayerY(this.level.getTp1().getVoisinY());
-            this.level.getTp1().setActive(false);
-            this.level.getTp2().setActive(false);
-        }else if (teleport2() && this.level.getTp2().getActive()){
-            this.level.setPlayerX(this.level.getTp2().getVoisinX());
-            this.level.setPlayerY(this.level.getTp2().getVoisinY());
-            this.level.getTp1().setActive(false);
-            this.level.getTp2().setActive(false);
-        }
-        if(piege() && level.getPiegeTrigger().getActive()){
-            this.getHero().enleverPv();
-            level.getPiegeTrigger().setActive(false);
-        }
-        if (magique() && level.getMagiqueTrigger().getActive()){
-            this.getHero().gagnerPv();
-            level.getMagiqueTrigger().setActive(false);
-        }
-    }
-
-    private boolean piege(){
         int herox = getHeroX();
         int heroy = getHeroY();
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        for (Piege p : this.getPiege()){
-            if (p.getRectangle().intersects(hero)){
-                level.setPiegeTrigger(p);
-                return true;
+        for (Case c : this.getCasesSpeciales()){
+            if (c.isActive() && c.getRectangle().intersects(hero)){
+                c.handleSpecialEffect(this.getHero());
             }
         }
-        return false;
-    }
-
-    private boolean magique(){
-        int herox = getHeroX();
-        int heroy = getHeroY();
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        for (Magique m : this.getMagique()){
-            if (m.getRectangle().intersects(hero)){
-                level.setMagiqueTrigger(m);
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    private boolean teleport1(){
-        int herox = getHeroX();
-        int heroy = getHeroY();
-        Teleporteur tp1 = this.level.getTp1();
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        return tp1.getRectangle().intersects(hero);
-    }
-
-    private boolean teleport2(){
-        int herox = getHeroX();
-        int heroy = getHeroY();
-        Teleporteur tp2 = this.level.getTp2();
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        return tp2.getRectangle().intersects(hero);
     }
 
     @Override
@@ -214,7 +158,6 @@ public class LabyrintheGame implements Game {
 
     @Override
     public boolean isOver() {
-
         return getHero().isDead();
     }
 
@@ -296,12 +239,8 @@ public class LabyrintheGame implements Game {
         return this.level.getArrive();
     }
 
-    public ArrayList<Piege> getPiege(){
-        return this.level.getPieges();
-    }
-
-    public ArrayList<Magique> getMagique(){
-        return this.level.getMagiques();
+    public ArrayList<Case> getCasesSpeciales(){
+        return this.level.getCasesSpeciales();
     }
 
     public int getHeroX(){
@@ -336,15 +275,11 @@ public class LabyrintheGame implements Game {
         return this.level.getStamina();
     }
 
-    public Teleporteur getTp1() {
-        return this.level.getTp1();
-    }
-
-    public Teleporteur getTp2() {
-        return this.level.getTp2();
-    }
-
     public int getDammageProofHero(){
         return this.dammageProofHero;
+    }
+
+    public boolean notInfinite() {
+        return this.numerolab != 0;
     }
 }

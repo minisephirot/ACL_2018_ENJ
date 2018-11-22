@@ -1,6 +1,7 @@
 package modele.elements;
 
 import engine.TextureFactory;
+import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
@@ -14,8 +15,16 @@ public class Arrive extends Case {
         imgArrive = TextureFactory.getImgArrive(leftside);
     }
 
-    public BufferedImage getImgArrive(){
+    public BufferedImage getImg(){
         return imgArrive;
     }
 
+    @Override
+    public boolean isActive() {
+        return true;
+    }
+
+    @Override
+    public void handleSpecialEffect(Hero h) {
+    }
 }

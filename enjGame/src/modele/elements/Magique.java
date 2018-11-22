@@ -1,6 +1,7 @@
 package modele.elements;
 
 import engine.TextureFactory;
+import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
@@ -14,11 +15,17 @@ public class Magique extends Case {
         active = true;
     }
 
-    public BufferedImage getImgMagique(){
+    @Override
+    public void handleSpecialEffect(Hero h) {
+        h.gagnerPv();
+        this.setActive(false);
+    }
+
+    public BufferedImage getImg(){
         return imgMagique;
     }
 
-    public boolean getActive(){
+    public boolean isActive(){
         return active;
     }
 

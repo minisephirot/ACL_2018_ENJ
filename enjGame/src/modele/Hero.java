@@ -96,7 +96,4 @@ public class Hero extends Entite {
         return pvMax;
     }
 
-    public void incrementPvMax() {
-        pvMax++;
-    }
 }
