@@ -16,9 +16,10 @@ public class Magique extends Case {
     }
 
     @Override
-    public void handleSpecialEffect(Hero h) {
+    public int handleSpecialEffect(Hero h) {
         h.gagnerPv();
         this.setActive(false);
+        return 0;
     }
 
     public BufferedImage getImg(){

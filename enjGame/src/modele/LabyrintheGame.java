@@ -142,7 +142,8 @@ public class LabyrintheGame implements Game {
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
         for (Case c : this.getCasesSpeciales()){
             if (c.isActive() && c.getRectangle().intersects(hero)){
-                c.handleSpecialEffect(this.getHero());
+                if (c.handleSpecialEffect(this.getHero()) == 1)
+                    this.dammageProofHero += 250;
             }
         }
     }

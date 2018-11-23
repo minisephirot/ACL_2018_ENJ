@@ -16,9 +16,10 @@ public class Piege extends Case {
     }
 
     @Override
-    public void handleSpecialEffect(Hero h) {
+    public int handleSpecialEffect(Hero h) {
         h.enleverPv();
         this.setActive(false);
+        return 1;
     }
 
     public BufferedImage getImg(){

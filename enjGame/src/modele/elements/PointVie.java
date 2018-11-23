@@ -27,8 +27,8 @@ public class PointVie extends Case {
     }
 
     @Override
-    public void handleSpecialEffect(Hero h) {
-
+    public int handleSpecialEffect(Hero h) {
+        return -1;
     }
 
     public BufferedImage getImgPv(){

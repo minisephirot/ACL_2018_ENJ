@@ -63,5 +63,5 @@ public abstract class Case {
 
     abstract public boolean isActive();
 
-    abstract public void handleSpecialEffect(Hero h);
+    abstract public int handleSpecialEffect(Hero h);
 }

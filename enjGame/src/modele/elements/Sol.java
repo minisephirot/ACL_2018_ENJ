@@ -24,6 +24,7 @@ public class Sol extends Case {
     }
 
     @Override
-    public void handleSpecialEffect(Hero h) {
+    public int handleSpecialEffect(Hero h) {
+        return -1;
     }
 }

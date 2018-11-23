@@ -52,13 +52,6 @@ public class LabyrinthePainter implements GamePainter {
         Arrive arrive = lg.getArrive();
         ArrayList<Case> caseSpeciales = lg.getCasesSpeciales();
 
-        for (int i = 0; i < WIDTH*2; i+=32){
-            for (int j = 0; j < HEIGHT*2; j+=32){
-                int xCamera =i - camY + (32 / 2);
-                int yCamera =j - camX + (32 / 2);
-                crayon.drawImage(TextureFactory.getImgGrass(), null, xCamera, yCamera);
-            }
-        }
         // Dessiner le labyrinthe
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
         crayon.drawImage(TextureFactory.getImgSol(), null, rectangleArrive.x, rectangleArrive.y);
@@ -101,11 +94,7 @@ public class LabyrinthePainter implements GamePainter {
         crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         crayon.drawString("Etage n°" + lg.getFloor(), 20, 30);
         if (lg.isFinished() && lg.notInfinite()) {
-            crayon.setColor(Color.gray);
-            crayon.fillOval(this.getHeight() / 2 - this.getHeight() / 6, this.getWidth() / 2 - 65, 250, 100);
-            crayon.setColor(Color.black);
-            crayon.setFont(this.font2);
-            crayon.drawString("Bravo !", this.getHeight() / 2 - this.getHeight() / 8, this.getWidth() / 2);
+            crayon.drawImage(TextureFactory.getImgVitory(),null, this.getHeight() / 2 - this.getHeight() / 6,  this.getWidth() / 2 - 65);
         }
 
         //STAMINA BAR
@@ -152,11 +141,7 @@ public class LabyrinthePainter implements GamePainter {
 
         // Dessiner la fin du jeu (GAME OVER)
         if (lg.isOver()) {
-            crayon.setColor(Color.gray);
-            crayon.fillOval(this.getHeight() / 2 - this.getHeight() / 6, this.getWidth() / 2 - 65, 250, 100);
-            crayon.setColor(Color.black);
-            crayon.setFont(this.font2);
-            crayon.drawString("Game Over !", this.getHeight() / 2 - this.getHeight() / 8, this.getWidth() / 2);
+            crayon.drawImage(TextureFactory.getImgGameOver(),null, this.getHeight() / 2 - this.getHeight() / 6,  this.getWidth() / 2 - 65);
         }
 
 
