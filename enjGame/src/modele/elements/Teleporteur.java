@@ -9,12 +9,14 @@ public class Teleporteur extends Case {
     private BufferedImage imgTp;
     private boolean active;
     private Teleporteur tpjumele;
+    private boolean cooldown;
 
     public Teleporteur(int x, int y, Teleporteur tpjumele) {
         super(x, y);
         imgTp = TextureFactory.getImgTp(true);
         this.tpjumele = tpjumele;
         active = true;
+        cooldown = true;
     }
 
     public BufferedImage getImg(){
@@ -25,10 +27,14 @@ public class Teleporteur extends Case {
         return active;
     }
 
+    public boolean isCooldown(){
+        return cooldown;
+    }
+
     public void setActive(boolean active){
-        this.active = active;
-        if(this.getTpjumele().isActive()){
-            this.getTpjumele().setActive(false);
+        this.cooldown = active;
+        if(this.getTpjumele().isCooldown()){
+            this.getTpjumele().setActive(active);
         }
         imgTp = TextureFactory.getImgTp(active);
     }
@@ -43,9 +49,11 @@ public class Teleporteur extends Case {
 
     @Override
     public int handleSpecialEffect(Hero h) {
-        h.setX(this.tpjumele.getY());
-        h.setY(this.tpjumele.getX());
-        this.setActive(false);
+        if (this.isCooldown()) {
+            h.setX(this.tpjumele.getY());
+            h.setY(this.tpjumele.getX());
+            this.setActive(false);
+        }
         return 2;
     }
 }
