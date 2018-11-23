@@ -44,6 +44,9 @@ public class TextureFactory {
     private static BufferedImage imgGoomba;
     private static BufferedImage imgPv;
     private static BufferedImage imgPvLost;
+    private static BufferedImage plante1;
+    private static BufferedImage plante2;
+    private static BufferedImage plante3;
     private static boolean tresor = false;
 
     public TextureFactory() {
@@ -133,6 +136,10 @@ public class TextureFactory {
             attaqueDroite[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR5.png"));
             attaqueDroite[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR6.png"));
 
+            plante1 = ImageIO.read(getClass().getResource("/res/plante1.png"));
+            plante2 = ImageIO.read(getClass().getResource("/res/plante2.png"));
+            plante3 = ImageIO.read(getClass().getResource("/res/plante3.png"));
+
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
@@ -179,6 +186,18 @@ public class TextureFactory {
         }else{
             return attaqueGauche[anim];
         }
+    }
+
+    public static BufferedImage getImgPlante1() {
+        return plante1;
+    }
+
+    public static BufferedImage getImgPlante2() {
+        return plante2;
+    }
+
+    public static BufferedImage getImgPlante3() {
+        return plante3;
     }
 
     public static BufferedImage getImgTp(boolean activated) {
