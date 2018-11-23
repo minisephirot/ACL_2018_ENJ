@@ -121,7 +121,10 @@ public class LabyrinthePainter implements GamePainter {
         int stamina_percentage = (stamina * 100) / 200;
         int width_bar = (125 * stamina_percentage) / 200;
         Rectangle staminabar = new Rectangle(20, 50, width_bar * 2, 15);
-        crayon.setColor(Color.green);
+        if(stamina <= 10)
+            crayon.setColor(Color.BLACK);
+        else
+            crayon.setColor(Color.green);
         crayon.fill(staminabar);
         Stroke oldstroke = crayon.getStroke();
         crayon.setStroke(new BasicStroke(2));
