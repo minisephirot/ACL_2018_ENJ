@@ -138,18 +138,17 @@ public class LabyrinthePainter implements GamePainter {
 
         //Points de Vie BAR
         int pv = lg.getHero().getPv();
-        int pv_percentage = (pv * 100) / lg.getHero().getPvMax();
-        int pv_width_bar = (2 * pv_percentage) / lg.getHero().getPvMax();
-        Rectangle pvbar = new Rectangle(19, 79, pv_width_bar * 2, 16);
+        int pvMax = lg.getHero().getPvMax();
+        Rectangle pvbar = new Rectangle(19, 79, pv*40, 16);
         crayon.setColor(Color.RED);
         crayon.fill(pvbar);
         crayon.setStroke(new BasicStroke(2));
         crayon.setColor(Color.GRAY);
-        crayon.drawRect(18, 78, 127, 17);
+        crayon.drawRect(18, 78, pvMax*40, 17);
         crayon.setStroke(oldstroke);
         crayon.setColor(Color.black);
         crayon.setFont(font3);
-        crayon.drawString("Points de vie", 30, 92);
+        crayon.drawString("Points de vie", 35, 92);
 
         // Dessiner les vies
         for (int p = 0; p<pv; p++) {
