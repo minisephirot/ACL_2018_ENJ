@@ -196,6 +196,9 @@ public class TextureFactory {
         return imgArrive2;
     }
 
+    public static BufferedImage getImgGrass() {
+        return imgSol3;
+    }
     public static BufferedImage getImgSol() {
         switch (numeroSol){
             case 0:

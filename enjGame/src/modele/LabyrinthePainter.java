@@ -52,6 +52,13 @@ public class LabyrinthePainter implements GamePainter {
         Arrive arrive = lg.getArrive();
         ArrayList<Case> caseSpeciales = lg.getCasesSpeciales();
 
+        for (int i = 0; i < WIDTH*2; i+=32){
+            for (int j = 0; j < HEIGHT*2; j+=32){
+                int xCamera =i - camY + (32 / 2);
+                int yCamera =j - camX + (32 / 2);
+                crayon.drawImage(TextureFactory.getImgGrass(), null, xCamera, yCamera);
+            }
+        }
         // Dessiner le labyrinthe
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
         crayon.drawImage(TextureFactory.getImgSol(), null, rectangleArrive.x, rectangleArrive.y);
