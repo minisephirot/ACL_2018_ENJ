@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public class Sol extends Case {
     private BufferedImage imgSol;
 
-    public Sol(int x, int y, int rand) {
+    public Sol(int x, int y) {
         super(x, y);
         imgSol = TextureFactory.getImgSol();
     }
