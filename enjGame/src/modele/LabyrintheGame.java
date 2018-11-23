@@ -7,8 +7,6 @@ import modele.elements.Arrive;
 import modele.elements.Case;
 import modele.elements.Mur;
 import modele.elements.Sol;
-import modele.elements.*;
-import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 public class LabyrintheGame implements Game {
 
     private final int numerolab;
-    private Niveau level;
+    private  Niveau level;
     private boolean gameWin;
     private int floor;
     private final static int HAUT = 0;
@@ -56,49 +54,51 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd, boolean[] tab) {
-        if (isFinished()){
-            this.gameWin = true;
-            if (this.numerolab == 0){
-                this.genLabyrinth(this.numerolab);
-                this.incrementFloor();
-                new Timer(2000, e -> resetGame()).start();
+            if (isFinished()) {
+                this.gameWin = true;
+                if (this.numerolab == 0) {
+                    this.genLabyrinth(this.numerolab);
+                    this.incrementFloor();
+                    new Timer(2000, e -> resetGame()).start();
+                }
             }
-        }
-        this.gestionCases();
-        int sprint = (tab[4]) ? 2 : 1;
-        this.level.sprintHandler(tab[4]);
-        if (!this.level.heroSprint()) sprint = 1;
-        if (gestionCollision(getMur(), cmd, tab)) {
-            if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1*sprint, 0);
-            else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1*sprint, 0);
-            else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1*sprint);
-            else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1*sprint);
-        }
-        if (cmd == Commande.ATTAQUE && tab[5]){
-            if (this.animationImg < 6){
-                this.level.heroAttaque(this.animationImg);
-                if (gestionAttaqueAnimation%5 == 0)
-                    this.animationImg++;
-                this.gestionAttaqueAnimation++;
-                gestionAttaque();
+
+            this.gestionCases();
+            int sprint = (tab[4]) ? 2 : 1;
+            this.level.sprintHandler(tab[4]);
+            if (!this.level.heroSprint()) sprint = 1;
+            if (gestionCollision(getMur(), cmd, tab)) {
+                if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1 * sprint, 0);
+                else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1 * sprint, 0);
+                else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1 * sprint);
+                else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1 * sprint);
             }
-        } else {
-            this.gestionAttaqueAnimation = 0;
-            this.animationImg = 0;
-        }
-        for (Monstre m :this.level.getMonstres()) {
-            m.seRapprocher();
-            if (!m.isFamtome()) {
-                this.gestionCollision(getMur(), m);
+            if (cmd == Commande.ATTAQUE && tab[5]) {
+                if (this.animationImg < 6) {
+                    this.level.heroAttaque(this.animationImg);
+                    if (gestionAttaqueAnimation % 5 == 0)
+                        this.animationImg++;
+                    this.gestionAttaqueAnimation++;
+                    gestionAttaque();
+                }
+            } else {
+                this.gestionAttaqueAnimation = 0;
+                this.animationImg = 0;
             }
-        }
-        if (dammageProofHero > 0){
-            dammageProofHero--;
-            if (dammageProofHero == 0)
-                this.level.unsetInvincibleHero();
-        } else {
-            gestionMonstresAttaque();
-        }
+            for (Monstre m : this.level.getMonstres()) {
+                m.seRapprocher();
+                if (!m.isFamtome()) {
+                    this.gestionCollision(getMur(), m);
+                }
+            }
+            if (dammageProofHero > 0) {
+                dammageProofHero--;
+                if (dammageProofHero == 0)
+                    this.level.unsetInvincibleHero();
+            } else {
+                gestionMonstresAttaque();
+            }
+
     }
 
     private void gestionMonstresAttaque(){
@@ -137,68 +137,15 @@ public class LabyrintheGame implements Game {
     }
 
     private void gestionCases() {
-        if (teleport1() && this.level.getTp1().getActive()){
-            this.level.setPlayerX(this.level.getTp1().getVoisinX());
-            this.level.setPlayerY(this.level.getTp1().getVoisinY());
-            this.level.getTp1().setActive(false);
-            this.level.getTp2().setActive(false);
-        }else if (teleport2() && this.level.getTp2().getActive()){
-            this.level.setPlayerX(this.level.getTp2().getVoisinX());
-            this.level.setPlayerY(this.level.getTp2().getVoisinY());
-            this.level.getTp1().setActive(false);
-            this.level.getTp2().setActive(false);
-        }
-        if(piege() && level.getPiegeTrigger().getActive()){
-            this.getHero().enleverPv();
-            level.getPiegeTrigger().setActive(false);
-        }
-        if (magique() && level.getMagiqueTrigger().getActive()){
-            this.getHero().gagnerPv();
-            level.getMagiqueTrigger().setActive(false);
-        }
-    }
-
-    private boolean piege(){
         int herox = getHeroX();
         int heroy = getHeroY();
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        for (Piege p : this.getPiege()){
-            if (p.getRectangle().intersects(hero)){
-                level.setPiegeTrigger(p);
-                return true;
+        for (Case c : this.getCasesSpeciales()){
+            if (c.isActive() && c.getRectangle().intersects(hero)){
+                if (c.handleSpecialEffect(this.getHero()) == 1)
+                    this.dammageProofHero += 250;
             }
         }
-        return false;
-    }
-
-    private boolean magique(){
-        int herox = getHeroX();
-        int heroy = getHeroY();
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        for (Magique m : this.getMagique()){
-            if (m.getRectangle().intersects(hero)){
-                level.setMagiqueTrigger(m);
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    private boolean teleport1(){
-        int herox = getHeroX();
-        int heroy = getHeroY();
-        Teleporteur tp1 = this.level.getTp1();
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        return tp1.getRectangle().intersects(hero);
-    }
-
-    private boolean teleport2(){
-        int herox = getHeroX();
-        int heroy = getHeroY();
-        Teleporteur tp2 = this.level.getTp2();
-        Rectangle hero = new Rectangle(heroy, herox, 20, 20);
-        return tp2.getRectangle().intersects(hero);
     }
 
     @Override
@@ -208,6 +155,11 @@ public class LabyrintheGame implements Game {
         Arrive arrive = this.getArrive();
         Rectangle hero = new Rectangle(heroy, herox, 20, 20);
         return arrive.getRectangle().intersects(hero);
+    }
+
+    @Override
+    public boolean isOver() {
+        return getHero().isDead();
     }
 
     public void gestionCollision(Mur mur, Monstre m){
@@ -288,12 +240,8 @@ public class LabyrintheGame implements Game {
         return this.level.getArrive();
     }
 
-    public ArrayList<Piege> getPiege(){
-        return this.level.getPieges();
-    }
-
-    public ArrayList<Magique> getMagique(){
-        return this.level.getMagiques();
+    public ArrayList<Case> getCasesSpeciales(){
+        return this.level.getCasesSpeciales();
     }
 
     public int getHeroX(){
@@ -328,15 +276,11 @@ public class LabyrintheGame implements Game {
         return this.level.getStamina();
     }
 
-    public Teleporteur getTp1() {
-        return this.level.getTp1();
-    }
-
-    public Teleporteur getTp2() {
-        return this.level.getTp2();
-    }
-
     public int getDammageProofHero(){
         return this.dammageProofHero;
+    }
+
+    public boolean notInfinite() {
+        return this.numerolab != 0;
     }
 }

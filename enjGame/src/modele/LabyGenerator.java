@@ -1,5 +1,6 @@
 package modele;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class LabyGenerator {
@@ -163,7 +164,7 @@ public class LabyGenerator {
         return grid;
     }
 
-    public boolean isDeadEnd(int x,int y){
+    private boolean isDeadEnd(int x, int y){
         int cpt = 0;
         if (this.grid[x-1][y] == 1) cpt++;
         if (this.grid[x+1][y] == 1) cpt++;
@@ -177,5 +178,4 @@ public class LabyGenerator {
         height = hauteur;
         grid = this.generate();
     }
-
 }

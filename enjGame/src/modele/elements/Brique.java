@@ -1,6 +1,7 @@
 package modele.elements;
 
 import engine.TextureFactory;
+import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
@@ -15,17 +16,17 @@ public class Brique extends Case {
         imgBrique = TextureFactory.getImgBrique(this.profondeur);
     }
 
-    public boolean isProfondeur(){
-        return this.profondeur;
-    }
-
-    public BufferedImage getImgBrique(){
+    public BufferedImage getImg(){
         return imgBrique;
     }
 
-    public BufferedImage getImgBriqueProf(){
-        return imgBriqueProf;
+    @Override
+    public boolean isActive() {
+        return true;
     }
 
-
+    @Override
+    public int handleSpecialEffect(Hero h) {
+        return -1;
+    }
 }

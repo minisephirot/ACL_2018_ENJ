@@ -42,6 +42,13 @@ public class TextureFactory {
     private static BufferedImage imgMenu;
     private static BufferedImage imgFamtome;
     private static BufferedImage imgGoomba;
+    private static BufferedImage imgPv;
+    private static BufferedImage imgPvLost;
+    private static BufferedImage imgVitory;
+    private static BufferedImage imgGameOver;
+    private static BufferedImage plante1;
+    private static BufferedImage plante2;
+    private static BufferedImage plante3;
     private static boolean tresor = false;
 
     public TextureFactory() {
@@ -64,6 +71,8 @@ public class TextureFactory {
             imgMagique = ImageIO.read(getClass().getResource("/res/bonus.png"));
             imgFamtome = ImageIO.read(getClass().getResource("/res/boo.png"));
             imgGoomba = ImageIO.read(getClass().getResource("/res/goomba.png"));
+            imgPv = ImageIO.read(getClass().getResource("/res/life.png"));
+            imgPvLost = ImageIO.read(getClass().getResource("/res/nolife.png"));
             animBas = new BufferedImage[9];
             animDroite = new BufferedImage[9];
             animHaut = new BufferedImage[9];
@@ -128,12 +137,22 @@ public class TextureFactory {
             attaqueDroite[3] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR4.png"));
             attaqueDroite[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR5.png"));
             attaqueDroite[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR6.png"));
+
+            plante1 = ImageIO.read(getClass().getResource("/res/plante1.png"));
+            plante2 = ImageIO.read(getClass().getResource("/res/plante2.png"));
+            plante3 = ImageIO.read(getClass().getResource("/res/plante3.png"));
+
+            imgVitory = ImageIO.read(getClass().getResource("/res/victory.png"));
+            imgGameOver = ImageIO.read(getClass().getResource("/res/gameover.png"));
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
     }
 
     public static BufferedImage getImgMenu(){return imgMenu;}
+
+    public static BufferedImage getImgPv(){return imgPv;}
+    public static BufferedImage getImgPvLost(){return imgPvLost;}
 
     public static BufferedImage getImgBrique(boolean isProfondeur) {
         switch (numeroMur){
@@ -173,6 +192,18 @@ public class TextureFactory {
         }
     }
 
+    public static BufferedImage getImgPlante1() {
+        return plante1;
+    }
+
+    public static BufferedImage getImgPlante2() {
+        return plante2;
+    }
+
+    public static BufferedImage getImgPlante3() {
+        return plante3;
+    }
+
     public static BufferedImage getImgTp(boolean activated) {
         if (activated) return imgTp;
         return imgTpDisabled;
@@ -188,6 +219,9 @@ public class TextureFactory {
         return imgArrive2;
     }
 
+    public static BufferedImage getImgGrass() {
+        return imgSol3;
+    }
     public static BufferedImage getImgSol() {
         switch (numeroSol){
             case 0:
@@ -216,4 +250,8 @@ public class TextureFactory {
         if (famtome) return imgFamtome;
         return imgGoomba;
     }
+
+    public static BufferedImage getImgVitory(){ return imgVitory; }
+
+    public static BufferedImage getImgGameOver(){ return imgGameOver; }
 }
