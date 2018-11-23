@@ -66,11 +66,11 @@ public class Labyrinthe {
                         murs.ajouterBrique(new Brique(casex, casey, false));
                     }
                 } else if (labyrinthe[i][j] == 0){
-                    chemin.add(new Sol(casex, casey, rand));
+                    chemin.add(new Sol(casex, casey));
                 }else if (labyrinthe[i][j] == 2){
                     heroposX = casey;
                     heroposY = casex;
-                    chemin.add(new Sol(casex, casey, rand));
+                    chemin.add(new Sol(casex, casey));
                 }else if (labyrinthe[i][j] == 3){
                     if (labyrinthe[i][j-1] == 0){
                         arrive = new Arrive(casex,casey,true);
@@ -84,21 +84,22 @@ public class Labyrinthe {
                         posTpx = casex;
                         posTpy = casey;
                         nbTp += 1;
+                        chemin.add(new Sol(casex, casey));
                     }else {
+                        chemin.add(new Sol(casex, casey));
                         tp1 = new Teleporteur(posTpx, posTpy, null);
                         tp2 = new Teleporteur(casex, casey, tp1);
                         tp1.setTpjumele(tp2);
                         this.casesSpeciales.add(tp1);
                         this.casesSpeciales.add(tp2);
-                        chemin.add(new Sol(casex, casey, rand));
-                        chemin.add(new Sol(posTpx, posTpy, rand));
+                        nbTp = 0;
                     }
                 }else if (labyrinthe[i][j] == 5){
                     this.casesSpeciales.add(new Piege(casex, casey));
-                    chemin.add(new Sol(casex, casey, rand));
+                    chemin.add(new Sol(casex, casey));
                 }else if (labyrinthe[i][j] == 6){
                     this.casesSpeciales.add(new Magique(casex, casey));
-                    chemin.add(new Sol(casex, casey, rand));
+                    chemin.add(new Sol(casex, casey));
                 }
                 casex += 32;
             }
