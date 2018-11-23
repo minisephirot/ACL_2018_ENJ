@@ -169,15 +169,26 @@ public class Niveau {
         while(nbmonstre < 2){
             int x = rng.nextInt(lab[1].length);
             int y = rng.nextInt(lab.length);
-            if (lab[x][y] == 0) {
-                int type = rng.nextInt(1);
-                if (type == 0){
-                    this.ajouterMonstre(x*32,y*32,needboo);
-                    if(needboo) needboo = false;
-                    nbmonstre++;
+            if (heroNear(x,y,lab)) {
+                if (lab[x][y] == 0) {
+                    int type = rng.nextInt(1);
+                    if (type == 0) {
+                        this.ajouterMonstre(x * 32, y * 32, needboo);
+                        if (needboo) needboo = false;
+                        nbmonstre++;
+                    }
                 }
             }
         }
+    }
+
+    public boolean heroNear(int x, int y, int[][] grid){
+        int cpt = 0;
+        if (x != 0 && grid[x-1][y] == 2) cpt++;
+        if (x != grid.length-1 && grid[x+1][y] == 2) cpt++;
+        if (y != 0 && grid[x][y-1] == 2) cpt++;
+        if (y != grid.length-1 && grid[x][y+1] == 2) cpt++;
+        return cpt != 3;
     }
 
     public void dammageHero(){
