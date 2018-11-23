@@ -3,10 +3,7 @@ package modele;
 import exception.ExceptionTailleLaby;
 import modele.elements.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -121,6 +118,10 @@ public class Niveau {
             this.labyrinthe.setLabyrinthe(labyrinthe);
             setPlayerX(this.labyrinthe.getHeroposX());
             setPlayerY(this.labyrinthe.getHeroposY());
+        }
+        catch (NullPointerException ex){
+            System.out.println("Le fichier n'existe pas");
+            System.exit(0);
         }
         catch (FileNotFoundException exception){
             System.out.println("Le fichier n'existe pas");

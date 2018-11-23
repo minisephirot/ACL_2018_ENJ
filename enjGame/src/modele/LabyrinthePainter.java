@@ -7,6 +7,7 @@ import modele.elements.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class LabyrinthePainter implements GamePainter {
 
@@ -19,6 +20,7 @@ public class LabyrinthePainter implements GamePainter {
     private Font font;
     private Font font2;
     private Font font3;
+    private int refresh;
 
     /**
      * Le modele du jeu Labyrinthe
@@ -51,7 +53,24 @@ public class LabyrinthePainter implements GamePainter {
         ArrayList<Sol> chemin = lg.getChemin();
         Arrive arrive = lg.getArrive();
         ArrayList<Case> caseSpeciales = lg.getCasesSpeciales();
-
+        refresh = 0;
+        for (int i = 0; i < WIDTH*2; i+=32){
+            for (int j = 0; j < HEIGHT*2; j+=32){
+                int xCamera =i - camY + (32 / 2);
+                int yCamera =j - camX + (32 / 2);
+                crayon.drawImage(TextureFactory.getImgGrass(), null, xCamera, yCamera);
+                if (refresh == 30 || refresh == 50){
+                    crayon.drawImage(TextureFactory.getImgPlante3(), null, xCamera, yCamera);
+                }else if (refresh == 40 || refresh == 20){
+                    crayon.drawImage(TextureFactory.getImgPlante2(), null, xCamera, yCamera);
+                }else if (refresh == 60 || refresh == 80){
+                    crayon.drawImage(TextureFactory.getImgPlante1(), null, xCamera, yCamera);
+                }else if (refresh == 100){
+                    refresh = 0;
+                }
+                refresh++;
+            }
+        }
         // Dessiner le labyrinthe
         Rectangle rectangleArrive = arrive.getRectangleCamera(camY, camX, WIDTH, HEIGHT);
         crayon.drawImage(TextureFactory.getImgSol(), null, rectangleArrive.x, rectangleArrive.y);
