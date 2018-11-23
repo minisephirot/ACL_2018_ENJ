@@ -105,8 +105,8 @@ public class LabyrinthePainter implements GamePainter {
         }
 
         //RECTANGLE INFO
-        crayon.setColor(Color.WHITE);
-        crayon.fillRect(10, 10, 145, 75);
+        crayon.setColor(Color.white);
+        crayon.fillRect(10,10,lg.getHero().getPvMax()*42+19,125);
 
         // Dessiner la condition de victoire et les étages:
         crayon.setColor(Color.black);
@@ -139,16 +139,17 @@ public class LabyrinthePainter implements GamePainter {
         //Points de Vie BAR
         int pv = lg.getHero().getPv();
         int pvMax = lg.getHero().getPvMax();
-        Rectangle pvbar = new Rectangle(19, 79, pv*40, 16);
+        Rectangle pvbar = new Rectangle(19, 79, pv*42, 16);
         crayon.setColor(Color.RED);
         crayon.fill(pvbar);
         crayon.setStroke(new BasicStroke(2));
         crayon.setColor(Color.GRAY);
-        crayon.drawRect(18, 78, pvMax*40, 17);
+        crayon.drawRect(18, 78, pvMax*42, 17);
         crayon.setStroke(oldstroke);
         crayon.setColor(Color.black);
         crayon.setFont(font3);
         crayon.drawString("Points de vie", 35, 92);
+
 
         // Dessiner les vies
         for (int p = 0; p<pv; p++) {
