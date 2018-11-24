@@ -11,8 +11,16 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * The type Test launcher.
+ */
 public class testLauncher extends TestCase {
 
+    /**
+     * Instantiates a new Test launcher.
+     *
+     * @param testMethodName the test method name
+     */
     public testLauncher(String testMethodName) {
         super(testMethodName);
         try {
@@ -22,6 +30,11 @@ public class testLauncher extends TestCase {
         }
     }
 
+    /**
+     * Test hero.
+     *
+     * @throws Exception the exception
+     */
     public void testHero() throws Exception { //Teste la classe héro : ses déplacements et ses pv
         Hero julien = new Hero(); // en vie
         assertEquals(false,julien.isDead());
@@ -33,6 +46,11 @@ public class testLauncher extends TestCase {
         assertEquals(42,julien.getY());
     }
 
+    /**
+     * Test labyrinthe.
+     *
+     * @throws Exception the exception
+     */
     public void testLabyrinthe() throws Exception { //Teste la classe Labyrinthe : les deplacements authorisé et le chargement de fichier
         Labyrinthe lab = new Labyrinthe(); // en vie
         int[][] token = {{1,1,1},{1,0,1},{1,0,1}};
@@ -45,12 +63,18 @@ public class testLauncher extends TestCase {
         assertFalse(Arrays.deepEquals(res,tokenbis));
     }
 
+    /**
+     * Test collisions.
+     */
     public void testCollisions(){
         Rectangle rec1 = new Rectangle(10,10,10,10);
         Rectangle hero = new Rectangle(15,15,10,10);
         assertTrue(rec1.intersects(hero));
     }
 
+    /**
+     * Test generator.
+     */
     public void testGenerator(){
         LabyGenerator lg = new LabyGenerator(10,10);
         int[][] grid = lg.getGrid();

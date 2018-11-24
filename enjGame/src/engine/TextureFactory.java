@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * The type Texture factory.
+ */
 public class TextureFactory {
 
     //Logic
@@ -28,6 +31,11 @@ public class TextureFactory {
     private static BufferedImage imgArrive2;
    // private static BufferedImage animHaut[];
 
+    /**
+     * Instantiates a new Texture factory.
+     *
+     * @throws IOException the io exception
+     */
     public TextureFactory() throws IOException {
         imgBrique = ImageIO.read(getClass().getResource("/res/mur.jpg"));
         imgBriqueP = ImageIO.read(getClass().getResource("/res/murProf.jpg"));
@@ -58,6 +66,12 @@ public class TextureFactory {
         imgArrive2 = ImageIO.read(getClass().getResource("/res/stairRight.png"));
     }
 
+    /**
+     * Gets img brique.
+     *
+     * @param isProfondeur the is profondeur
+     * @return the img brique
+     */
     public static BufferedImage getImgBrique(boolean isProfondeur) {
         switch (numeroMur){
             case 0:
@@ -72,15 +86,32 @@ public class TextureFactory {
         }
     }
 
+    /**
+     * Gets img hero.
+     *
+     * @param dir the dir
+     * @return the img hero
+     */
     public static BufferedImage getImgHero(int dir) {
         return imgHero[dir];
     }
 
+    /**
+     * Gets img arrive.
+     *
+     * @param leftside the leftside
+     * @return the img arrive
+     */
     public static BufferedImage getImgArrive(boolean leftside) {
         if (leftside)return imgArrive;
         return imgArrive2;
     }
 
+    /**
+     * Gets img sol.
+     *
+     * @return the img sol
+     */
     public static BufferedImage getImgSol() {
         switch (numeroSol){
             case 0:
@@ -96,6 +127,9 @@ public class TextureFactory {
         }
     }
 
+    /**
+     * Generer combinaison.
+     */
     public static void genererCombinaison(){
         numeroSol = rng.nextInt(NBSPRITESOL);
         numeroMur = rng.nextInt(NBSPRITEMUR);

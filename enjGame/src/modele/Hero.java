@@ -13,6 +13,9 @@ public class Hero extends Entite {
     private int direction;
     private int stamina;
 
+    /**
+     * Instantiates a new Hero.
+     */
     public Hero() {
         imgHero = TextureFactory.getImgHero(1);
         this.pv = 3;
@@ -20,10 +23,20 @@ public class Hero extends Entite {
         this.stamina = 200;
     }
 
+    /**
+     * Can sprint boolean.
+     *
+     * @return the boolean
+     */
     public boolean canSprint() {
         return stamina >= 50;
     }
 
+    /**
+     * Handle stamina.
+     *
+     * @param sprinting the sprinting
+     */
     public void handleStamina(boolean sprinting){
         if (sprinting){
             this.stamina -= 1;
@@ -34,16 +47,35 @@ public class Hero extends Entite {
         }
     }
 
+    /**
+     * Gets stamina.
+     *
+     * @return the stamina
+     */
     public int getStamina() {
         return this.stamina;
     }
 
+    /**
+     * Get img hero buffered image.
+     *
+     * @return the buffered image
+     */
     public BufferedImage getImgHero(){
         return imgHero;
     }
 
+    /**
+     * Attaquer.
+     */
     public void attaquer(){
     }
+
+    /**
+     * Changer direction.
+     *
+     * @param dir the dir
+     */
     public void changerDirection(int dir){
         imgHero = TextureFactory.getImgHero(dir);
     }

@@ -12,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The type Labyrinthe game.
+ */
 public class LabyrintheGame implements Game {
 
     private Niveau level;
@@ -22,12 +25,20 @@ public class LabyrintheGame implements Game {
     private final static int GAUCHE = 2;
     private final static int DROITE = 3;
 
+    /**
+     * Instantiates a new Labyrinthe game.
+     */
     public LabyrintheGame(){
         this.gameWin = false;
         this.level = new Niveau();
         genLabyrinth(true);
     }
 
+    /**
+     * Gen labyrinth.
+     *
+     * @param useGenerator the use generator
+     */
     public void genLabyrinth(boolean useGenerator){
         TextureFactory.genererCombinaison();
        if (useGenerator){
@@ -70,6 +81,14 @@ public class LabyrintheGame implements Game {
         return arrive.getRectangle().intersects(hero);
     }
 
+    /**
+     * Gestion collision boolean.
+     *
+     * @param mur the mur
+     * @param cmd the cmd
+     * @param tab the tab
+     * @return the boolean
+     */
     public boolean gestionCollision(Mur mur, Commande cmd, boolean[] tab){
         int herox = getHeroX();
         int heroy = getHeroY();
@@ -96,29 +115,70 @@ public class LabyrintheGame implements Game {
         return avancer;
     }
 
+    /**
+     * Get labyrinthe int [ ] [ ].
+     *
+     * @return the int [ ] [ ]
+     */
     public int[][] getLabyrinthe(){
         return level.getLabyrinthe();
     }
 
+    /**
+     * Get hero hero.
+     *
+     * @return the hero
+     */
     public Hero getHero(){ return level.getHero();}
+
+    /**
+     * Get mur mur.
+     *
+     * @return the mur
+     */
     public Mur getMur(){
         return level.getMur();
     }
 
+    /**
+     * Changer direction.
+     *
+     * @param dir the dir
+     */
     public void changerDirection(int dir){
         level.changerDirection(dir);
     }
 
+    /**
+     * Get chemin array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Sol> getChemin(){return level.getChemin();}
 
+    /**
+     * Get arrive arrive.
+     *
+     * @return the arrive
+     */
     public Arrive getArrive(){
         return this.level.getArrive();
     }
 
+    /**
+     * Get hero x int.
+     *
+     * @return the int
+     */
     public int getHeroX(){
         return level.getPlayerX();
     }
 
+    /**
+     * Get hero y int.
+     *
+     * @return the int
+     */
     public int getHeroY(){
         return level.getPlayerY();
     }
@@ -128,22 +188,43 @@ public class LabyrintheGame implements Game {
         return false;
     }
 
+    /**
+     * Gets game win.
+     *
+     * @return the game win
+     */
     public boolean getGameWin() {
         return this.gameWin;
     }
 
+    /**
+     * Reset game.
+     */
     public void resetGame(){
         this.gameWin = false;
     }
 
+    /**
+     * Gets floor.
+     *
+     * @return the floor
+     */
     public String getFloor() {
         return this.floor+"";
     }
 
+    /**
+     * Increment floor.
+     */
     public void incrementFloor(){
         this.floor++;
     }
 
+    /**
+     * Get stamina int.
+     *
+     * @return the int
+     */
     public int getStamina(){
         return this.level.getStamina();
     }
