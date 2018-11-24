@@ -104,4 +104,5 @@ public class Hero extends Entite {
         return pvMax;
     }
 
+    public int getDirection() { return direction; }
 }
