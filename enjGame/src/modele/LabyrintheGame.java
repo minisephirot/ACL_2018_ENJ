@@ -122,7 +122,17 @@ public class LabyrintheGame implements Game {
         int widthH = this.level.getHero().getWidth();
         int heroX = this.level.getPlayerX();
         int heroY = this.level.getPlayerY();
+        int heroDirection = this.level.getHero().getDirection();
 
+        if (heroDirection == 0){
+            heroX -= 5;
+        } else if (heroDirection == 1){
+            heightH += 5;
+        } else if (heroDirection == 2){
+            heroY -= 0;
+        } else if (heroDirection == 3){
+            widthH += 0;
+        }
         Rectangle hero = new Rectangle(heroY, heroX, widthH, heightH);
         ArrayList<Monstre> deadMonsters = new ArrayList<Monstre>();
         for (Monstre m : this.level.getMonstres()){
