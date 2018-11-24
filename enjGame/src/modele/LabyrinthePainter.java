@@ -6,6 +6,8 @@ import modele.elements.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,9 +37,18 @@ public class LabyrinthePainter implements GamePainter {
      */
     public LabyrinthePainter(LabyrintheGame game) {
         this.lg = game;
-        this.font = new Font("Comic Sans MS", Font.BOLD, 20);
-        this.font2 = new Font("Impact", Font.BOLD, 50);
-        this.font3 = new Font("Comic Sans MS", Font.CENTER_BASELINE,14);
+        InputStream font_pixel = getClass().getResourceAsStream("/res/font/pixeled.ttf");
+        try {
+            Font font_p = Font.createFont(Font.TRUETYPE_FONT, font_pixel);
+            this.font = font_p.deriveFont(16f);
+            this.font3 = font_p.deriveFont(14f);
+            this.font2 = font_p.deriveFont(8f);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -105,13 +116,18 @@ public class LabyrinthePainter implements GamePainter {
         }
 
         //RECTANGLE INFO
-        crayon.setColor(Color.WHITE);
-        crayon.fillRect(10, 10, 145, 75);
+        crayon.setColor(new Color(173, 216, 230, 127));
+        crayon.fillRect(5, 10, 147, 90);
+        Stroke oldstroke1 = crayon.getStroke();
+        crayon.setStroke(new BasicStroke(3));
+        crayon.setColor(new Color(0, 0, 136));
+        crayon.drawRect(5, 10, 147, 90);
+        crayon.setStroke(oldstroke1);
 
         // Dessiner la condition de victoire et les étages:
         crayon.setColor(Color.black);
         crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        crayon.drawString("Etage n°" + lg.getFloor(), 20, 30);
+        crayon.drawString("ETAGE " + lg.getFloor(), 15, 35);
         if (lg.isFinished() && lg.notInfinite()) {
             crayon.drawImage(TextureFactory.getImgVitory(),null, this.getHeight() / 2 - this.getHeight() / 6,  this.getWidth() / 2 - 65);
         }
@@ -120,25 +136,25 @@ public class LabyrinthePainter implements GamePainter {
         int stamina = lg.getStamina();
         int stamina_percentage = (stamina * 100) / 200;
         int width_bar = (125 * stamina_percentage) / 200;
-        Rectangle staminabar = new Rectangle(20, 50, width_bar * 2, 15);
+        Rectangle staminabar = new Rectangle(16, 47, width_bar * 2, 15);
         if(stamina <= 10)
             crayon.setColor(Color.BLACK);
         else
-            crayon.setColor(Color.green);
+            crayon.setColor(new Color(0, 230, 118));
         crayon.fill(staminabar);
         Stroke oldstroke = crayon.getStroke();
-        crayon.setStroke(new BasicStroke(2));
-        crayon.setColor(Color.GRAY);
-        crayon.drawRect(18, 48, 127, 17);
+        crayon.setStroke(new BasicStroke(3));
+        crayon.setColor(new Color(27, 94, 32));
+        crayon.drawRect(15, 45, 125, 17);
         crayon.setStroke(oldstroke);
         crayon.setColor(Color.black);
-        crayon.setFont(font3);
+        crayon.setFont(font2);
         crayon.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        crayon.drawString("Endurance", 40, 62);
+        crayon.drawString("ENDURANCE", 42, 59);
 
         //Points de Vie BAR
         int pv = lg.getHero().getPv();
-        int pv_percentage = (pv * 100) / lg.getHero().getPvMax();
+   /*     int pv_percentage = (pv * 100) / lg.getHero().getPvMax();
         int pv_width_bar = (2 * pv_percentage) / lg.getHero().getPvMax();
         Rectangle pvbar = new Rectangle(19, 79, pv_width_bar * 2, 16);
         crayon.setColor(Color.RED);
@@ -149,15 +165,15 @@ public class LabyrinthePainter implements GamePainter {
         crayon.setStroke(oldstroke);
         crayon.setColor(Color.black);
         crayon.setFont(font3);
-        crayon.drawString("Points de vie", 30, 92);
-
+        crayon.drawString("PV", 30, 92);
+*/
         // Dessiner les vies
         for (int p = 0; p<pv; p++) {
-            PointVie pvt = new PointVie(20+(p*32),100);
+            PointVie pvt = new PointVie(12+(p*32),68);
             crayon.drawImage(pvt.getImgPv(), null, pvt.getX(), pvt.getY());
         }
         for (int p = pv; p<lg.getHero().getPvMax(); p++) {
-            PointVie pvt = new PointVie(20+(p*32),100);
+            PointVie pvt = new PointVie(12+(p*32),68);
             crayon.drawImage(pvt.getImgPvLost(), null, pvt.getX(), pvt.getY());
         }
 
