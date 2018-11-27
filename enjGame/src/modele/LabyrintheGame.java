@@ -62,7 +62,6 @@ public class LabyrintheGame implements Game {
                 ignoreInput--;
             }
             if (isMenu()){
-                System.out.println(this.numerolab);
                 if (cmd == Commande.DOWN){
                     this.numerolab++;
                     this.ignorerInput(15);

@@ -66,6 +66,17 @@ public class LabyrinthePainter implements GamePainter {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         crayon.setColor(Color.CYAN);
         crayon.fillRect(0, 0, WIDTH, HEIGHT);
+        for (int i = 0; i < WIDTH*2; i+=32){
+            for (int j = 0; j < HEIGHT*2; j+=32){
+                int xCamera =i - camY + (32 / 2);
+                int yCamera =j - camX + (32 / 2);
+                int rand = (int)(Math.random() * (100 - 0) + 1) + 0;
+                if (rand < 5) {
+                    int direction = (int) (Math.random() * (3 - 0) + 1) + 0;
+                    crayon.drawImage(TextureFactory.getImgHero(direction,0), null, xCamera-10, yCamera-10);
+                }
+            }
+        }
         crayon.drawImage(TextureFactory.getImgArrow(),null,(this.getWidth()/2-TextureFactory.getImgArrow().getWidth()*2-20),(this.getHeight()/2-110)+(this.lg.getNumerolab()*70));
         crayon.fillRect((this.getWidth()/2-90),(this.getHeight()/2-100)+(this.lg.getNumerolab()*70),180,40);
         crayon.setColor(Color.BLACK);
