@@ -43,9 +43,7 @@ public class LabyrinthePainter implements GamePainter {
             this.font = font_p.deriveFont(16f);
             this.font3 = font_p.deriveFont(14f);
             this.font2 = font_p.deriveFont(8f);
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
 
@@ -56,6 +54,31 @@ public class LabyrinthePainter implements GamePainter {
      */
     @Override
     public void draw(BufferedImage img) {
+
+        if (lg.isMenu()){
+            this.drawMenu(img);
+        }else{
+            this.drawGame(img);
+        }
+    }
+
+    private void drawMenu(BufferedImage img) {
+        Graphics2D crayon = (Graphics2D) img.getGraphics();
+        crayon.setColor(Color.CYAN);
+        crayon.fillRect(0, 0, WIDTH, HEIGHT);
+        crayon.drawImage(TextureFactory.getImgArrow(),null,(this.getWidth()/2-TextureFactory.getImgArrow().getWidth()*2-20),(this.getHeight()/2-110)+(this.lg.getNumerolab()*70));
+        crayon.fillRect((this.getWidth()/2-90),(this.getHeight()/2-100)+(this.lg.getNumerolab()*70),180,40);
+        crayon.setColor(Color.BLACK);
+        crayon.setFont(this.font);
+        int i;
+        for (i = 0 ; i < 5; i++){
+            if (i == 0) crayon.drawString("Labyrinthe infinis", (this.getWidth()/2-80),(this.getHeight()/2-75)+i*70);
+            else crayon.drawString("Labyrinthe "+i, (this.getWidth()/2-80),(this.getHeight()/2-75)+i*70);
+        }
+        crayon.drawString("Quitter", (this.getWidth()/2-80),(this.getHeight()/2-75)+i*70);
+    }
+
+    private void drawGame(BufferedImage img) {
         camY = lg.getHeroY();
         camX = lg.getHeroX();
         Graphics2D crayon = (Graphics2D) img.getGraphics();
@@ -167,8 +190,6 @@ public class LabyrinthePainter implements GamePainter {
         if (lg.isOver()) {
             crayon.drawImage(TextureFactory.getImgGameOver(),null, this.getHeight() / 2 - this.getHeight() / 6,  this.getWidth() / 2 - 65);
         }
-
-
     }
 
 

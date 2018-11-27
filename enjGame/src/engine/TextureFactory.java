@@ -50,6 +50,7 @@ public class TextureFactory {
     private static BufferedImage plante2;
     private static BufferedImage plante3;
     private static boolean tresor = false;
+    private static BufferedImage imgArrow;
 
     public TextureFactory() {
         try {
@@ -137,11 +138,10 @@ public class TextureFactory {
             attaqueDroite[3] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR4.png"));
             attaqueDroite[4] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR5.png"));
             attaqueDroite[5] = ImageIO.read(getClass().getResource("/res/attaque/attaqueR6.png"));
-
+            imgArrow = ImageIO.read(getClass().getResource("/res/arrow.png"));
             plante1 = ImageIO.read(getClass().getResource("/res/plante1.png"));
             plante2 = ImageIO.read(getClass().getResource("/res/plante2.png"));
             plante3 = ImageIO.read(getClass().getResource("/res/plante3.png"));
-
             imgVitory = ImageIO.read(getClass().getResource("/res/victory.png"));
             imgGameOver = ImageIO.read(getClass().getResource("/res/gameover.png"));
         } catch (IOException e) {
@@ -254,4 +254,7 @@ public class TextureFactory {
     public static BufferedImage getImgVitory(){ return imgVitory; }
 
     public static BufferedImage getImgGameOver(){ return imgGameOver; }
+
+    public static BufferedImage getImgArrow() {return  imgArrow;
+    }
 }

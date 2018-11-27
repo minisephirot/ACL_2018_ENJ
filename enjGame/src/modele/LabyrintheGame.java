@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class LabyrintheGame implements Game {
 
-    private final int numerolab;
-    private  Niveau level;
+    private int numerolab;
+    private Niveau level;
     private boolean gameWin;
     private int floor;
     private final static int HAUT = 0;
@@ -25,15 +25,17 @@ public class LabyrintheGame implements Game {
     private int gestionAttaqueAnimation;
     private int animationImg;
     private int dammageProofHero;
+    private boolean menu;
+    private int ignoreInput;
 
-    public LabyrintheGame(int numLab){
+    public LabyrintheGame(){
         this.gameWin = false;
         this.level = new Niveau();
-        genLabyrinth(numLab);
-        this.numerolab = numLab;
+        this.numerolab = 0;
         this.gestionAttaqueAnimation = 0;
         this.animationImg = 0;
         this.dammageProofHero = 0;
+        this.menu = true;
     }
 
     public void genLabyrinth(int numerolab){
@@ -54,50 +56,90 @@ public class LabyrintheGame implements Game {
 
     @Override
     public void evolve(Commande cmd, boolean[] tab) {
-            if (isFinished()) {
-                this.gameWin = true;
-                if (this.numerolab == 0) {
-                    this.genLabyrinth(this.numerolab);
-                    this.incrementFloor();
+            if (ignoreInput != 0){
+                cmd = Commande.IDLE;
+                for (int i = 0; i < tab.length; i++) tab[i] = false;
+                ignoreInput--;
+            }
+            if (isMenu()){
+                System.out.println(this.numerolab);
+                if (cmd == Commande.DOWN){
+                    this.numerolab++;
+                    this.ignorerInput(15);
+                }
+                if (cmd == Commande.UP){
+                    this.numerolab--;
+                    this.ignorerInput(15);
+                }
+                if (this.numerolab < 0 ) this.numerolab = 4;
+                if (this.numerolab > 5 ) this.numerolab = 0;
+                if (cmd == Commande.ATTAQUE){
+                    if (this.numerolab == 5) System.exit(3771);
+                    else {
+                        this.genLabyrinth(this.numerolab);
+                        this.menu = false;
+                        this.ignorerInput(25);
+                    }
+                }
+            }else {
+                if (isFinished()) {
+                    this.gameWin = true;
+                    if (this.numerolab == 0) {
+                        this.genLabyrinth(this.numerolab);
+                        this.incrementFloor();
+                    }else{
+                        if (cmd == Commande.ATTAQUE){
+                            this.menu = true;
+                            this.ignorerInput(50);
+                        }
+                    }
+                } else if (isOver()) {
+                    if (cmd == Commande.ATTAQUE){
+                        this.menu = true;
+                        this.ignorerInput(50);
+                    }
+                } else {
+                    this.gestionCases();
+                    int sprint = (tab[4]) ? 2 : 1;
+                    this.level.sprintHandler(tab[4]);
+                    if (!this.level.heroSprint()) sprint = 1;
+                    if (gestionCollision(getMur(), cmd, tab)) {
+                        if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1 * sprint, 0);
+                        else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1 * sprint, 0);
+                        else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1 * sprint);
+                        else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1 * sprint);
+                    }
+                    if (cmd == Commande.ATTAQUE && tab[5]) {
+                        if (this.animationImg < 6) {
+                            this.level.heroAttaque(this.animationImg);
+                            if (gestionAttaqueAnimation % 5 == 0)
+                                this.animationImg++;
+                            this.gestionAttaqueAnimation++;
+                            gestionAttaque();
+                        }
+                    } else {
+                        this.gestionAttaqueAnimation = 0;
+                        this.animationImg = 0;
+                    }
+                    for (Monstre m : this.level.getMonstres()) {
+                        m.seRapprocher();
+                        if (!m.isFamtome()) {
+                            this.gestionCollision(getMur(), m);
+                        }
+                    }
+                    if (dammageProofHero > 0) {
+                        dammageProofHero--;
+                        if (dammageProofHero == 0)
+                            this.level.unsetInvincibleHero();
+                    } else {
+                        gestionMonstresAttaque();
+                    }
                 }
             }
+    }
 
-            this.gestionCases();
-            int sprint = (tab[4]) ? 2 : 1;
-            this.level.sprintHandler(tab[4]);
-            if (!this.level.heroSprint()) sprint = 1;
-            if (gestionCollision(getMur(), cmd, tab)) {
-                if (cmd == Commande.UP || tab[0]) this.level.deplacerHero(-1 * sprint, 0);
-                else if (cmd == Commande.DOWN || tab[1]) this.level.deplacerHero(1 * sprint, 0);
-                else if (cmd == Commande.LEFT || tab[2]) this.level.deplacerHero(0, -1 * sprint);
-                else if (cmd == Commande.RIGHT || tab[3]) this.level.deplacerHero(0, 1 * sprint);
-            }
-            if (cmd == Commande.ATTAQUE && tab[5]) {
-                if (this.animationImg < 6) {
-                    this.level.heroAttaque(this.animationImg);
-                    if (gestionAttaqueAnimation % 5 == 0)
-                        this.animationImg++;
-                    this.gestionAttaqueAnimation++;
-                    gestionAttaque();
-                }
-            } else {
-                this.gestionAttaqueAnimation = 0;
-                this.animationImg = 0;
-            }
-            for (Monstre m : this.level.getMonstres()) {
-                m.seRapprocher();
-                if (!m.isFamtome()) {
-                    this.gestionCollision(getMur(), m);
-                }
-            }
-            if (dammageProofHero > 0) {
-                dammageProofHero--;
-                if (dammageProofHero == 0)
-                    this.level.unsetInvincibleHero();
-            } else {
-                gestionMonstresAttaque();
-            }
-
+    private void ignorerInput(int i) {
+        this.ignoreInput = i;
     }
 
     private void gestionMonstresAttaque(){
@@ -273,6 +315,10 @@ public class LabyrintheGame implements Game {
         this.gameWin = false;
     }
 
+    public int getNumerolab() {
+        return numerolab;
+    }
+
     public String getFloor() {
         return this.floor+"";
     }
@@ -291,5 +337,13 @@ public class LabyrintheGame implements Game {
 
     public boolean notInfinite() {
         return this.numerolab != 0;
+    }
+
+    public boolean isMenu() {
+        return menu;
+    }
+
+    public void setMenu(boolean menu) {
+        this.menu = menu;
     }
 }
