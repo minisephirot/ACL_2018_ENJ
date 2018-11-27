@@ -1,5 +1,6 @@
 package modele;
 
+import com.sun.prism.Texture;
 import engine.GamePainter;
 import engine.TextureFactory;
 import modele.elements.*;
@@ -76,8 +77,10 @@ public class LabyrinthePainter implements GamePainter {
 
     private void drawMenu(BufferedImage img) {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
+
         crayon.setColor(Color.CYAN);
         crayon.fillRect(0, 0, WIDTH, HEIGHT);
+        crayon.drawImage(TextureFactory.getImgCiel(), null, 0, 0);
 
         for (int i = 0; i < 4; i++){
                 if (descY[0][i] == 100 || descY[0][i] == 200 || descY[0][i] == 250 || descY[0][i] == 260 || descY[0][i] == 264) {

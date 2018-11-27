@@ -52,6 +52,7 @@ public class TextureFactory {
     private static BufferedImage plante3;
     private static boolean tresor = false;
     private static BufferedImage imgArrow;
+    private static BufferedImage ciel;
 
     public TextureFactory() {
         try {
@@ -152,6 +153,8 @@ public class TextureFactory {
             descente[3] = ImageIO.read(getClass().getResource("/res/descente/descente4.png"));
             descente[4] = ImageIO.read(getClass().getResource("/res/descente/descente5.png"));
             descente[5] = ImageIO.read(getClass().getResource("/res/descente/descente6.png"));
+            ciel = ImageIO.read(getClass().getResource("/res/ciel.png"));
+
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
@@ -214,6 +217,10 @@ public class TextureFactory {
 
     public static BufferedImage getImgPlante3() {
         return plante3;
+    }
+
+    public static BufferedImage getImgCiel() {
+        return ciel;
     }
 
     public static BufferedImage getImgTp(boolean activated) {
