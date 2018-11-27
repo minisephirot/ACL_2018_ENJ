@@ -1,6 +1,5 @@
 package modele;
 
-import com.sun.prism.Texture;
 import engine.GamePainter;
 import engine.TextureFactory;
 import modele.elements.*;
@@ -9,10 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Random;
 
 public class LabyrinthePainter implements GamePainter {
@@ -77,9 +73,6 @@ public class LabyrinthePainter implements GamePainter {
 
     private void drawMenu(BufferedImage img) {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-
-        crayon.setColor(Color.CYAN);
-        crayon.fillRect(0, 0, WIDTH, HEIGHT);
         crayon.drawImage(TextureFactory.getImgCiel(), null, 0, 0);
 
         for (int i = 0; i < 4; i++){
@@ -97,13 +90,14 @@ public class LabyrinthePainter implements GamePainter {
                 }
         }
 
-        crayon.drawImage(TextureFactory.getImgArrow(),null,(this.getWidth()/2-TextureFactory.getImgArrow().getWidth()*2-20),(this.getHeight()/2-110)+(this.lg.getNumerolab()*70));
-        crayon.fillRect((this.getWidth()/2-90),(this.getHeight()/2-100)+(this.lg.getNumerolab()*70),180,40);
+        crayon.setColor(Color.orange);
+        crayon.fillRect((this.getWidth()/2-90),(this.getHeight()/2-100)+(this.lg.getNumerolab()*70),190,40);
         crayon.setColor(Color.BLACK);
+        crayon.drawRect((this.getWidth()/2-90),(this.getHeight()/2-100)+(this.lg.getNumerolab()*70),190,40);
         crayon.setFont(this.font);
         int i;
         for (i = 0 ; i < 5; i++){
-            if (i == 0) crayon.drawString("Labyrinthe infinis", (this.getWidth()/2-80),(this.getHeight()/2-75)+i*70);
+            if (i == 0) crayon.drawString("Infinis", (this.getWidth()/2-80),(this.getHeight()/2-75)+i*70);
             else crayon.drawString("Labyrinthe "+i, (this.getWidth()/2-80),(this.getHeight()/2-75)+i*70);
         }
         crayon.drawString("Quitter", (this.getWidth()/2-80),(this.getHeight()/2-75)+i*70);
