@@ -6,7 +6,7 @@ Compiler et exécuter le programme :
 Pour compiler et lancer le programme, il faut run la méthode main présente dans la class Main
 Un menu sera alors affiché :
         - Z pour monter, S pour descendre la sélection
-        - Espace pour valider
+        - Espace pour valider et entrer dans le jeu
         - Les labyrinthes sont tous différents sauf les lab 1/2/3/4 qui sont fixes.
 
 Pour déplacer le héro : il faut utiliser les touches "z", "q", "s" ou "d".
