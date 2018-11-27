@@ -15,12 +15,13 @@ public class Hero extends Entite {
     private int animation = 0;
     private int sprite = 0;
     private boolean invicible;
-    private int pvMax=3;
+    private int pvMax;
     private int vitesse;
 
     public Hero() {
         imgHero = TextureFactory.getImgHero(1, 0);
         this.pv = 3;
+        this.pvMax = 3;
         anim = 0;
         vitesse = 10;
         this.stamina = 200;
@@ -106,4 +107,11 @@ public class Hero extends Entite {
     }
 
     public int getDirection() { return direction; }
+
+    public void reset() {
+        this.pv = 3;
+        this.pvMax = 3;
+        this.stamina = 200;
+        this.invicible = false;
+    }
 }
