@@ -12,72 +12,98 @@ public class Hero extends Entite {
     private int anim;
     private int direction;
     private int stamina;
+    private int animation = 0;
+    private int sprite = 0;
+    private boolean invicible;
+    private int pvMax=3;
+    private int vitesse;
 
-    /**
-     * Instantiates a new Hero.
-     */
     public Hero() {
-        imgHero = TextureFactory.getImgHero(1);
+        imgHero = TextureFactory.getImgHero(1, 0);
         this.pv = 3;
         anim = 0;
+        vitesse = 10;
         this.stamina = 200;
+        this.invicible = false;
     }
 
-    /**
-     * Can sprint boolean.
-     *
-     * @return the boolean
-     */
     public boolean canSprint() {
-        return stamina >= 50;
+        return stamina >= 11;
     }
 
-    /**
-     * Handle stamina.
-     *
-     * @param sprinting the sprinting
-     */
     public void handleStamina(boolean sprinting){
         if (sprinting){
             this.stamina -= 1;
-            if (this.stamina <= 49) this.stamina = 49;
+            if (stamina > 10) vitesse = 4;
+            if (this.stamina <= 10) {
+                this.stamina = 10;
+                vitesse = 10;
+            }
         }else{
+            vitesse = 10;
             this.stamina += 1;
             if (this.stamina >= 200) this.stamina = 200;
         }
     }
 
-    /**
-     * Gets stamina.
-     *
-     * @return the stamina
-     */
     public int getStamina() {
         return this.stamina;
     }
 
-    /**
-     * Get img hero buffered image.
-     *
-     * @return the buffered image
-     */
     public BufferedImage getImgHero(){
         return imgHero;
     }
 
-    /**
-     * Attaquer.
-     */
-    public void attaquer(){
+    public void enleverPv(){
+        if (!invicible && pv > 0) {
+            this.pv -= 1;
+            this.invicible = true;
+        }
     }
 
-    /**
-     * Changer direction.
-     *
-     * @param dir the dir
-     */
+    public void noInvincible(){
+        this.invicible = false;
+    }
+
+    public void gagnerPv(){
+        this.pv +=1;
+        if (this.pv > 4) this.pv = 4;
+        if (pv > pvMax && pvMax < 4) {
+            pvMax++;}
+    }
+
+    public int getPv(){
+        return pv;
+    }
+
     public void changerDirection(int dir){
-        imgHero = TextureFactory.getImgHero(dir);
+        direction = dir;
+        if (sprite < 7) {
+            if (animation % vitesse == 0) {
+                imgHero = TextureFactory.getImgHero(dir, sprite);
+                sprite++;
+            }
+        }else{
+            sprite = 0;
+        }
+        animation++;
     }
 
+    public void attaqueAnimation(int anim){
+        imgHero = TextureFactory.getImgAttaque(direction, anim);
+    }
+
+    public int getWidth(){
+        return this.imgHero.getWidth();
+    }
+
+    public int getHeight(){
+        return this.imgHero.getHeight();
+    }
+
+    public int getPvMax() {
+        return pvMax;
+    }
+
+    public int getDirection() { return direction; }
 }

@@ -1,15 +1,14 @@
 import engine.GameController;
 import engine.GameEngineGraph;
 import engine.GamePainter;
+import engine.TextureFactory;
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
 import modele.LabyrinthePainter;
-import engine.TextureFactory;
 
-import java.io.IOException;
+public class Main {
 
-public class main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         TextureFactory textureFactory = new TextureFactory();
         LabyrintheGame lg = new LabyrintheGame();
         GameController gc = new LabyrintheController();
@@ -21,4 +20,5 @@ public class main {
             e.printStackTrace();
         }
     }
+
 }

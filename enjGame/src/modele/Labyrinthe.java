@@ -2,27 +2,18 @@ package modele;
 
 import modele.elements.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Labyrinthe d'un niveau du jeu
  */
 public class Labyrinthe {
-    /**
-     * The constant MUR.
-     */
-    public final static int MUR = 1;
-    /**
-     * The constant VIDE.
-     */
-    public final static int VIDE = 0;
-    private Mur mur;
+
+    private Mur murs;
     private Arrive arrive;
-    /**
-     * The Chemin.
-     */
-    public ArrayList<Sol> chemin;
+    private ArrayList<Case> casesSpeciales;
+    private ArrayList<Sol> chemin;
+
     private int heroposX;
     private int heroposY;
     /**
@@ -34,13 +25,12 @@ public class Labyrinthe {
      * Constructeur de Labyrinthe
      */
     public Labyrinthe(){
-        chemin = new ArrayList<Sol>();
+        chemin = new ArrayList<>();
+        casesSpeciales = new ArrayList<>();
     }
 
     /**
      * Getter de la matrice du labyrinthe
-     *
-     * @return the int [ ] [ ]
      */
     public int[][] getLabyrinthe() {
         return labyrinthe;
@@ -48,36 +38,39 @@ public class Labyrinthe {
 
     /**
      * Setter de la matrice du labyrinthe
-     *
-     * @param labyrinthe the labyrinthe
      */
     public void setLabyrinthe(int[][] labyrinthe) {
-        mur = new Mur();
-        mur.toutCasser();
+        murs = new Mur();
+        murs.toutCasser();
         chemin.clear();
+        casesSpeciales.clear();
         int rand = (int)(Math.random() * 2);
         this.labyrinthe = labyrinthe;
+        Teleporteur tp1,tp2;
         int casex = 0;
         int casey = 0;
+        int posTpx = 0;
+        int posTpy = 0;
+        int nbTp = 0;
         for (int i = 0; i < labyrinthe.length; i++){
             casex = 0;
             for (int j = 0; j < labyrinthe[i].length; j++){
                 if (labyrinthe[i][j] == 1) {
                     if (i+1 < labyrinthe.length) {
                         if (labyrinthe[i+1][j] == 1) {
-                            mur.ajouterBrique(new Brique(casex, casey, false));
+                            murs.ajouterBrique(new Brique(casex, casey, false));
                         } else {
-                            mur.ajouterBrique(new Brique(casex, casey, true));
+                            murs.ajouterBrique(new Brique(casex, casey, true));
                         }
                     }else{
-                        mur.ajouterBrique(new Brique(casex, casey, false));
+                        murs.ajouterBrique(new Brique(casex, casey, false));
                     }
                 } else if (labyrinthe[i][j] == 0){
-                    chemin.add(new Sol(casex, casey, rand));
+                    chemin.add(new Sol(casex, casey));
                 }else if (labyrinthe[i][j] == 2){
                     heroposX = casey;
                     heroposY = casex;
-                    chemin.add(new Sol(casex, casey, rand));
+                    chemin.add(new Sol(casex, casey));
                 }else if (labyrinthe[i][j] == 3){
                     if (labyrinthe[i][j-1] == 0){
                         arrive = new Arrive(casex,casey,true);
@@ -86,6 +79,27 @@ public class Labyrinthe {
                     }else{
                      arrive = new Arrive(casex,casey,Math.random() < 0.5);
                     }
+                }else if (labyrinthe[i][j] == 4){
+                    if (nbTp == 0){
+                        posTpx = casex;
+                        posTpy = casey;
+                        nbTp += 1;
+                        chemin.add(new Sol(casex, casey));
+                    }else {
+                        chemin.add(new Sol(casex, casey));
+                        tp1 = new Teleporteur(posTpx, posTpy, null);
+                        tp2 = new Teleporteur(casex, casey, tp1);
+                        tp1.setTpjumele(tp2);
+                        this.casesSpeciales.add(tp1);
+                        this.casesSpeciales.add(tp2);
+                        nbTp = 0;
+                    }
+                }else if (labyrinthe[i][j] == 5){
+                    this.casesSpeciales.add(new Piege(casex, casey));
+                    chemin.add(new Sol(casex, casey));
+                }else if (labyrinthe[i][j] == 6){
+                    this.casesSpeciales.add(new Magique(casex, casey));
+                    chemin.add(new Sol(casex, casey));
                 }
                 casex += 32;
             }
@@ -93,61 +107,28 @@ public class Labyrinthe {
         }
     }
 
-    /**
-     * Gets murs.
-     *
-     * @return the murs
-     */
-    public Mur getMurs() {
-        return mur;
+    public ArrayList<Case> getCasesSpeciales() {
+        return casesSpeciales;
     }
 
-    /**
-     * Get chemin array list.
-     *
-     * @return the array list
-     */
+    public Mur getMurs() {
+        return murs;
+    }
+
     public ArrayList<Sol> getChemin(){
         return chemin;
     }
 
-    /**
-     * Get arrive arrive.
-     *
-     * @return the arrive
-     */
     public Arrive getArrive(){
         return this.arrive;
     }
 
-    /**
-     * Get heropos x int.
-     *
-     * @return the int
-     */
     public int getHeroposX(){
         return heroposX;
     }
 
-    /**
-     * Get heropos y int.
-     *
-     * @return the int
-     */
     public int getHeroposY(){
         return heroposY;
     }
-
-    /**
-     * Verifie si le joueur peux se deplacer vers la nouvelle case
-     *
-     * @param x the x
-     * @param y the y
-     * @return the boolean
-     */
-    public boolean deplacementPossible(int x, int y) {
-        return true;
-    }
-
 
 }

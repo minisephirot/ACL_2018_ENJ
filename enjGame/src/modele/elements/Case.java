@@ -1,6 +1,9 @@
 package modele.elements;
 
+import modele.Hero;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * The type Case.
@@ -111,4 +114,10 @@ public abstract class Case {
 
         return new Rectangle(xCamera,yCamera,(int)rectangle.getWidth(),(int)rectangle.getHeight());
     }
+
+    abstract public BufferedImage getImg();
+
+    abstract public boolean isActive();
+
+    abstract public int handleSpecialEffect(Hero h);
 }

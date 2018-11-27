@@ -4,6 +4,7 @@ import engine.Commande;
 import engine.GameController;
 
 import java.awt.event.KeyEvent;
+import java.security.Key;
 
 /**
  * Controlleur de type KeyListener
@@ -31,7 +32,7 @@ public class LabyrintheController implements GameController {
      */
     public LabyrintheController(){
         this.cmd = Commande.IDLE;
-        this.keyPressed = new boolean[5];
+        this.keyPressed = new boolean[6];
     }
 
     /**
@@ -83,9 +84,13 @@ public class LabyrintheController implements GameController {
             this.keyPressed[3] = true;
             cmd = Commande.RIGHT;
         }
-        if (keyPress == ' '){
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT){
             this.keyPressed[4] = true;
             cmd = Commande.SPRINT;
+        }
+        if (keyPress == ' '){
+            this.keyPressed[5] = true;
+            cmd = Commande.ATTAQUE;
         }
     }
 
@@ -110,8 +115,11 @@ public class LabyrintheController implements GameController {
         if (keyPress == 'd' || keyPress == 'D'){
             this.keyPressed[3] = false;
         }
-        if (keyPress == ' ') {
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
             this.keyPressed[4] = false;
+        }
+        if (keyPress == ' '){
+            this.keyPressed[5] = false;
         }
         cmd = Commande.IDLE;
     }

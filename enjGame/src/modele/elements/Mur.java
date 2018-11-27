@@ -1,7 +1,5 @@
 package modele.elements;
 
-import modele.elements.Case;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 

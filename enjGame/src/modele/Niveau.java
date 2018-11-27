@@ -1,24 +1,17 @@
 package modele;
 
 import exception.ExceptionTailleLaby;
-import modele.elements.Arrive;
-import modele.elements.Mur;
-import modele.elements.Sol;
+import modele.elements.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
  * Un Niveau du jeu
  */
 public class Niveau {
-
-
-    /**
-     * Numéro du niveau
-     */
-    private int niveau;
 
     /**
      * Generateur de labyrinthe
@@ -35,6 +28,10 @@ public class Niveau {
      */
     private Hero hero;
 
+    /**
+     * Liste des monstres
+     */
+    private final ArrayList<Monstre> monstres;
 
     /**
      * Constructeur de Niveau
@@ -42,48 +39,30 @@ public class Niveau {
     public Niveau(){
         this.labyrinthe = new Labyrinthe();
         this.hero = new Hero();
-        this.lg = new LabyGenerator(51,51);
+        this.monstres = new ArrayList<>();
+        this.lg = new LabyGenerator(15,15);
     }
 
-    /**
-     * Hero sprint boolean.
-     *
-     * @return the boolean
-     */
+    public void killMonstres(ArrayList<Monstre> toKill){
+        this.monstres.removeAll(toKill);
+    }
+
     public boolean heroSprint(){
         return hero.canSprint();
     }
 
-    /**
-     * Sprint handler.
-     *
-     * @param isSprinting the is sprinting
-     */
     public void sprintHandler(boolean isSprinting){
         hero.handleStamina(isSprinting);
     }
 
-    /**
-     * Get stamina int.
-     *
-     * @return the int
-     */
     public int getStamina(){
         return this.hero.getStamina();
     }
 
-    /**
-     * Get labyrinthe int [ ] [ ].
-     *
-     * @return the int [ ] [ ]
-     */
     public int[][] getLabyrinthe(){
         return labyrinthe.getLabyrinthe();
     }
 
-    /**
-     * Generer niveau.
-     */
     public void genererNiveau() {
         this.labyrinthe.setLabyrinthe(this.lg.generate());
         setPlayerX(labyrinthe.getHeroposX());
@@ -92,39 +71,26 @@ public class Niveau {
 
     /**
      * Retourne la coordonnée X du hero
-     *
      * @return coordonnée x
      */
     public int getPlayerX(){return this.hero.getX();}
 
     /**
      * Retourne la coordonnée Y du hero
-     *
      * @return coordonnée y
      */
     public int getPlayerY(){return this.hero.getY();}
 
-    /**
-     * Set player x.
-     *
-     * @param x the x
-     */
     public void setPlayerX(int x){
         hero.setX(x);
     }
 
-    /**
-     * Set player y.
-     *
-     * @param y the y
-     */
     public void setPlayerY(int y){
         hero.setY(y);
     }
 
     /**
      * Permet de charger le niveau souhaité
-     *
      * @param file informations nécessaire au niveau
      */
     public void chargerNiveau(String file){
@@ -141,8 +107,7 @@ public class Niveau {
                 strArray = line.split(",");
                 if (hauteur > 0) {
                     if (strArray.length != labyrinthe[0].length){
-                        ExceptionTailleLaby exceptionTailleLaby = new ExceptionTailleLaby();
-                        throw exceptionTailleLaby;
+                        throw new ExceptionTailleLaby();
                     }
                     for (int i = 0; i < strArray.length; i++) {
                         labyrinthe[hauteur - 1][i] = Integer.parseInt(strArray[i]);
@@ -151,65 +116,105 @@ public class Niveau {
                 hauteur++;
             }
             this.labyrinthe.setLabyrinthe(labyrinthe);
+            setPlayerX(this.labyrinthe.getHeroposX());
+            setPlayerY(this.labyrinthe.getHeroposY());
+        }
+        catch (NullPointerException ex){
+            System.out.println("Le fichier n'existe pas");
+            System.exit(0);
         }
         catch (FileNotFoundException exception){
             System.out.println("Le fichier n'existe pas");
+            System.exit(0);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(0);
         } catch (ExceptionTailleLaby exceptionTailleLaby) {
             System.out.println(exceptionTailleLaby.getMessage());
+            System.exit(0);
         } catch (NumberFormatException numberException){
             System.out.println("Fichier corrompu");
+            System.exit(0);
         }
     }
 
     /**
      * Deplace le héro dans le labyrinthe
-     *
      * @param x deplacement en X du héro
      * @param y deplacement en Y du héro
      */
     public void deplacerHero(int x, int y){
+        if (!hero.isDead()){
         this.hero.setX(this.getPlayerX() + x);
         this.hero.setY(this.getPlayerY() + y);
+        }
     }
 
-    /**
-     * Get hero hero.
-     *
-     * @return the hero
-     */
     public Hero getHero(){ return hero; }
 
-    /**
-     * Changer direction.
-     *
-     * @param dir the dir
-     */
+    public ArrayList<Monstre> getMonstres() {
+        return monstres;
+    }
+
+    public void ajouterMonstre(int x, int y,boolean nocoll){
+        this.monstres.add(new Monstre(this,x,y, nocoll));
+    }
+
+    public void poserMonstres(){
+        this.monstres.clear();
+        int[][] lab = this.getLabyrinthe();
+        int nbmonstre = 0;
+        boolean needboo = true;
+        Random rng = new Random();
+        while(nbmonstre < 2){
+            int x = rng.nextInt(lab[1].length);
+            int y = rng.nextInt(lab.length);
+            if (heroNear(x,y,lab)) {
+                if (lab[x][y] == 0) {
+                    int type = rng.nextInt(1);
+                    if (type == 0) {
+                        this.ajouterMonstre(x * 32, y * 32, needboo);
+                        if (needboo) needboo = false;
+                        nbmonstre++;
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean heroNear(int x, int y, int[][] grid){
+        int cpt = 0;
+        if (x != 0 && grid[x-1][y] == 2) cpt++;
+        if (x != grid.length-1 && grid[x+1][y] == 2) cpt++;
+        if (y != 0 && grid[x][y-1] == 2) cpt++;
+        if (y != grid.length-1 && grid[x][y+1] == 2) cpt++;
+        return cpt != 3;
+    }
+
+    public void dammageHero(){
+        this.hero.enleverPv();
+    }
+
+    public void unsetInvincibleHero(){
+        this.hero.noInvincible();
+    }
+
     public void changerDirection(int dir){ hero.changerDirection(dir);}
 
-    /**
-     * Get mur mur.
-     *
-     * @return the mur
-     */
     public Mur getMur(){
         return labyrinthe.getMurs();
     }
 
-    /**
-     * Get arrive arrive.
-     *
-     * @return the arrive
-     */
     public Arrive getArrive(){return labyrinthe.getArrive();}
 
-    /**
-     * Get chemin array list.
-     *
-     * @return the array list
-     */
+    public void heroAttaque(int anim) { this.hero.attaqueAnimation(anim);}
+
+    public ArrayList<Case> getCasesSpeciales(){
+        return this.labyrinthe.getCasesSpeciales();
+    }
+
     public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
+
     /**
      * Print le labyrinthe, les joueurs en string
      */
@@ -227,7 +232,7 @@ public class Niveau {
                 if (playerX == i && playerY == j){
                     sb.append("H,");
                 }else{
-                    sb.append(labyrinthe[i][j]+",");
+                    sb.append(labyrinthe[i][j]).append(",");
                 }
             }
             sb.setLength(sb.length() - 1);

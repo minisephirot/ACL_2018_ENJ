@@ -1,18 +1,13 @@
 package modele;
 
+import java.util.Arrays;
 import java.util.Random;
 
-/**
- * The type Laby generator.
- */
 public class LabyGenerator {
 
     private int[][] grid;
     private int width;
     private int height;
-    /**
-     * The Rng.
-     */
     Random RNG = new Random();
 
     //Verifie si des cases n'ont pas été visitées
@@ -92,11 +87,6 @@ public class LabyGenerator {
         }
     }
 
-    /**
-     * Generate int [ ] [ ].
-     *
-     * @return the int [ ] [ ]
-     */
     public int[][] generate() {
         grid = new int[width][height];
         //Initialize Grid with all walls
@@ -113,44 +103,68 @@ public class LabyGenerator {
         chemin(grid,sr,sc);
 
         //pose la case du héros et l'arrivée
-        boolean hero = true;
-        boolean arriv = true;
-        while (hero) {
+        boolean cherche = true;
+        while (cherche) {
             int x = (int) (Math.random() * width - 1);
             int y = (int) (Math.random() * height - 1);
             if (grid[x][y] == 0) {
                 grid[x][y] = 2;
-                hero = false;
+                cherche = false;
             }
         }
-        while (arriv) {
+        cherche = true;
+        while (cherche) {
             int x = (int) (Math.random() * width - 1);
             int y = (int) (Math.random() * height - 1);
             if (grid[x][y] == 0 && this.isDeadEnd(x,y)) {
                 grid[x][y] = 3;
-                arriv = false;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 4;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 4;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 5;
+                cherche = false;
+            }
+        }
+        cherche = true;
+        while (cherche) {
+            int x = (int) (Math.random() * width - 1);
+            int y = (int) (Math.random() * height - 1);
+            if (grid[x][y] == 0) {
+                grid[x][y] = 6;
+                cherche = false;
             }
         }
         return grid;
     }
 
-    /**
-     * Get grid int [ ] [ ].
-     *
-     * @return the int [ ] [ ]
-     */
     public int[][] getGrid() {
         return grid;
     }
 
-    /**
-     * Is dead end boolean.
-     *
-     * @param x the x
-     * @param y the y
-     * @return the boolean
-     */
-    public boolean isDeadEnd(int x,int y){
+    private boolean isDeadEnd(int x, int y){
         int cpt = 0;
         if (this.grid[x-1][y] == 1) cpt++;
         if (this.grid[x+1][y] == 1) cpt++;
@@ -159,16 +173,9 @@ public class LabyGenerator {
         return cpt == 3;
     }
 
-    /**
-     * Instantiates a new Laby generator.
-     *
-     * @param largeur the largeur
-     * @param hauteur the hauteur
-     */
     public LabyGenerator (int largeur, int hauteur) {
         width = largeur;
         height = hauteur;
         grid = this.generate();
     }
-
 }
