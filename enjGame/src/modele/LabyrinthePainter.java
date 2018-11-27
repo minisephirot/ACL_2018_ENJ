@@ -8,7 +8,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 public class LabyrinthePainter implements GamePainter {
@@ -19,6 +22,10 @@ public class LabyrinthePainter implements GamePainter {
     private static final int WIDTH = 736;
     private static final int HEIGHT = 736;
     private static int camX,camY;
+    private static int[][] descY;
+    private static int[] descX;
+    private int anim;
+    private Random rand;
     private Font font;
     private Font font2;
     private Font font3;
@@ -36,6 +43,11 @@ public class LabyrinthePainter implements GamePainter {
      *            le jeutest a afficher
      */
     public LabyrinthePainter(LabyrintheGame game) {
+        rand = new Random();
+        descY = new int[][] { {-1000, -100, -700, -500},{0,0,0,0} };
+        descX = new int[] {100, 250, 400, 550};
+
+        anim = 0;
         this.lg = game;
         InputStream font_pixel = getClass().getResourceAsStream("/res/font/pixeled.ttf");
         try {
@@ -66,17 +78,22 @@ public class LabyrinthePainter implements GamePainter {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         crayon.setColor(Color.CYAN);
         crayon.fillRect(0, 0, WIDTH, HEIGHT);
-        for (int i = 0; i < WIDTH*2; i+=32){
-            for (int j = 0; j < HEIGHT*2; j+=32){
-                int xCamera =i - camY + (32 / 2);
-                int yCamera =j - camX + (32 / 2);
-                int rand = (int)(Math.random() * (100 - 0) + 1) + 0;
-                if (rand < 5) {
-                    int direction = (int) (Math.random() * (3 - 0) + 1) + 0;
-                    crayon.drawImage(TextureFactory.getImgHero(direction,0), null, xCamera-10, yCamera-10);
+
+        for (int i = 0; i < 4; i++){
+                if (descY[0][i] == 100 || descY[0][i] == 200 || descY[0][i] == 250 || descY[0][i] == 260 || descY[0][i] == 264) {
+                    descY[1][i] += 1;
                 }
-            }
+                if (descY[0][i] >= 252) {
+                    crayon.drawImage(TextureFactory.getImgDescente(descY[1][i]), null, descX[i], descY[0][i] += 1);
+                } else {
+                    crayon.drawImage(TextureFactory.getImgDescente(descY[1][i]), null, descX[i], descY[0][i] += 2);
+                }
+                if (descY[0][i] > HEIGHT){
+                    descY[0][i] =  -(400 + rand.nextInt(400));
+                    descY[1][i] = 0;
+                }
         }
+
         crayon.drawImage(TextureFactory.getImgArrow(),null,(this.getWidth()/2-TextureFactory.getImgArrow().getWidth()*2-20),(this.getHeight()/2-110)+(this.lg.getNumerolab()*70));
         crayon.fillRect((this.getWidth()/2-90),(this.getHeight()/2-100)+(this.lg.getNumerolab()*70),180,40);
         crayon.setColor(Color.BLACK);
@@ -99,8 +116,8 @@ public class LabyrinthePainter implements GamePainter {
         Arrive arrive = lg.getArrive();
         ArrayList<Case> caseSpeciales = lg.getCasesSpeciales();
         refresh = 0;
-        for (int i = 0; i < WIDTH*2; i+=32){
-            for (int j = 0; j < HEIGHT*2; j+=32){
+        for (int i = 0; i < WIDTH*3; i+=32){
+            for (int j = 0; j < HEIGHT*3; j+=32){
                 int xCamera =i - camY + (32 / 2);
                 int yCamera =j - camX + (32 / 2);
                 crayon.drawImage(TextureFactory.getImgGrass(), null, xCamera, yCamera);

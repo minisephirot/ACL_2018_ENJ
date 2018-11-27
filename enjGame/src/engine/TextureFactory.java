@@ -37,6 +37,7 @@ public class TextureFactory {
     private static BufferedImage attaqueGauche[];
     private static BufferedImage attaqueHaut[];
     private static BufferedImage attaqueBas[];
+    private static BufferedImage descente[];
     private static BufferedImage animGauche[];
     private static BufferedImage animHaut[];
     private static BufferedImage imgMenu;
@@ -144,6 +145,13 @@ public class TextureFactory {
             plante3 = ImageIO.read(getClass().getResource("/res/plante3.png"));
             imgVitory = ImageIO.read(getClass().getResource("/res/victory.png"));
             imgGameOver = ImageIO.read(getClass().getResource("/res/gameover.png"));
+            descente = new BufferedImage[6];
+            descente[0] = ImageIO.read(getClass().getResource("/res/descente/descente1.png"));
+            descente[1] = ImageIO.read(getClass().getResource("/res/descente/descente2.png"));
+            descente[2] = ImageIO.read(getClass().getResource("/res/descente/descente3.png"));
+            descente[3] = ImageIO.read(getClass().getResource("/res/descente/descente4.png"));
+            descente[4] = ImageIO.read(getClass().getResource("/res/descente/descente5.png"));
+            descente[5] = ImageIO.read(getClass().getResource("/res/descente/descente6.png"));
         } catch (IOException e) {
             System.out.println("Impossible de charger les fichiers");
         }
@@ -178,6 +186,10 @@ public class TextureFactory {
         }else{
             return animGauche[anim];
         }
+    }
+
+    public static BufferedImage getImgDescente(int anim){
+        return descente[anim];
     }
 
     public static BufferedImage getImgAttaque(int dir, int anim){

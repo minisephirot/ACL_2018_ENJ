@@ -137,6 +137,8 @@ public class LabyrintheGame implements Game {
             }
     }
 
+
+
     private void ignorerInput(int i) {
         this.ignoreInput = i;
     }
