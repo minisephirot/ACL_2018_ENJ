@@ -70,7 +70,7 @@ public class LabyrintheGame implements Game {
                     this.numerolab--;
                     this.ignorerInput(15);
                 }
-                if (this.numerolab < 0 ) this.numerolab = 4;
+                if (this.numerolab < 0 ) this.numerolab = 5;
                 if (this.numerolab > 5 ) this.numerolab = 0;
                 if (cmd == Commande.ATTAQUE){
                     if (this.numerolab == 5) System.exit(3771);

@@ -1,7 +1,0 @@
-Liste des fonctionnalités de la version v3.1 :
-
-- Implementation d'un système de sprint
-- Affichage des sprites du Labyrinthe, création d'une classe générant des combinaisons graphiques aléatoires de labyrinthes
-- Système de profondeur dans les sprites
-- Les labyrinthes se suivent avec des étages
-- Changement de direction du héro
