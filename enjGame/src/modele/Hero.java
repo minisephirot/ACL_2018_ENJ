@@ -67,7 +67,8 @@ public class Hero extends Entite {
 
     public void gagnerPv(){
         this.pv +=1;
-        if (pv > pvMax) {
+        if (this.pv > 4) this.pv = 4;
+        if (pv > pvMax && pvMax < 4) {
             pvMax++;}
     }
 
