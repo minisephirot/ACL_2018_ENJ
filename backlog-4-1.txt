@@ -9,4 +9,5 @@ Liste des fonctionnalités de la version v4.1 :
 - Création des labyrinthes 2 3 4 
 - Fond d'écran 
 - Menu de sélection
-- Tests unitaires 
+- Affichage informations (Sprint / Vie / Etage)
+- Tests unitaires
