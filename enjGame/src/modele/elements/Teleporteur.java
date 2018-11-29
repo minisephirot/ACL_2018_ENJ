@@ -80,6 +80,7 @@ public class Teleporteur extends Case {
     @Override
     public int handleSpecialEffect(Hero h) {
         if (this.isCooldown()) {
+            h.playTPSound();
             h.setX(this.tpjumele.getY());
             h.setY(this.tpjumele.getX());
             this.setActive(false);

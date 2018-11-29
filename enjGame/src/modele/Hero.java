@@ -3,6 +3,7 @@ package modele;
 import engine.SoundFactory;
 import engine.TextureFactory;
 
+import javax.sound.sampled.AudioInputStream;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -19,12 +20,20 @@ public class Hero extends Entite {
     private boolean invicible;
     private int pvMax;
     private int vitesse;
+    private AudioInputStream oyeah;
+    private AudioInputStream cry;
+    private AudioInputStream teleported;
+    private AudioInputStream ouch;
 
     /**
      * Instantiates a new Hero.
      */
     public Hero() {
         imgHero = TextureFactory.getImgHero(1, 0);
+        oyeah = SoundFactory.getOyeah();
+        teleported = SoundFactory.getTP();
+        cry = SoundFactory.getCry();
+        ouch = SoundFactory.getOuch();
         this.pv = 3;
         this.pvMax = 3;
         anim = 0;
@@ -84,16 +93,11 @@ public class Hero extends Entite {
      * Enlever pv.
      */
     public void enleverPv(){
-        SoundFactory sound = new SoundFactory();
         if (!invicible && pv > 0) {
             this.pv -= 1;
-            try {
-                sound.playSound();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             this.invicible = true;
         }
+        SoundFactory.playSound(ouch);
     }
 
     /**
@@ -110,7 +114,9 @@ public class Hero extends Entite {
         this.pv +=1;
         if (this.pv > 4) this.pv = 4;
         if (pv > pvMax && pvMax < 4) {
-            pvMax++;}
+            pvMax++;
+        }
+        SoundFactory.playSound(oyeah);
     }
 
     public int getPv(){
@@ -187,4 +193,15 @@ public class Hero extends Entite {
         this.stamina = 200;
         this.invicible = false;
     }
+
+    @Override
+    public boolean isDead(){
+        if (this.pv < 0) SoundFactory.playSound(this.cry);
+        return this.pv < 0;
+    }
+
+    public void playTPSound(){
+        SoundFactory.playSound(this.teleported);
+    }
+
 }

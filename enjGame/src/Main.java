@@ -1,7 +1,4 @@
-import engine.GameController;
-import engine.GameEngineGraph;
-import engine.GamePainter;
-import engine.TextureFactory;
+import engine.*;
 import modele.LabyrintheController;
 import modele.LabyrintheGame;
 import modele.LabyrinthePainter;
@@ -18,6 +15,7 @@ public class Main {
      */
     public static void main(String[] args){
         TextureFactory textureFactory = new TextureFactory();
+        SoundFactory soundFactory = new SoundFactory();
         LabyrintheGame lg = new LabyrintheGame();
         GameController gc = new LabyrintheController();
         GamePainter gp = new LabyrinthePainter(lg);

@@ -2,6 +2,7 @@ package modele;
 
 import engine.Commande;
 import engine.Game;
+import engine.SoundFactory;
 import engine.TextureFactory;
 import modele.elements.Arrive;
 import modele.elements.Case;
@@ -86,6 +87,7 @@ public class LabyrintheGame implements Game {
             if (cmd == Commande.ATTAQUE){
                 if (this.numerolab == 5) System.exit(3771);
                 else {
+                    SoundFactory.playOkey();
                     this.genLabyrinth(this.numerolab);
                     this.getHero().reset();
                     this.menu = false;
