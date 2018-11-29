@@ -34,6 +34,11 @@ public class Niveau {
     private final ArrayList<Monstre> monstres;
 
     /**
+     * Difficulte des monstres
+     */
+    private int difficulte;
+
+    /**
      * Constructeur de Niveau
      */
     public Niveau(){
@@ -41,6 +46,7 @@ public class Niveau {
         this.hero = new Hero();
         this.monstres = new ArrayList<>();
         this.lg = new LabyGenerator(15,15);
+        this.difficulte = 1;
     }
 
     /**
@@ -89,9 +95,18 @@ public class Niveau {
     }
 
     /**
+     * Set la difficulte
+     * @param diff nouvel difficulte
+     */
+    public void setDifficulte(int diff){
+        this.difficulte = diff;
+    }
+
+    /**
      * Generer niveau.
      */
     public void genererNiveau() {
+        this.setDifficulte(2);
         this.labyrinthe.setLabyrinthe(this.lg.generate());
         setPlayerX(labyrinthe.getHeroposX());
         setPlayerY(labyrinthe.getHeroposY());
@@ -227,8 +242,9 @@ public class Niveau {
         int[][] lab = this.getLabyrinthe();
         int nbmonstre = 0;
         boolean needboo = true;
+        int nbboo = 0;
         Random rng = new Random();
-        while(nbmonstre < 2){
+        while(nbmonstre < 2*difficulte){
             int x = rng.nextInt(lab[1].length);
             int y = rng.nextInt(lab.length);
             if (heroNear(x,y,lab)) {
@@ -236,7 +252,11 @@ public class Niveau {
                     int type = rng.nextInt(1);
                     if (type == 0) {
                         this.ajouterMonstre(x * 32, y * 32, needboo);
-                        if (needboo) needboo = false;
+                        if (needboo)
+                            if (nbboo == difficulte-1)
+                                needboo = false;
+                            else
+                                nbboo++;
                         nbmonstre++;
                     }
                 }

@@ -55,6 +55,7 @@ public class LabyrintheGame implements Game {
             this.level.genererNiveau();
         }else{
             TextureFactory.setTresor();
+            this.level.setDifficulte(numerolab);
             this.level.chargerNiveau("Labyrinthe"+numerolab);
         }
         this.level.poserMonstres();
