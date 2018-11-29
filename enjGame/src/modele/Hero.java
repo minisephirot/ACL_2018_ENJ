@@ -1,6 +1,5 @@
 package modele;
 
-import engine.SoundFactory;
 import engine.TextureFactory;
 
 import java.awt.image.BufferedImage;
@@ -84,14 +83,8 @@ public class Hero extends Entite {
      * Enlever pv.
      */
     public void enleverPv(){
-        SoundFactory sound = new SoundFactory();
-        if (!invicible && pv > 0) {
+         if (!invicible && pv > 0) {
             this.pv -= 1;
-            try {
-                sound.playSound();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             this.invicible = true;
         }
     }
