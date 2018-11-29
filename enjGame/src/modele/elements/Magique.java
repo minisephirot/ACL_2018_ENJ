@@ -5,10 +5,19 @@ import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * The type Magique.
+ */
 public class Magique extends Case {
     private BufferedImage imgMagique;
     private boolean active;
 
+    /**
+     * Instantiates a new Magique.
+     *
+     * @param x the x
+     * @param y the y
+     */
     public Magique(int x, int y) {
         super(x, y);
         imgMagique = TextureFactory.getImgMagique();
@@ -30,6 +39,11 @@ public class Magique extends Case {
         return active;
     }
 
+    /**
+     * Set active.
+     *
+     * @param active the active
+     */
     public void setActive(boolean active){
         this.active = active;
     }

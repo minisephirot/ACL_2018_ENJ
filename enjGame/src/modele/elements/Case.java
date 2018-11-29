@@ -104,7 +104,7 @@ public abstract class Case {
      * @param height the height
      * @return the rectangle camera
      */
-/* methode de creation de rectangle avec les nouvelles coordonnées du camera
+    /* methode de creation de rectangle avec les nouvelles coordonnées du camera
     *  camY, camX : positions des la camera
     *  width, height : longeur et largeur de la fenetre
     * */
@@ -115,9 +115,25 @@ public abstract class Case {
         return new Rectangle(xCamera,yCamera,(int)rectangle.getWidth(),(int)rectangle.getHeight());
     }
 
+    /**
+     * Gets img.
+     *
+     * @return the img
+     */
     abstract public BufferedImage getImg();
 
+    /**
+     * Is active boolean.
+     *
+     * @return the boolean
+     */
     abstract public boolean isActive();
 
+    /**
+     * Handle special effect int.
+     *
+     * @param h the h
+     * @return the int
+     */
     abstract public int handleSpecialEffect(Hero h);
 }

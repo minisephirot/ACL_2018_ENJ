@@ -22,6 +22,14 @@ public class Monstre extends Entite {
     private boolean famtome;
     private int direction;
 
+    /**
+     * Instantiates a new Monstre.
+     *
+     * @param niveau the niveau
+     * @param x      the x
+     * @param y      the y
+     * @param nocoll the nocoll
+     */
     public Monstre(Niveau niveau, int x , int y, boolean nocoll) {
         this.pv = 1;
         this.level = niveau;
@@ -80,18 +88,36 @@ public class Monstre extends Entite {
         }
 
 
+    /**
+     * Get direction int.
+     *
+     * @return the int
+     */
     public int getDirection(){
         return  this.direction;
     }
 
+    /**
+     * Is famtome boolean.
+     *
+     * @return the boolean
+     */
     public boolean isFamtome() {
         return famtome;
     }
 
+    /**
+     * Get img monstre buffered image.
+     *
+     * @return the buffered image
+     */
     public BufferedImage getImgMonstre(){
         return TextureFactory.getImgMonstre(this.famtome);
     }
 
+    /**
+     * Take dammage.
+     */
     public void takeDammage(){
         this.pv -= 1;
     }

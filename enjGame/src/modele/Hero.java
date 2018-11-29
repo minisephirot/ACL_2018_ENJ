@@ -18,6 +18,9 @@ public class Hero extends Entite {
     private int pvMax;
     private int vitesse;
 
+    /**
+     * Instantiates a new Hero.
+     */
     public Hero() {
         imgHero = TextureFactory.getImgHero(1, 0);
         this.pv = 3;
@@ -28,10 +31,20 @@ public class Hero extends Entite {
         this.invicible = false;
     }
 
+    /**
+     * Can sprint boolean.
+     *
+     * @return the boolean
+     */
     public boolean canSprint() {
         return stamina >= 11;
     }
 
+    /**
+     * Handle stamina.
+     *
+     * @param sprinting the sprinting
+     */
     public void handleStamina(boolean sprinting){
         if (sprinting){
             this.stamina -= 1;
@@ -47,14 +60,27 @@ public class Hero extends Entite {
         }
     }
 
+    /**
+     * Gets stamina.
+     *
+     * @return the stamina
+     */
     public int getStamina() {
         return this.stamina;
     }
 
+    /**
+     * Get img hero buffered image.
+     *
+     * @return the buffered image
+     */
     public BufferedImage getImgHero(){
         return imgHero;
     }
 
+    /**
+     * Enlever pv.
+     */
     public void enleverPv(){
         if (!invicible && pv > 0) {
             this.pv -= 1;
@@ -62,10 +88,16 @@ public class Hero extends Entite {
         }
     }
 
+    /**
+     * No invincible.
+     */
     public void noInvincible(){
         this.invicible = false;
     }
 
+    /**
+     * Gagner pv.
+     */
     public void gagnerPv(){
         this.pv +=1;
         if (this.pv > 4) this.pv = 4;
@@ -77,6 +109,11 @@ public class Hero extends Entite {
         return pv;
     }
 
+    /**
+     * Changer direction.
+     *
+     * @param dir the dir
+     */
     public void changerDirection(int dir){
         direction = dir;
         if (sprite < 7) {
@@ -90,24 +127,52 @@ public class Hero extends Entite {
         animation++;
     }
 
+    /**
+     * Attaque animation.
+     *
+     * @param anim the anim
+     */
     public void attaqueAnimation(int anim){
         imgHero = TextureFactory.getImgAttaque(direction, anim);
     }
 
+    /**
+     * Get width int.
+     *
+     * @return the int
+     */
     public int getWidth(){
         return this.imgHero.getWidth();
     }
 
+    /**
+     * Get height int.
+     *
+     * @return the int
+     */
     public int getHeight(){
         return this.imgHero.getHeight();
     }
 
+    /**
+     * Gets pv max.
+     *
+     * @return the pv max
+     */
     public int getPvMax() {
         return pvMax;
     }
 
+    /**
+     * Gets direction.
+     *
+     * @return the direction
+     */
     public int getDirection() { return direction; }
 
+    /**
+     * Reset.
+     */
     public void reset() {
         this.pv = 3;
         this.pvMax = 3;

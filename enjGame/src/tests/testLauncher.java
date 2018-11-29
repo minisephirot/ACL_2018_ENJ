@@ -13,13 +13,26 @@ import modele.elements.Teleporteur;
 import java.awt.*;
 import java.util.Arrays;
 
+/**
+ * The type Test launcher.
+ */
 public class testLauncher extends TestCase {
 
+    /**
+     * Instantiates a new Test launcher.
+     *
+     * @param testMethodName the test method name
+     */
     public testLauncher(String testMethodName) {
         super(testMethodName);
         new TextureFactory();
     }
 
+    /**
+     * Test hero.
+     *
+     * @throws Exception the exception
+     */
     public void testHero() throws Exception { //Teste la classe héro : ses déplacements et ses pv
         Hero julien = new Hero(); // en vie
         assertFalse(julien.isDead());
@@ -31,6 +44,11 @@ public class testLauncher extends TestCase {
         assertEquals(42,julien.getY());
     }
 
+    /**
+     * Test labyrinthe.
+     *
+     * @throws Exception the exception
+     */
     public void testLabyrinthe() throws Exception { //Teste la classe Labyrinthe : les deplacements authorisé et le chargement de fichier
         Labyrinthe lab = new Labyrinthe(); // en vie
         int[][] token = {{1,1,1},{1,0,1},{1,0,1}};
@@ -43,12 +61,18 @@ public class testLauncher extends TestCase {
         assertFalse(Arrays.deepEquals(res,tokenbis));
     }
 
+    /**
+     * Test collisions.
+     */
     public void testCollisions(){
         Rectangle rec1 = new Rectangle(10,10,10,10);
         Rectangle hero = new Rectangle(15,15,10,10);
         assertTrue(rec1.intersects(hero));
     }
 
+    /**
+     * Test stamina.
+     */
     public void testStamina() {
         Hero julien = new Hero();
         julien.handleStamina(true);
@@ -59,6 +83,9 @@ public class testLauncher extends TestCase {
         assertFalse(julien.canSprint());
     }
 
+    /**
+     * Test generator.
+     */
     public void testGenerator(){
         LabyGenerator lg = new LabyGenerator(10,10);
         int[][] grid = lg.getGrid();
@@ -76,6 +103,9 @@ public class testLauncher extends TestCase {
         assertTrue(arrive);
     }
 
+    /**
+     * Test teleporteur.
+     */
     public void testTeleporteur(){
         Hero julien = new Hero();
         Teleporteur tp1 = new Teleporteur(10, 10, null);
@@ -86,6 +116,9 @@ public class testLauncher extends TestCase {
         assertEquals(julien.getY(), tp2.getY());
     }
 
+    /**
+     * Test piege.
+     */
     public void testPiege(){
         Hero julien = new Hero();
         assertEquals(julien.getPv(),3);
@@ -94,6 +127,9 @@ public class testLauncher extends TestCase {
         assertEquals(julien.getPv(),2);
     }
 
+    /**
+     * Test magie.
+     */
     public void testMagie(){
         Hero julien = new Hero();
         assertEquals(julien.getPv(),3);

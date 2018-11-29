@@ -11,6 +11,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The type Labyrinthe painter.
+ */
 public class LabyrinthePainter implements GamePainter {
 
     /**
@@ -36,8 +39,7 @@ public class LabyrinthePainter implements GamePainter {
     /**
      * appelle constructeur parent
      *
-     * @param game
-     *            le jeutest a afficher
+     * @param game le jeutest a afficher
      */
     public LabyrinthePainter(LabyrintheGame game) {
         rand = new Random();

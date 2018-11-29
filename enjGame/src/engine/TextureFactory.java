@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * The type Texture factory.
+ */
 public class TextureFactory {
 
     //Logic
@@ -54,6 +57,9 @@ public class TextureFactory {
     private static BufferedImage imgArrow;
     private static BufferedImage ciel;
 
+    /**
+     * Instantiates a new Texture factory.
+     */
     public TextureFactory() {
         try {
             imgMenu = ImageIO.read(getClass().getResource("/res/LB.jpg"));
@@ -160,11 +166,33 @@ public class TextureFactory {
         }
     }
 
+    /**
+     * Get img menu buffered image.
+     *
+     * @return the buffered image
+     */
     public static BufferedImage getImgMenu(){return imgMenu;}
 
+    /**
+     * Get img pv buffered image.
+     *
+     * @return the buffered image
+     */
     public static BufferedImage getImgPv(){return imgPv;}
+
+    /**
+     * Get img pv lost buffered image.
+     *
+     * @return the buffered image
+     */
     public static BufferedImage getImgPvLost(){return imgPvLost;}
 
+    /**
+     * Gets img brique.
+     *
+     * @param isProfondeur the is profondeur
+     * @return the img brique
+     */
     public static BufferedImage getImgBrique(boolean isProfondeur) {
         switch (numeroMur){
             case 0:
@@ -179,6 +207,13 @@ public class TextureFactory {
         }
     }
 
+    /**
+     * Gets img hero.
+     *
+     * @param dir  the dir
+     * @param anim the anim
+     * @return the img hero
+     */
     public static BufferedImage getImgHero(int dir, int anim) {
         if (dir == 1){
             return animBas[anim];
@@ -191,10 +226,23 @@ public class TextureFactory {
         }
     }
 
+    /**
+     * Get img descente buffered image.
+     *
+     * @param anim the anim
+     * @return the buffered image
+     */
     public static BufferedImage getImgDescente(int anim){
         return descente[anim];
     }
 
+    /**
+     * Get img attaque buffered image.
+     *
+     * @param dir  the dir
+     * @param anim the anim
+     * @return the buffered image
+     */
     public static BufferedImage getImgAttaque(int dir, int anim){
         if (dir == 1){
             return attaqueBas[anim];
@@ -207,40 +255,93 @@ public class TextureFactory {
         }
     }
 
+    /**
+     * Gets img plante 1.
+     *
+     * @return the img plante 1
+     */
     public static BufferedImage getImgPlante1() {
         return plante1;
     }
 
+    /**
+     * Gets img plante 2.
+     *
+     * @return the img plante 2
+     */
     public static BufferedImage getImgPlante2() {
         return plante2;
     }
 
+    /**
+     * Gets img plante 3.
+     *
+     * @return the img plante 3
+     */
     public static BufferedImage getImgPlante3() {
         return plante3;
     }
 
+    /**
+     * Gets img ciel.
+     *
+     * @return the img ciel
+     */
     public static BufferedImage getImgCiel() {
         return ciel;
     }
 
+    /**
+     * Gets img tp.
+     *
+     * @param activated the activated
+     * @return the img tp
+     */
     public static BufferedImage getImgTp(boolean activated) {
         if (activated) return imgTp;
         return imgTpDisabled;
     }
 
+    /**
+     * Get img piege buffered image.
+     *
+     * @return the buffered image
+     */
     public static BufferedImage getImgPiege(){return imgPiege;}
 
+    /**
+     * Get img magique buffered image.
+     *
+     * @return the buffered image
+     */
     public static BufferedImage getImgMagique(){return imgMagique;}
 
+    /**
+     * Gets img arrive.
+     *
+     * @param leftside the leftside
+     * @return the img arrive
+     */
     public static BufferedImage getImgArrive(boolean leftside) {
         if (tresor) return imgTresor;
         if (leftside)return imgArrive;
         return imgArrive2;
     }
 
+    /**
+     * Gets img grass.
+     *
+     * @return the img grass
+     */
     public static BufferedImage getImgGrass() {
         return imgSol3;
     }
+
+    /**
+     * Gets img sol.
+     *
+     * @return the img sol
+     */
     public static BufferedImage getImgSol() {
         switch (numeroSol){
             case 0:
@@ -256,24 +357,51 @@ public class TextureFactory {
         }
     }
 
+    /**
+     * Generer combinaison.
+     */
     public static void genererCombinaison(){
         numeroSol = rng.nextInt(NBSPRITESOL);
         numeroMur = rng.nextInt(NBSPRITEMUR);
     }
 
+    /**
+     * Sets tresor.
+     */
     public static void setTresor() {
         tresor = true;
     }
 
+    /**
+     * Gets img monstre.
+     *
+     * @param famtome the famtome
+     * @return the img monstre
+     */
     public static BufferedImage getImgMonstre(boolean famtome) {
         if (famtome) return imgFamtome;
         return imgGoomba;
     }
 
+    /**
+     * Get img vitory buffered image.
+     *
+     * @return the buffered image
+     */
     public static BufferedImage getImgVitory(){ return imgVitory; }
 
+    /**
+     * Get img game over buffered image.
+     *
+     * @return the buffered image
+     */
     public static BufferedImage getImgGameOver(){ return imgGameOver; }
 
+    /**
+     * Gets img arrow.
+     *
+     * @return the img arrow
+     */
     public static BufferedImage getImgArrow() {return  imgArrow;
     }
 }

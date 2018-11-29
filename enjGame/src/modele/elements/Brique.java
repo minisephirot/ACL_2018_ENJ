@@ -5,11 +5,21 @@ import modele.Hero;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * The type Brique.
+ */
 public class Brique extends Case {
     private BufferedImage imgBrique;
     private BufferedImage imgBriqueProf;
     private boolean profondeur;
 
+    /**
+     * Instantiates a new Brique.
+     *
+     * @param x          the x
+     * @param y          the y
+     * @param profondeur the profondeur
+     */
     public Brique(int x, int y, boolean profondeur)  {
         super(x, y);
         this.profondeur = profondeur;

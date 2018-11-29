@@ -43,26 +43,54 @@ public class Niveau {
         this.lg = new LabyGenerator(15,15);
     }
 
+    /**
+     * Kill monstres.
+     *
+     * @param toKill the to kill
+     */
     public void killMonstres(ArrayList<Monstre> toKill){
         this.monstres.removeAll(toKill);
     }
 
+    /**
+     * Hero sprint boolean.
+     *
+     * @return the boolean
+     */
     public boolean heroSprint(){
         return hero.canSprint();
     }
 
+    /**
+     * Sprint handler.
+     *
+     * @param isSprinting the is sprinting
+     */
     public void sprintHandler(boolean isSprinting){
         hero.handleStamina(isSprinting);
     }
 
+    /**
+     * Get stamina int.
+     *
+     * @return the int
+     */
     public int getStamina(){
         return this.hero.getStamina();
     }
 
+    /**
+     * Get labyrinthe int [ ] [ ].
+     *
+     * @return the int [ ] [ ]
+     */
     public int[][] getLabyrinthe(){
         return labyrinthe.getLabyrinthe();
     }
 
+    /**
+     * Generer niveau.
+     */
     public void genererNiveau() {
         this.labyrinthe.setLabyrinthe(this.lg.generate());
         setPlayerX(labyrinthe.getHeroposX());
@@ -71,26 +99,39 @@ public class Niveau {
 
     /**
      * Retourne la coordonnée X du hero
+     *
      * @return coordonnée x
      */
     public int getPlayerX(){return this.hero.getX();}
 
     /**
      * Retourne la coordonnée Y du hero
+     *
      * @return coordonnée y
      */
     public int getPlayerY(){return this.hero.getY();}
 
+    /**
+     * Set player x.
+     *
+     * @param x the x
+     */
     public void setPlayerX(int x){
         hero.setX(x);
     }
 
+    /**
+     * Set player y.
+     *
+     * @param y the y
+     */
     public void setPlayerY(int y){
         hero.setY(y);
     }
 
     /**
      * Permet de charger le niveau souhaité
+     *
      * @param file informations nécessaire au niveau
      */
     public void chargerNiveau(String file){
@@ -140,6 +181,7 @@ public class Niveau {
 
     /**
      * Deplace le héro dans le labyrinthe
+     *
      * @param x deplacement en X du héro
      * @param y deplacement en Y du héro
      */
@@ -150,16 +192,36 @@ public class Niveau {
         }
     }
 
+    /**
+     * Get hero hero.
+     *
+     * @return the hero
+     */
     public Hero getHero(){ return hero; }
 
+    /**
+     * Gets monstres.
+     *
+     * @return the monstres
+     */
     public ArrayList<Monstre> getMonstres() {
         return monstres;
     }
 
+    /**
+     * Ajouter monstre.
+     *
+     * @param x      the x
+     * @param y      the y
+     * @param nocoll the nocoll
+     */
     public void ajouterMonstre(int x, int y,boolean nocoll){
         this.monstres.add(new Monstre(this,x,y, nocoll));
     }
 
+    /**
+     * Poser monstres.
+     */
     public void poserMonstres(){
         this.monstres.clear();
         int[][] lab = this.getLabyrinthe();
@@ -182,6 +244,14 @@ public class Niveau {
         }
     }
 
+    /**
+     * Hero near boolean.
+     *
+     * @param x    the x
+     * @param y    the y
+     * @param grid the grid
+     * @return the boolean
+     */
     public boolean heroNear(int x, int y, int[][] grid){
         int cpt = 0;
         if (x != 0 && grid[x-1][y] == 2) cpt++;
@@ -191,28 +261,64 @@ public class Niveau {
         return cpt != 3;
     }
 
+    /**
+     * Dammage hero.
+     */
     public void dammageHero(){
         this.hero.enleverPv();
     }
 
+    /**
+     * Unset invincible hero.
+     */
     public void unsetInvincibleHero(){
         this.hero.noInvincible();
     }
 
+    /**
+     * Changer direction.
+     *
+     * @param dir the dir
+     */
     public void changerDirection(int dir){ hero.changerDirection(dir);}
 
+    /**
+     * Get mur mur.
+     *
+     * @return the mur
+     */
     public Mur getMur(){
         return labyrinthe.getMurs();
     }
 
+    /**
+     * Get arrive arrive.
+     *
+     * @return the arrive
+     */
     public Arrive getArrive(){return labyrinthe.getArrive();}
 
+    /**
+     * Hero attaque.
+     *
+     * @param anim the anim
+     */
     public void heroAttaque(int anim) { this.hero.attaqueAnimation(anim);}
 
+    /**
+     * Get cases speciales array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Case> getCasesSpeciales(){
         return this.labyrinthe.getCasesSpeciales();
     }
 
+    /**
+     * Get chemin array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Sol> getChemin(){return labyrinthe.getChemin();}
 
     /**

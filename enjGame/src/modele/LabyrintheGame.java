@@ -12,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The type Labyrinthe game.
+ */
 public class LabyrintheGame implements Game {
 
     private int numerolab;
@@ -28,6 +31,9 @@ public class LabyrintheGame implements Game {
     private boolean menu;
     private int ignoreInput;
 
+    /**
+     * Instantiates a new Labyrinthe game.
+     */
     public LabyrintheGame(){
         this.gameWin = false;
         this.level = new Niveau();
@@ -38,6 +44,11 @@ public class LabyrintheGame implements Game {
         this.menu = true;
     }
 
+    /**
+     * Gen labyrinth.
+     *
+     * @param numerolab the numerolab
+     */
     public void genLabyrinth(int numerolab){
         TextureFactory.genererCombinaison();
         if (numerolab == 0){
@@ -215,6 +226,12 @@ public class LabyrintheGame implements Game {
         return getHero().isDead();
     }
 
+    /**
+     * Gestion collision.
+     *
+     * @param mur the mur
+     * @param m   the m
+     */
     public void gestionCollision(Mur mur, Monstre m){
         int x = m.x;
         int y = m.y;
@@ -247,6 +264,14 @@ public class LabyrintheGame implements Game {
         }
     }
 
+    /**
+     * Gestion collision boolean.
+     *
+     * @param mur the mur
+     * @param cmd the cmd
+     * @param tab the tab
+     * @return the boolean
+     */
     public boolean gestionCollision(Mur mur, Commande cmd, boolean[] tab){
         int herox = getHeroX();
         int heroy = getHeroY();
@@ -273,78 +298,174 @@ public class LabyrintheGame implements Game {
         return avancer;
     }
 
+    /**
+     * Get labyrinthe int [ ] [ ].
+     *
+     * @return the int [ ] [ ]
+     */
     public int[][] getLabyrinthe(){
         return level.getLabyrinthe();
     }
 
+    /**
+     * Get hero hero.
+     *
+     * @return the hero
+     */
     public Hero getHero(){ return level.getHero();}
 
+    /**
+     * Get mur mur.
+     *
+     * @return the mur
+     */
     public Mur getMur(){
         return level.getMur();
     }
 
+    /**
+     * Changer direction.
+     *
+     * @param dir the dir
+     */
     public void changerDirection(int dir){
         level.changerDirection(dir);
     }
 
+    /**
+     * Get chemin array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Sol> getChemin(){return level.getChemin();}
 
+    /**
+     * Get arrive arrive.
+     *
+     * @return the arrive
+     */
     public Arrive getArrive(){
         return this.level.getArrive();
     }
 
+    /**
+     * Get cases speciales array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Case> getCasesSpeciales(){
         return this.level.getCasesSpeciales();
     }
 
+    /**
+     * Get hero x int.
+     *
+     * @return the int
+     */
     public int getHeroX(){
         return level.getPlayerX();
     }
 
+    /**
+     * Get hero y int.
+     *
+     * @return the int
+     */
     public int getHeroY(){
         return level.getPlayerY();
     }
 
+    /**
+     * Get monstres array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Monstre> getMonstres(){
         return level.getMonstres();
     }
 
+    /**
+     * Gets game win.
+     *
+     * @return the game win
+     */
     public boolean getGameWin() {
         return this.gameWin;
     }
 
+    /**
+     * Reset game.
+     */
     public void resetGame(){
         this.gameWin = false;
     }
 
+    /**
+     * Gets numerolab.
+     *
+     * @return the numerolab
+     */
     public int getNumerolab() {
         return numerolab;
     }
 
+    /**
+     * Gets floor.
+     *
+     * @return the floor
+     */
     public String getFloor() {
         return this.floor+"";
     }
 
+    /**
+     * Increment floor.
+     */
     public void incrementFloor(){
         this.floor++;
     }
 
+    /**
+     * Get stamina int.
+     *
+     * @return the int
+     */
     public int getStamina(){
         return this.level.getStamina();
     }
 
+    /**
+     * Get dammage proof hero int.
+     *
+     * @return the int
+     */
     public int getDammageProofHero(){
         return this.dammageProofHero;
     }
 
+    /**
+     * Not infinite boolean.
+     *
+     * @return the boolean
+     */
     public boolean notInfinite() {
         return this.numerolab != 0;
     }
 
+    /**
+     * Is menu boolean.
+     *
+     * @return the boolean
+     */
     public boolean isMenu() {
         return menu;
     }
 
+    /**
+     * Sets menu.
+     *
+     * @param menu the menu
+     */
     public void setMenu(boolean menu) {
         this.menu = menu;
     }

@@ -3,11 +3,17 @@ package modele;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * The type Laby generator.
+ */
 public class LabyGenerator {
 
     private int[][] grid;
     private int width;
     private int height;
+    /**
+     * The Rng.
+     */
     Random RNG = new Random();
 
     //Verifie si des cases n'ont pas été visitées
@@ -87,6 +93,11 @@ public class LabyGenerator {
         }
     }
 
+    /**
+     * Generate int [ ] [ ].
+     *
+     * @return the int [ ] [ ]
+     */
     public int[][] generate() {
         grid = new int[width][height];
         //Initialize Grid with all walls
@@ -160,6 +171,11 @@ public class LabyGenerator {
         return grid;
     }
 
+    /**
+     * Get grid int [ ] [ ].
+     *
+     * @return the int [ ] [ ]
+     */
     public int[][] getGrid() {
         return grid;
     }
@@ -173,6 +189,12 @@ public class LabyGenerator {
         return cpt == 3;
     }
 
+    /**
+     * Instantiates a new Laby generator.
+     *
+     * @param largeur the largeur
+     * @param hauteur the hauteur
+     */
     public LabyGenerator (int largeur, int hauteur) {
         width = largeur;
         height = hauteur;

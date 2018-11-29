@@ -31,6 +31,8 @@ public class Labyrinthe {
 
     /**
      * Getter de la matrice du labyrinthe
+     *
+     * @return the int [ ] [ ]
      */
     public int[][] getLabyrinthe() {
         return labyrinthe;
@@ -38,6 +40,8 @@ public class Labyrinthe {
 
     /**
      * Setter de la matrice du labyrinthe
+     *
+     * @param labyrinthe the labyrinthe
      */
     public void setLabyrinthe(int[][] labyrinthe) {
         murs = new Mur();
@@ -107,26 +111,56 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Gets cases speciales.
+     *
+     * @return the cases speciales
+     */
     public ArrayList<Case> getCasesSpeciales() {
         return casesSpeciales;
     }
 
+    /**
+     * Gets murs.
+     *
+     * @return the murs
+     */
     public Mur getMurs() {
         return murs;
     }
 
+    /**
+     * Get chemin array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Sol> getChemin(){
         return chemin;
     }
 
+    /**
+     * Get arrive arrive.
+     *
+     * @return the arrive
+     */
     public Arrive getArrive(){
         return this.arrive;
     }
 
+    /**
+     * Get heropos x int.
+     *
+     * @return the int
+     */
     public int getHeroposX(){
         return heroposX;
     }
 
+    /**
+     * Get heropos y int.
+     *
+     * @return the int
+     */
     public int getHeroposY(){
         return heroposY;
     }

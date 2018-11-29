@@ -29,6 +29,8 @@ public abstract class Entite {
 
     /**
      * getter Cordoonnée X de l'entité
+     *
+     * @return the x
      */
     public int getX() {
         return x;
@@ -36,6 +38,8 @@ public abstract class Entite {
 
     /**
      * setter Cordoonnée X de l'entité
+     *
+     * @param x the x
      */
     public void setX(int x) {
         this.x = x;
@@ -43,6 +47,8 @@ public abstract class Entite {
 
     /**
      * getter Cordoonnée Y de l'entité
+     *
+     * @return the y
      */
     public int getY() {
         return y;
@@ -51,6 +57,8 @@ public abstract class Entite {
 
     /**
      * setter Cordoonnée Y de l'entité
+     *
+     * @param y the y
      */
     public void setY(int y) {
         this.y = y;
@@ -58,6 +66,8 @@ public abstract class Entite {
 
     /**
      * getter pv de l'entité
+     *
+     * @return the pv
      */
     public int getPv() {
         return pv;
@@ -65,6 +75,8 @@ public abstract class Entite {
 
     /**
      * setter pv de l'entité
+     *
+     * @param pv the pv
      */
     public void setPv(int pv) {
         this.pv = pv;
@@ -72,6 +84,8 @@ public abstract class Entite {
 
     /**
      * Getter pour verifier si entité morte
+     *
+     * @return the boolean
      */
     public boolean isDead() {
         return this.pv <= 0;
