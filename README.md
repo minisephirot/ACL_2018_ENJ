@@ -13,4 +13,4 @@ Pour déplacer le héro : il faut utiliser les touches "z", "q", "s" ou "d".
 Pour sprinter : la touche "espace".
 Pour attaquer : la touche "entrée"
 
-L'UML est dans pdf de conception et dans le Backlog 4.1
+ ![alt text](https://raw.githubusercontent.com/minisephirot/ACL_2018_ENJ/master/UML.png)
